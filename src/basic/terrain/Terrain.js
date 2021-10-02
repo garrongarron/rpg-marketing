@@ -1,5 +1,6 @@
 import plane from "../../shapes/Plane.js"
 import scene from "../Scene.js";
+import noiseGenerator from "./NoiseGenerator.js";
 import { noise2 } from "./Perlin.js";
 
 class Terrain {
@@ -26,7 +27,13 @@ class Terrain {
         }
         return this.chunksNeeded
     }
+    updateAgain(){
+        this.chunks.forEach((v, k) => {
+            this.modifyVerticalPosition(v)
+        })
+    }
     update() {
+        console.log('update');
         this.getChunksNeeded()
         let available = []
         let required = []
@@ -52,12 +59,18 @@ class Terrain {
     modifyVerticalPosition(plane) {
         let v = plane.geometry.attributes.position.array
         let nnn = v.length / 3
+
+        let tmp = -1
+        let tmp2 = 10
         for (let index = 0; index < nnn; index++) {
-            v[index * 3 + 2] = noise2(
+            v[index * 3 + 2] = noiseGenerator.perlin2d(
                 v[index * 3 + 0] + plane.position.x *1, 
                 v[index * 3 + 1] - plane.position.z*1 
             )
+            tmp = Math.max(v[index * 3 + 2], tmp)
+            tmp2 = Math.min(v[index * 3 + 2], tmp2)
         }
+        console.log(tmp, tmp2);
         plane.geometry.verticesNeedUpdate = true;
         plane.geometry.normalsNeedUpdate = true;
         plane.geometry.computeVertexNormals();
