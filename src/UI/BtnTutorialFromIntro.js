@@ -6,7 +6,7 @@ let tutorial = document.createElement('div')
 tutorial.classList.add('btnTutorial')
 tutorial.innerText = 'Tutorial'
 
-let btnTutorial = () => {
+let btnTutorial = (story) => {
     document.body.appendChild(tutorial)
     setTimeout(() => {
         tutorial.classList.add('btnTutorialVisible')
@@ -16,6 +16,9 @@ let btnTutorial = () => {
             landing.sceneHandler.goTo(sceneList.sceneDemoB)
             let tmp  = document.createElement('div')
             tmp.appendChild(tutorial)
+            story.stop()
+            document.body.style.backgroundImage = 'none'
+            document.body.style.backgroundColor = 'black'
             setTimeout(() => {
                 fadeInBlack.stop()
             }, 1000);

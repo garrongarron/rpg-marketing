@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-color: black;
+    background-image: linear-gradient(black, rgb(151, 56, 56))
 }
 .fire{
     position: absolute;

@@ -7,65 +7,64 @@ import scene from "../basic/Scene.js"
 import MasterScene from "../scenesystem/MasterScene.js"
 import fire from "../fx/Fire.js"
 import warrior from "../character/warrior/Warrior.js"
-import soundHandler from "../basic/sound/SoundHandler.js"
-import playnow from "../UI/PlayNow.js"
+// import soundHandler from "../basic/sound/SoundHandler.js"
 import Animator from "../basic/Animator.js"
-import story from "../UI/Story.js"
+import eventBus from "../basic/EventBus.js"
+import PlayNow from "../UI/compoment/PlayNow.js"
 
 class Landing extends MasterScene {
+    constructor() {
+        super()
+        this.cameraTarget = new THREE.Object3D()
+        this.mesh = null
+        this.delta = 0
+        this.playNow = new PlayNow()
+    }
+    down() {
+        let callback = () => {
+            this.cameraTarget.position.y -= 0.2 * this.delta
+            if (this.cameraTarget.position.y < 1.3) {
+                loopMachine.removeCallback(callback)
+            }
+            camera.lookAt(this.cameraTarget.position)
+        }
+        loopMachine.addCallback(callback)
+    }
+    rotation() {
+        this.mesh.rotation.y += 0.5 * this.delta
+        if (this.mesh.rotation.y > Math.PI * 2 + .2) {
+            loopMachine.removeCallback(rotation)
+        }
+    }
     open() {
         scene.add(light)
         camera.position.set(0, 1.5, 1.5)
-        const cameraTarget = new THREE.Object3D()
-        cameraTarget.position.set(0, 5, -3)
-        camera.lookAt(cameraTarget.position)
+
+        this.cameraTarget.position.set(0, 5, -3)
+        camera.lookAt(this.cameraTarget.position)
         resize.start(renderer)
         let clock = new THREE.Clock();
-        let delta = 0
         loopMachine.addCallback(() => {
             renderer.render(scene, camera)
-            delta = clock.getDelta();
+            this.delta = clock.getDelta();
         })
-
-        let down = () => {
-            cameraTarget.position.y -= 0.2 * delta
-            if (cameraTarget.position.y < 1.3) {
-                loopMachine.removeCallback(down)
-            }
-            camera.lookAt(cameraTarget.position)
-        }
         fire.start()
+        
+        setTimeout(() => { this.playNow.querySelector('body') }, 100);
         warrior.then(mesh => {
-            this.mesh= mesh
-            soundHandler.setVolume('fire', .2)
-            playnow.getPlayNowModule().querySelector('.beating1').addEventListener('click', () => {
-                soundHandler.play('epic')
-                soundHandler.play('fire')
-                playnow.fadeout()
-                setTimeout(() => {
-                    story.start()
-                }, 3000);
-                loopMachine.addCallback(down)
-                let rotation = () => {
-                    mesh.rotation.y += 0.5 * delta
-                    if (mesh.rotation.y > Math.PI * 2 + .2) {
-                        loopMachine.removeCallback(rotation)
-                    }
-                }
-                loopMachine.addCallback(rotation)
-            })
+            this.mesh = mesh
             scene.add(mesh)
             let animator = new Animator(mesh)
             animator.action(0, 1, false)
             animator.start()
+            eventBus.dispatch('characterLoaded', this)
         })
         loopMachine.start()
     }
     close() {
         loopMachine.clean()
         fire.stop()
-        let a = document.createElement('div')
-        a.appendChild(playnow.getPlayNowModule())
+        this.playNow.drop()
         scene.remove(this.mesh)
         console.log(`the Scene ${this.instanceName} is clossing`);
     }

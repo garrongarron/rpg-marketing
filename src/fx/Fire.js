@@ -1,3 +1,4 @@
+import cache from "../basic/Cache.js"
 import loopMachine from "../basic/LoopMachine.js"
 
 class Fire {
@@ -63,9 +64,7 @@ class Fire {
         })
     }
     stop() {
-        let a = document.createElement('div')
-        a.appendChild(this.canvas)
-
+        cache.appendChild(this.canvas)
         loopMachine.clean()
     }
 }

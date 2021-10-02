@@ -1,3 +1,5 @@
+import cache from "../basic/Cache.js"
+
 class FadeInBlack {
     constructor() {
         this.bg = null
@@ -16,6 +18,9 @@ class FadeInBlack {
     }
     stop() { 
         this.bg.classList.remove('fadeout-1')
+        setTimeout(() => {
+            cache.appendChild(this.bg)
+        }, 2000);
     }
 }
 
