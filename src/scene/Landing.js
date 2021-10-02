@@ -37,6 +37,8 @@ class Landing extends MasterScene {
         }
     }
     open() {
+        document.body.style.backgroundImage = 'linear-gradient(black, rgb(151, 56, 56))'
+        document.body.style.backgroundColor = 'black'
         scene.add(light)
         camera.position.set(0, 1.5, 1.5)
 
@@ -49,7 +51,7 @@ class Landing extends MasterScene {
             this.delta = clock.getDelta();
         })
         fire.start()
-        
+
         setTimeout(() => { this.playNow.querySelector('body') }, 100);
         warrior.then(mesh => {
             this.mesh = mesh

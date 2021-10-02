@@ -8,10 +8,9 @@ class Story extends Component {
         return {
             'listText': [
                 'Hace mucho tiempo atras',
-                // 'en una tierra lejana',
-                // 'un valiente gerrero llamado Alva',
-                // 'lucho una batalla epica',
-                // 'buscando la liberacion de su pueblo'
+                'en una tierra lejana',
+                'un valiente gerrero llamado Alva',
+                'lucho una batalla epica'
             ]
         }
     }
@@ -25,8 +24,7 @@ class Story extends Component {
         let p = document.createElement('p')
         this.n = setInterval(() => {
             if (this.state.listText.length == 0) {
-                clearInterval(this.n)
-                btnTutorial(this)
+                clearInterval(this.n)                
                 return
             }
             this.getText(p)

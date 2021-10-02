@@ -64,7 +64,7 @@
 }
 
 .play-now {
-    transition: 3s all;
+    transition: 1s all;
     opacity   : 1;
 }
 
@@ -135,7 +135,7 @@
     cursor          : pointer;
     user-select     : none;
     opacity         : 0;
-    transition      : 1s all;
+    transition      : 15s all;
     /*original*/
     text-shadow     : 0px 0px 4px white;
     box-shadow      : 0px 0px 8px #ff0000;
@@ -154,6 +154,7 @@
 
 .btnTutorial:hover,
 .scene1-tutorial:hover {
+    transition-duration: 2s;
     box-shadow      : 0px 0px 8px #ffffff;
     text-shadow     : 0px 0px 4px #ff0000;
     background-color: #181818;

@@ -2,7 +2,7 @@ import Component from "../../../js/Component.js";
 import cache from "../../basic/Cache.js";
 import eventBus from "../../basic/EventBus.js";
 import soundHandler from "../../basic/sound/SoundHandler.js";
-// import story from "../Story.js";
+import btnTutorial from "../BtnTutorialFromIntro.js";
 import Story from "../compoment/Story.js"
 
 class PlayNow extends Component {
@@ -22,13 +22,15 @@ class PlayNow extends Component {
         soundHandler.play('epic')
         soundHandler.play('fire')
         e.target.parentNode.classList.add('fadeout')
+        this.fadeOut()
         setTimeout(() => {
-            // story.start()
             let s = new Story()
             s.querySelector('body')
             s.start()
-        }, 3000);
-        this.fadeOut()
+            setTimeout(() => {
+                btnTutorial(s)
+            }, 5000);
+        }, 100);
     }
     drop(){
         cache.appendChild(this.node)
