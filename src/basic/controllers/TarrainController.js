@@ -14,7 +14,7 @@ class TerrainController{
         loopMachine.removeCallback(this.run.bind(this))
     }
     run(){
-        this.terrain.around(this.target)
+        this.terrain.tick(this.target)
     }
 }
 

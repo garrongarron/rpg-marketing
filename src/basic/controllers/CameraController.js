@@ -14,7 +14,7 @@ class CameraController{
     }
     run(){
         let position = this.target.position.clone()
-        position.add(new THREE.Vector3(0, 5, 5))
+        position.add(new THREE.Vector3(5, 10, 5))
         camera.position.lerp ( position, .1 )
         camera.lookAt(this.target.position)
     }

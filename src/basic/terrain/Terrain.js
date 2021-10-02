@@ -1,6 +1,6 @@
 import plane from "../../shapes/Plane.js"
-import Noise from "../Noise.js";
 import scene from "../Scene.js";
+import { noise2 } from "./Perlin.js";
 
 class Terrain {
     constructor() {
@@ -11,8 +11,8 @@ class Terrain {
         }
         this.chunks = new Map()
         this.group = new THREE.Group();
-        this.position = new THREE.Vector3()
-        this.prevPosition = new THREE.Vector3()
+        this.position = new THREE.Vector2()
+        this.prevPosition = new THREE.Vector2()
         this.chunksNeeded = []
     }
     getChunksNeeded() {
@@ -20,7 +20,7 @@ class Terrain {
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
                 let x = this.position.x + i * this.data.width
-                let z = this.position.z + j * this.data.width
+                let z = this.position.y + j * this.data.width
                 this.chunksNeeded.push(x + ":" + z)
             }
         }
@@ -38,10 +38,6 @@ class Terrain {
             if (this.chunks.has(v)) return
             required.push(v)
         })
-        // available.forEach(mesh => {
-        //     console.log(mesh.position.x, mesh.position.z);
-        // })
-        // console.log(required);
 
         available.forEach((mesh, index) => {
             let x = required[index].split(':')[0]
@@ -50,17 +46,33 @@ class Terrain {
             mesh.position.x = x
             mesh.position.z = z
             this.chunks.set(x + ":" + z, mesh)
-            
+            this.modifyVerticalPosition(mesh)
         })
     }
-   
-    around(target) {
-        this.position = target.position.clone()
-        this.position.x = Math.round(this.position.x / this.data.width) * this.data.width
-        this.position.y = this.position.y
-        this.position.z = Math.round(this.position.z / this.data.height) * this.data.height
+    modifyVerticalPosition(plane) {
+        let v = plane.geometry.attributes.position.array
+        let nnn = v.length / 3
+        for (let index = 0; index < nnn; index++) {
+            v[index * 3 + 2] = noise2(
+                v[index * 3 + 0] + plane.position.x *1, 
+                v[index * 3 + 1] - plane.position.z*1 
+            )
+        }
+        plane.geometry.verticesNeedUpdate = true;
+        plane.geometry.normalsNeedUpdate = true;
+        plane.geometry.computeVertexNormals();
+        // plane.geometry.computeFaceNormals();
+        plane.geometry.normalizeNormals();
+        plane.matrixAutoUpdate = true;
+        plane.updateMatrix();
+        plane.geometry.attributes.position.needsUpdate = true;
+        plane.geometry.dynamic = true;
+    }
+    tick(target) {
+        this.position.x = Math.round(target.position.x / this.data.width) * this.data.width
+        this.position.y = Math.round(target.position.z / this.data.height) * this.data.height
         if (this.prevPosition.equals(this.position)) return
-        this.prevPosition = this.position
+        this.prevPosition = this.position.clone()
         this.update()
     }
     getData(plane) {
@@ -75,17 +87,20 @@ class Terrain {
                 let colorStr = Math.random().toString().slice(2, 8)
                 let c = new THREE.Color('#' + colorStr)//RED
                 otherPlane.material = otherPlane.material.clone()
+                otherPlane.geometry = otherPlane.geometry.clone()
                 otherPlane.material.color = c
-                otherPlane.position.x = plane.position.x + i * this.data.width
-                otherPlane.position.z = plane.position.z + j * this.data.height
+                otherPlane.position.x = this.position.x + i * this.data.width
+                otherPlane.position.z = this.position.y + j * this.data.height
                 let position = `${otherPlane.position.x}:${otherPlane.position.z}`
                 this.chunks.set(position, otherPlane)
                 this.group.add(otherPlane);
+                this.modifyVerticalPosition(otherPlane)
             }
         }
     }
     start() {
         plane.rotation.x = -Math.PI * .5
+        console.log(plane);
         this.getData(plane)
         this.generateMorePlanes(plane)
         scene.add(this.group)

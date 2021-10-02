@@ -6,11 +6,13 @@ import terrainController from "../../basic/controllers/TarrainController.js"
 import keyListener from "../../basic/KeyListener.js"
 import light from "../../basic/Light.js"
 import loopMachine from "../../basic/LoopMachine.js"
+import Noise from "../../basic/Noise.js"
 import renderer from "../../basic/Renderer.js"
 import resize from "../../basic/Resize.js"
 import scene from "../../basic/Scene.js"
 import terrain from "../../basic/terrain/Terrain.js"
 import cube from "../../shapes/Cube.js"
+import plane from "../../shapes/Plane.js"
 import MasterScene from "../MasterScene.js"
 
 class SceneDemoB extends MasterScene {
@@ -19,7 +21,7 @@ class SceneDemoB extends MasterScene {
         scene.add(cube)
         cube.material.color = new THREE.Color(0x0000FF)
         camera.position.set(0, 5, 10)
-        
+
         resize.start(renderer)
         loopMachine.addCallback(() => {
             camera.lookAt(cube.position)
