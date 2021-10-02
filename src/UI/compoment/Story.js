@@ -34,6 +34,7 @@ class Story extends Component {
         this.getText(p)
     }
     stop(){
+        clearInterval(this.n)
         cache.appendChild(this.node)
     }
     template({ }) {
