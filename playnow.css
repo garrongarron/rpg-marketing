@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'gotic';
+    src        : url("../../fonts/Seagram-tfb.ttf");
+}
+
+/* play-now */
+.play-now {
+    position       : fixed;
+    width          : 100vw;
+    height         : 100vh;
+    top            : 0;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex-direction : column;
+}
+
+.play-now>h1 {
+    font-family            : 'gotic';
+    font-size              : 7em;
+    margin-top             : -30px;
+    color                  : brown;
+    user-select            : none;
+    user-select            : none;
+    background             : -webkit-linear-gradient(#fc0404, rgb(248, 224, 8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.play-now>div {
+    font-size       : 2em;
+    background-color: #111111;
+    padding         : .3em .8em;
+    border-radius   : 1em;
+    color           : white;
+    font-weight     : bolder;
+    text-shadow     : 0px 0px 8px rgb(71, 79, 85);
+    box-shadow      : 0px 0px 8px red;
+    font-family     : 'gotic';
+    font-family     : sans-serif;
+    color           : rgb(214, 202, 96);
+    cursor          : pointer;
+    user-select     : none;
+}
+
+.beating1 {
+    animation: heartbeat 1s infinite;
+}
+
+.play-now>div:hover {
+    box-shadow: 0px 0px 8px yellow;
+}
+
+.play-now {
+    transition: 3s all;
+    opacity   : 1;
+}
+
+.fadeout {
+    opacity: 0;
+}
+
+
+/********************************************************************/
+.shining{
+    position               : fixed;
+    width                  : 100%;
+    top                    : 0;
+}
+.shining .gradient {
+    margin-top             : 15vh;
+    font-family            : sans-serif;
+    font-family            : 'gotic';
+    font-size              : 2em;
+    letter-spacing         : 4px;
+    overflow               : hidden;
+    background             : linear-gradient(90deg, #000, #fff, #000);
+    background-repeat      : no-repeat;
+    background-size        : 80%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    opacity                : 0;
+    animation              : animate 3s linear;
+}
+
+.shining p {
+    width     : 100%;
+    display   : block;
+    text-align: center;
+}
+
+@keyframes animate {
+    0% {
+        opacity            : 1;
+        background-position: -500%;
+    }
+
+    90% {
+        background-position: 500%;
+        opacity            : 1;
+    }
+
+    100% {
+        background-position: 500%;
+        opacity            : 1;
+    }
+}
+/********************************************************************/
+.btnTutorial{
+    background-color: red;
+    color: white;
+    position: fixed;
+    top: 5vh;
+    right: 5vw;
+    padding: 1vw;
+    background-color: #f90000;
+    color: #ffffff;
+    width: 12vw;
+    text-align: center;
+    font-family: 'gotic';
+    z-index: 1;
+    font-size: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px #ff0000;
+    text-shadow: 0px 0px 4px white;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0;
+    transition: 1s all;
+}
+.btnTutorialVisible{
+    opacity: 1;
+}
+.btnTutorial:hover, .scene1-tutorial:hover{
+    box-shadow: 0px 0px 8px #ffffff;
+    text-shadow: 0px 0px 4px #ff0000;
+    background-color: #ffffff;
+    color: #f90000;
+}
+.fadeout-0{
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    transition: 2s all;
+    top: 0;
+    z-index: 1;
+    display: block;
+}
+.fadeout-1{
+    position: fixed;
+    background: black;
+    opacity: 1;
+}

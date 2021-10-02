@@ -1,0 +1,8 @@
+body{
+    margin: 0;
+    background-color: black;
+}
+.fire{
+    position: absolute;
+    top: 0;
+}
