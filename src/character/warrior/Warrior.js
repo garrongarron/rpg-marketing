@@ -3,7 +3,11 @@ import Loader from "../../basic/Loader.js"
 
 const folder = "./src/character/warrior/"
 let fileList = {
-    '0':'sword and shield idle (4).fbx' //sword and shield idle.fbx'
+    '0':'sword and shield idle (4).fbx', //sword and shield idle.fbx'
+    '1':'sword and shield walk.fbx',
+    '2':'sword and shield walk (2).fbx',
+    '3':'sword and shield run.fbx',
+    '4':'sword and shield run (2).fbx',
 }
 const list = []
 

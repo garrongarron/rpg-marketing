@@ -21,6 +21,8 @@ import rayLander from "../basic/controllers/RayLander.js"
 import cameraController from "../basic/controllers/CameraController.js"
 import dinamicWater from "../basic/environment/water/DinamicWater.js"
 import transparentWater from "../basic/environment/watertransparent/WaterTransparent.js"
+import characterControllerZAxes from "../basic/controllers/CharacterControllerZAxes.js"
+import eventBus from "../basic/EventBus.js"
 
 
 class Tutorial extends MasterScene {
@@ -55,15 +57,18 @@ class Tutorial extends MasterScene {
                 rayLander.start(mesh, 0)
             }, 1000);
             cameraController.start(mesh)
+            characterControllerZAxes.start(mesh)
             // orbitImplementation.start(mesh)
             // rotationController.start(mesh)           
             // landerController.start(mesh, 0)
-
-            mesh.position.y = 4
-            let animator = new Animator(mesh)
-            animator.action(0, 1, false)
-            animator.start()
+            // let animator = new Animator(mesh)
+            // animator.action(0, 1, false)
+            // animator.start()
         })
+        let caster = (data)=>{
+            eventBus.dispatch('keyListener',data)
+        }
+        keyListener.setCaster(caster)
     }
     close() {
         console.log(`the Scene ${this.instanceName} is clossing`);

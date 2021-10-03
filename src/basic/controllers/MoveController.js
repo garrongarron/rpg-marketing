@@ -1,28 +1,37 @@
+import getDelta from "../Clock.js"
+import eventBus from "../EventBus.js"
 import keyListener from "../KeyListener.js"
 import loopMachine from "../LoopMachine.js"
 
 class MoveController{
     constructor(){
         this.target = null
-        this.speed = .05
+        this.speed = .1
+        this.delta = 0
     }
     start(target){
         this.target = target
         loopMachine.addCallback(this.run.bind(this))
+        eventBus.subscribe('keyListener', this.switcher.bind(this))
+        
     }
     stop(){
         loopMachine.removeCallback(this.run.bind(this))
+        eventBus.unSubscribe('keyListener', this.switcher.bind(this))
+    }
+    switcher(bool) {
+        this.speed = (bool[2][16])?4:1.5
     }
     run(){
         if(keyListener.isPressed(87)){
-            let x = Math.sin(this.target.rotation.y) * this.speed
-            let z = Math.cos(this.target.rotation.y) * this.speed
+            let x = Math.sin(this.target.rotation.y) * this.speed * getDelta()
+            let z = Math.cos(this.target.rotation.y) * this.speed * getDelta()
             this.target.position.x += x 
             this.target.position.z += z
         }
         if(keyListener.isPressed(83)){
-            let x = Math.sin(this.target.rotation.y) * this.speed
-            let z = Math.cos(this.target.rotation.y) * this.speed
+            let x = Math.sin(this.target.rotation.y) * this.speed * getDelta()
+            let z = Math.cos(this.target.rotation.y) * this.speed * getDelta()
             this.target.position.x -= x 
             this.target.position.z -= z
         }
