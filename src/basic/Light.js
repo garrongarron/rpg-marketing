@@ -5,7 +5,7 @@ const light = new THREE.AmbientLight(0x404040);
 
 //DIRECTIONAL LIGHT
 // const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-let directionalLight = new THREE.DirectionalLight(0x888888, 1.01);
+let directionalLight = new THREE.DirectionalLight(0x888888, 0.91);
 directionalLight.position.set(0, 100,0);
 directionalLight.target.position.set(-30, 0, -30);//see Gravity.js
 directionalLight.castShadow = true;

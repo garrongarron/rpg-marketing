@@ -1,6 +1,6 @@
-const geometry = new THREE.PlaneGeometry(100,100,40,40);
+const geometry = new THREE.PlaneGeometry(1000,1000,100,100);
 let colorStr = Math.random().toString().slice(2, 8)
-const material = new THREE.MeshBasicMaterial({ 
+const material = new THREE.MeshStandardMaterial({ 
     color: '#' + colorStr, side: THREE.FrontSide,
     // wireframe:true
  });

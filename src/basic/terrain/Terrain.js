@@ -2,6 +2,7 @@ import plane from "../../shapes/Plane.js"
 import scene from "../Scene.js";
 import noiseGenerator from "./NoiseGenerator.js";
 import { noise2 } from "./Perlin.js";
+import getMaterial from "./texture/Blender.js";
 
 class Terrain {
     constructor() {
@@ -93,26 +94,32 @@ class Terrain {
         this.data.height = plane.geometry.parameters.height
         this.data.position.copy(plane.position)
     }
+    
     generateMorePlanes(plane) {
-        for (let i = -1; i < 2; i++) {
-            for (let j = -1; j < 2; j++) {
-                let otherPlane = plane.clone(true)
-                let colorStr = Math.random().toString().slice(2, 8)
-                let c = new THREE.Color('#' + colorStr)//RED
-                otherPlane.material = otherPlane.material.clone()
-                otherPlane.geometry = otherPlane.geometry.clone()
-                otherPlane.material.color = c
-                otherPlane.position.x = this.position.x + i * this.data.width
-                otherPlane.position.z = this.position.y + j * this.data.height
-                let position = `${otherPlane.position.x}:${otherPlane.position.z}`
-                this.chunks.set(position, otherPlane)
-                this.group.add(otherPlane);
-                this.modifyVerticalPosition(otherPlane)
+        getMaterial().then(material=>{
+            for (let i = -1; i < 2; i++) {
+                for (let j = -1; j < 2; j++) {
+                    let otherPlane = plane.clone(true)
+                    let colorStr = Math.random().toString().slice(2, 8)
+                    let c = new THREE.Color('#' + colorStr)//RED
+                    // otherPlane.material = otherPlane.material.clone()//material
+                    otherPlane.material = material
+                    otherPlane.geometry = otherPlane.geometry.clone()
+                    otherPlane.material.color = c
+                    otherPlane.position.x = this.position.x + i * this.data.width
+                    otherPlane.position.z = this.position.y + j * this.data.height
+                    let position = `${otherPlane.position.x}:${otherPlane.position.z}`
+                    this.chunks.set(position, otherPlane)
+                    this.group.add(otherPlane);
+                    this.modifyVerticalPosition(otherPlane)
+                }
             }
-        }
+        })
+        
     }
     start() {
         plane.rotation.x = -Math.PI * .5
+        // plane.rotation.y = -10
         console.log(plane);
         this.getData(plane)
         this.generateMorePlanes(plane)
