@@ -19,7 +19,6 @@ class MoveController{
             let z = Math.cos(this.target.rotation.y) * this.speed
             this.target.position.x += x 
             this.target.position.z += z
-            console.log(this.target.position);
         }
         if(keyListener.isPressed(83)){
             let x = Math.sin(this.target.rotation.y) * this.speed

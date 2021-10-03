@@ -19,6 +19,8 @@ import warrior from "../character/warrior/Warrior.js"
 import Animator from "../basic/Animator.js"
 import rayLander from "../basic/controllers/RayLander.js"
 import cameraController from "../basic/controllers/CameraController.js"
+import dinamicWater from "../basic/environment/water/DinamicWater.js"
+import transparentWater from "../basic/environment/watertransparent/WaterTransparent.js"
 
 
 class Tutorial extends MasterScene {
@@ -27,30 +29,29 @@ class Tutorial extends MasterScene {
         scene.add(cube)
         cube.position.y = 10
         cube.material.color = new THREE.Color(0x0000FF)
-        camera.position.set(0, 7, 5)
-
         resize.start(renderer)
         loopMachine.addCallback(() => {
             renderer.render(scene, camera)
         })
         loopMachine.start()
         terrain.start(scene)
-
         terrainController.start(cube, terrain)
-
         keyListener.start()
-
         scene.add(skyFromShader)
-        scene.add(water);
+        // scene.add(water);
+        // dinamicWater.start()
+        scene.add(transparentWater)
         scene.fog = new THREE.FogExp2(0x868293, 0.002);
         /////////////////////////////////////////////
+        camera.position.set(0, 0, 5)
         warrior.then(mesh => {
             this.mesh = mesh
             this.mesh.rotation.y = Math.PI 
             scene.add(mesh)
-            moveController.start(mesh)
             setTimeout(() => {
                 mesh.position.set(-3, 0, 32)
+                camera.position.set(0, 0, 5)
+                moveController.start(mesh)
                 rayLander.start(mesh, 0)
             }, 1000);
             cameraController.start(mesh)
