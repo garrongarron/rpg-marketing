@@ -1,5 +1,6 @@
 import camera from "../../basic/Camera.js"
 import moveController from "../../basic/controllers/MoveController.js"
+import orbitImplementation from "../../basic/controllers/OrbitImplementation.js"
 import ratationController from "../../basic/controllers/RotationController.js"
 import terrainController from "../../basic/controllers/TarrainController.js"
 import keyListener from "../../basic/KeyListener.js"
@@ -11,7 +12,7 @@ import scene from "../../basic/Scene.js"
 import terrain from "../../basic/terrain/Terrain.js"
 import cube from "../../shapes/Cube.js"
 import MasterScene from "../MasterScene.js"
-import '../../basic/controllers/OrbitImplementation.js'
+
 
 class SceneDemoB extends MasterScene {
     open() {
@@ -31,6 +32,7 @@ class SceneDemoB extends MasterScene {
         moveController.start(cube)
         ratationController.start(cube)
         terrainController.start(cube, terrain)
+        orbitImplementation.start(cube)
         keyListener.start()
     }
     close() {
