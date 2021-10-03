@@ -13,7 +13,7 @@ let btnTutorial = (story) => {
     }, 10);
     tutorial.addEventListener('click', () => {
         fadeInBlack.start(() => {
-            landing.sceneHandler.goTo(sceneList.sceneDemoB)
+            landing.sceneHandler.goTo(sceneList.tutorial)
             let tmp  = document.createElement('div')
             tmp.appendChild(tutorial)
             story.stop()

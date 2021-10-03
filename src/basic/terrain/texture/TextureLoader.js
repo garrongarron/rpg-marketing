@@ -1,7 +1,7 @@
 const loader = new THREE.TextureLoader()
 
 let folder = 'src/basic/terrain/texture/images/'
-let images = 'sand grass rock snow stone'.split(' ')
+let images = 'sand grass rock snow stone sky'.split(' ')
 
 let textureLoader = () => {
 

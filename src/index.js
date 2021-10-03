@@ -4,4 +4,4 @@ import './basic/terrain/GuiTerrain.js'
 
 let sceneHandler = new SceneHandler(sceneList)
 
-sceneHandler.goTo(sceneList.sceneDemoB)
+sceneHandler.goTo(sceneList.tutorial)

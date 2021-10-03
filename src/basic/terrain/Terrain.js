@@ -1,6 +1,7 @@
 import plane from "../../shapes/Plane.js"
 import scene from "../Scene.js";
 import noiseGenerator from "./NoiseGenerator.js";
+import params from "./Params.js";
 import { noise2 } from "./Perlin.js";
 import getMaterial from "./texture/Blender.js";
 
@@ -28,7 +29,7 @@ class Terrain {
         }
         return this.chunksNeeded
     }
-    updateAgain(){
+    updateAgain() {
         this.chunks.forEach((v, k) => {
             this.modifyVerticalPosition(v)
         })
@@ -61,17 +62,14 @@ class Terrain {
         let v = plane.geometry.attributes.position.array
         let nnn = v.length / 3
 
-        let tmp = -1
-        let tmp2 = 10
+        let x = plane.position.x * 1
+        let y = plane.position.z * 1
         for (let index = 0; index < nnn; index++) {
-            v[index * 3 + 2] = noiseGenerator.perlin2d(
-                v[index * 3 + 0] + plane.position.x *1, 
-                v[index * 3 + 1] - plane.position.z*1 
+            v[index * 3 + 2] = params.customNoiseGenerator(
+                v[index * 3 + 0] + x,
+                v[index * 3 + 1] - y
             )
-            tmp = Math.max(v[index * 3 + 2], tmp)
-            tmp2 = Math.min(v[index * 3 + 2], tmp2)
         }
-        console.log(tmp, tmp2);
         plane.geometry.verticesNeedUpdate = true;
         plane.geometry.normalsNeedUpdate = true;
         plane.geometry.computeVertexNormals();
@@ -94,9 +92,9 @@ class Terrain {
         this.data.height = plane.geometry.parameters.height
         this.data.position.copy(plane.position)
     }
-    
+
     generateMorePlanes(plane) {
-        getMaterial().then(material=>{
+        getMaterial().then(material => {
             for (let i = -1; i < 2; i++) {
                 for (let j = -1; j < 2; j++) {
                     let otherPlane = plane.clone(true)
@@ -115,12 +113,10 @@ class Terrain {
                 }
             }
         })
-        
+
     }
     start() {
         plane.rotation.x = -Math.PI * .5
-        // plane.rotation.y = -10
-        console.log(plane);
         this.getData(plane)
         this.generateMorePlanes(plane)
         scene.add(this.group)
