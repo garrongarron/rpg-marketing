@@ -10,7 +10,7 @@ document.body.appendChild(renderer.domElement);
 //shadow
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-
+//pixelratio
 
 renderer.setClearColor(0xff0000, 0);
 renderer.setPixelRatio(window.devicePixelRatio);

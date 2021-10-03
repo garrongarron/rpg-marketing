@@ -19,7 +19,7 @@ class CameraController {
         position.add(new THREE.Vector3(-2, 0, -6))
         camera.position.lerp(position, .1)
         let trying = params.customNoiseGenerator(camera.position.x, -camera.position.z) +.5
-        camera.position.y = this.hieght= Math.max(this.hieght, trying)
+        camera.position.y = this.hieght= Math.max(camera.position.y, trying)
         let target = this.target.position.clone()
         target.y++
         target.x += 1.5

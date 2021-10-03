@@ -4,8 +4,8 @@ import "./THREE.Terrain.js";
 let getMaterial = () => {
     return new Promise((res, rej) => {
         textureLoader().then(t => {
-            t[0].repeat.x = 100; t[0].repeat.y = 100
-            t[1].repeat.x = 20; t[1].repeat.y = 20
+            t[0].repeat.x = 6; t[0].repeat.y = 6
+            t[1].repeat.x = 6; t[1].repeat.y = 6
             t[2].repeat.x = 100; t[2].repeat.y = 100
             t[3].repeat.x = 100; t[3].repeat.y = 100
             t[4].repeat.x = 100; t[4].repeat.y = 100
