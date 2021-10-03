@@ -7,7 +7,7 @@ class Story extends Component {
     setState() {
         return {
             'listText': [
-                'Hace mucho tiempo atras',
+                'Hace mucho... mucho tiempo...',
                 'en una tierra lejana',
                 'un valiente gerrero llamado Alva',
                 'lucho una batalla epica'

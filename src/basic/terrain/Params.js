@@ -32,5 +32,6 @@ let params = {
         ) * params.config2.finalHeight
     }
 }
+noiseGenerator.params = params.config1
 
 export default params
