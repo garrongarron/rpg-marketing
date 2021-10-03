@@ -23,6 +23,8 @@ import dinamicWater from "../basic/environment/water/DinamicWater.js"
 import transparentWater from "../basic/environment/watertransparent/WaterTransparent.js"
 import characterControllerZAxes from "../basic/controllers/CharacterControllerZAxes.js"
 import eventBus from "../basic/EventBus.js"
+import InstructionContainer from "../UI/compoment/InstructionContainer.js"
+import weel from "../UI/compoment/Weel.js"
 
 
 class Tutorial extends MasterScene {
@@ -48,9 +50,10 @@ class Tutorial extends MasterScene {
         camera.position.set(0, 0, 5)
         warrior.then(mesh => {
             this.mesh = mesh
-            this.mesh.rotation.y = Math.PI 
+            this.mesh.rotation.y = Math.PI
             scene.add(mesh)
             setTimeout(() => {
+
                 mesh.position.set(-3, 0, 32)
                 camera.position.set(0, 0, 5)
                 moveController.start(mesh)
@@ -64,9 +67,15 @@ class Tutorial extends MasterScene {
             // let animator = new Animator(mesh)
             // animator.action(0, 1, false)
             // animator.start()
+
         })
-        let caster = (data)=>{
-            eventBus.dispatch('keyListener',data)
+        let content = new InstructionContainer();
+        setTimeout(() => {
+            content.querySelector('body')   
+        }, 3000);
+        
+        let caster = (data) => {
+            eventBus.dispatch('keyListener', data)
         }
         keyListener.setCaster(caster)
     }

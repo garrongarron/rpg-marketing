@@ -1,0 +1,164 @@
+
+body{
+    background-color: green;
+}
+.basic-container {
+    width: 400px;
+    height: 80px;
+    display: block;
+    bottom: 3em;
+    left: 50%;
+    position: fixed;
+    transform: translateX(-50%);
+    border-radius: 50px;
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 0px 0px 8px white;
+    background-color: rgba(0, 0, 0, .7);
+    user-select: none;
+}
+
+.basic-container>div {
+    position: absolute;
+    width: 100%;
+    height: 80px;
+}
+.basic-container>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.basic-container .title::before,
+.basic-container .title::after {
+    content: " - ";
+}
+
+.basic-container .title {
+    font-weight: bolder;
+    font-style: italic;
+    text-shadow: 1px 1px 2px black;
+    
+}
+
+.basic-container .message {
+    text-shadow: 1px 1px 2px black;
+}
+
+.basic-container .ok-btn {
+    width: 2em;
+    height: 2em;
+    background-color: green;
+    right: 1em;
+    top: 40px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    line-height: 2em;
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+    box-shadow: 0 0 10px white;
+    border: 2px solid greenyellow;
+}
+
+.fadeIn1 {
+    animation: fadeIn1;
+    animation-duration: 1s;
+}
+
+.fadeOut1 {
+    animation: fadeOut1;
+    animation-duration: 1s;
+}
+
+@keyframes fadeIn1 {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut1 {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/*************************/
+.wrapper {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    clip: rect(0px, 25px, 25px, 12.5px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -12.5px;
+    margin-top: -12.5px;
+    z-index: 1
+}
+
+.wrapper .circle {
+    width: 25px;
+    height: 25px;
+    border: 4.16667px solid yellow;
+    border-radius: 12.5px;
+    position: absolute;
+    clip: rect(0px, 12.5px, 25px, 0px);
+    /* box-shadow: 0 0 10px black; */
+}
+
+.wrapper .circle[data-anim~=left] {
+    -webkit-animation-duration: 2s;
+    -webkit-animation-name: left-spin
+}
+
+.wrapper .circle[data-anim~=right] {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: right-spin
+}
+
+div[data-anim~=base] {
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear
+}
+
+.wrapper[data-anim~=wrapper] {
+    -webkit-animation-duration: 0.01s;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-name: close-wrapper
+}
+
+@-webkit-keyframes right-spin {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(180deg)
+    }
+}
+
+@-webkit-keyframes left-spin {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes close-wrapper {
+    to {
+        clip: rect(auto, auto, auto, auto)
+    }
+}

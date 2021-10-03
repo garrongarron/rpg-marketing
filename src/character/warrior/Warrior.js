@@ -14,6 +14,6 @@ const list = []
 Object.keys(fileList).forEach((element, index) => {
     list[index] = folder + 'animations/'+ fileList[index]
 })
-const warrior = (new Loader(folder + 'animations/untitled.fbx', list, 0.01)).getModel()
+const warrior = (new Loader(folder + 'animations/warrior.fbx', list, 0.01)).getModel()
 
 export default warrior

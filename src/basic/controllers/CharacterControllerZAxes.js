@@ -1,7 +1,6 @@
 import Animator from "../Animator.js"
 import eventBus from "../EventBus.js"
 import loopMachine from "../LoopMachine.js"
-import keyListener from '../KeyListener.js'
 
 class CharacterControllerZAxes {
     constructor() { }
