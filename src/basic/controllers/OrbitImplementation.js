@@ -4,16 +4,17 @@ import renderer from "../Renderer.js";
 
 class OrbitImplementation {
     constructor() {
+        this.target = null
+    }
+    init(){
         this.controls = new THREE.OrbitControls(camera, renderer.domElement);
         this.controls.enablePan = false;
         this.controls.enableZoom = true;
         this.controls.minDistance = 1
         this.controls.maxDistance = 100
-
-        // this.offset.set(100,100,100)// = new THREE.Vector3(100,100,100)
-        this.target = null
     }
     start(target) {
+        if(!this.target) this.init()
         this.target = target
         loopMachine.addCallback(this.run.bind(this))
     }

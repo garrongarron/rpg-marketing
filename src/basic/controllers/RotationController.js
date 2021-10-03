@@ -25,6 +25,6 @@ class RotationController{
     }
 }
 
-const ratationController = new RotationController()
+const rotationController = new RotationController()
 
-export default ratationController
+export default rotationController

@@ -29,6 +29,7 @@ class RayLander {
         }
         const sum = this.prev.reduce((a, b) => a + b, 0);
         const avg = (sum / this.prev.length) || 0;
+        // console.log(avg, this.prev);
         this.mesh.position.y -= avg
     }
     stop() {

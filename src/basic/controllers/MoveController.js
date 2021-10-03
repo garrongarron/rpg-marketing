@@ -4,7 +4,7 @@ import loopMachine from "../LoopMachine.js"
 class MoveController{
     constructor(){
         this.target = null
-        this.speed = .1
+        this.speed = .05
     }
     start(target){
         this.target = target
@@ -19,6 +19,7 @@ class MoveController{
             let z = Math.cos(this.target.rotation.y) * this.speed
             this.target.position.x += x 
             this.target.position.z += z
+            console.log(this.target.position);
         }
         if(keyListener.isPressed(83)){
             let x = Math.sin(this.target.rotation.y) * this.speed

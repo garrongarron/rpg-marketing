@@ -5,7 +5,7 @@ const material = new THREE.MeshStandardMaterial({
     // wireframe:true
  });
 const plane = new THREE.Mesh(geometry, material);
-plane.position.set(2,0,3)
+plane.position.set(0,0,0)
 plane.layers.enable( 1 );
 
 export default plane

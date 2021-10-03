@@ -29,7 +29,7 @@ let params = {
             x+ params.config2.displacementX,
             y + params.config2.displacementZ,
             params.config2
-        ) * params.config2.finalHeight
+        ) * params.config2.finalHeight *0
     }
 }
 noiseGenerator.params = params.config1
