@@ -3,7 +3,17 @@ import eventBus from "../EventBus.js"
 import loopMachine from "../LoopMachine.js"
 
 class CharacterControllerZAxes {
-    constructor() { }
+    constructor() {
+        this.animator = null
+        eventBus.subscribe('outOfWater', (bool) => {
+            this.animation = 0
+            if (bool) {
+                this.animator.action(this.animation, 1, false)
+                this.stop()
+            }
+            if (!bool) this.start(this.target)
+        })
+    }
     start(target) {
         this.target = target
         this.animator = new Animator(this.target)
@@ -17,33 +27,33 @@ class CharacterControllerZAxes {
             'runBackward': 4,
         }
         this.animation = 0
-        eventBus.subscribe('keyListener', this.switcher.bind(this))
-        loopMachine.addCallback(this.run.bind(this))
+        eventBus.subscribe('keyListener', this.switcher)
+        loopMachine.addCallback(this.run)
         this.runMode = false
     }
     stop() {
-        eventBus.unSubscribe('keyListener', this.switcher.bind(this))
-        loopMachine.removeCallback(this.run.bind(this))
+        eventBus.unSubscribe('keyListener', this.switcher)
+        loopMachine.removeCallback(this.run)
     }
-    switcher(bool) {
-        this.runMode = bool[2][16]
+    switcher = (data) => {
+        this.runMode = data[2][16]
         if (this.runMode) {
-            if (bool[2][87])
+            if (data[2][87])
                 this.animation = this.animations.runAhead
-            if (bool[2][83])
+            if (data[2][83])
                 this.animation = this.animations.runBackward
-            if (!bool[2][87] && !bool[2][83])
+            if (!data[2][87] && !data[2][83])
                 this.animation = this.animations.idle
         } else {
-            if (bool[2][87])
+            if (data[2][87])
                 this.animation = this.animations.ahead
-            if (bool[2][83])
+            if (data[2][83])
                 this.animation = this.animations.backward
-            if (!bool[2][87] && !bool[2][83])
+            if (!data[2][87] && !data[2][83])
                 this.animation = this.animations.idle
         }
     }
-    run() {
+    run = () => {
         this.animator.action(this.animation, 1, false)
     }
 }

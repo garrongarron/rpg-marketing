@@ -16,18 +16,25 @@ import MasterScene from "../scenesystem/MasterScene.js"
 import sky from "../basic/environment/Sky.js"
 import skyFromShader from "../basic/environment/skyfromshader/SkyFromShader.js"
 import warrior from "../character/warrior/Warrior.js"
-import Animator from "../basic/Animator.js"
 import rayLander from "../basic/controllers/RayLander.js"
 import cameraController from "../basic/controllers/CameraController.js"
 import dinamicWater from "../basic/environment/water/DinamicWater.js"
 import transparentWater from "../basic/environment/watertransparent/WaterTransparent.js"
 import characterControllerZAxes from "../basic/controllers/CharacterControllerZAxes.js"
+import tutorialGame from "./tutorial/TutorialGame.js"
+import peasantController from "../basic/controllers/PeasantController.js"
 import eventBus from "../basic/EventBus.js"
-import InstructionContainer from "../UI/compoment/InstructionContainer.js"
-import weel from "../UI/compoment/Weel.js"
 
 
 class Tutorial extends MasterScene {
+    constructor(){
+        super()
+        this.mesh = null
+        eventBus.subscribe('outOfWater',(bool)=>{
+            if(bool) moveController.stop()
+            if(!bool) moveController.start(this.mesh)
+        })
+    }
     open() {
         scene.add(light)
         scene.add(cube)
@@ -41,9 +48,7 @@ class Tutorial extends MasterScene {
         terrain.start(scene)
         terrainController.start(cube, terrain)
         keyListener.start()
-        scene.add(skyFromShader)
-        // scene.add(water);
-        // dinamicWater.start()
+        scene.add(skyFromShader)// scene.add(water);// dinamicWater.start()
         scene.add(transparentWater)
         scene.fog = new THREE.FogExp2(0x868293, 0.002);
         /////////////////////////////////////////////
@@ -53,7 +58,6 @@ class Tutorial extends MasterScene {
             this.mesh.rotation.y = Math.PI
             scene.add(mesh)
             setTimeout(() => {
-
                 mesh.position.set(-3, 0, 32)
                 camera.position.set(0, 0, 5)
                 moveController.start(mesh)
@@ -67,17 +71,10 @@ class Tutorial extends MasterScene {
             // let animator = new Animator(mesh)
             // animator.action(0, 1, false)
             // animator.start()
-
+            peasantController.start(mesh)
         })
-        let content = new InstructionContainer();
-        setTimeout(() => {
-            content.querySelector('body')   
-        }, 3000);
         
-        let caster = (data) => {
-            eventBus.dispatch('keyListener', data)
-        }
-        keyListener.setCaster(caster)
+        tutorialGame.start()
     }
     close() {
         console.log(`the Scene ${this.instanceName} is clossing`);

@@ -18,10 +18,11 @@ class Weel {
         this.progress = wrapper
     }
     start() {
+        console.log('c');
         document.body.appendChild(this.progress)
     }
     close() {
-        cach.appendChild(this.progress)
+        cache.appendChild(this.progress)
     }
 }
 

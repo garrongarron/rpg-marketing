@@ -11,18 +11,18 @@ class MoveController{
     }
     start(target){
         this.target = target
-        loopMachine.addCallback(this.run.bind(this))
+        loopMachine.addCallback(this.run)
         eventBus.subscribe('keyListener', this.switcher.bind(this))
         
     }
     stop(){
-        loopMachine.removeCallback(this.run.bind(this))
+        loopMachine.removeCallback(this.run)
         eventBus.unSubscribe('keyListener', this.switcher.bind(this))
     }
     switcher(bool) {
         this.speed = (bool[2][16])?4:1.5
     }
-    run(){
+    run = () => {
         if(keyListener.isPressed(87)){
             let x = Math.sin(this.target.rotation.y) * this.speed * getDelta()
             let z = Math.cos(this.target.rotation.y) * this.speed * getDelta()
@@ -35,6 +35,8 @@ class MoveController{
             this.target.position.x -= x 
             this.target.position.z -= z
         }
+        
+        
     }
 }
 
