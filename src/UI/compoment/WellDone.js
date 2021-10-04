@@ -12,6 +12,7 @@ class WellDone extends Component {
     }
     doSomething(e) {
         e.target.parentNode.classList.remove('fadeIn1')
+        console.log(this.eventName);
         eventBus.dispatch(this.eventName, false)
     }
     template({}){

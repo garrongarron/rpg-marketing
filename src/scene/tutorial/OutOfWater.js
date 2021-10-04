@@ -1,5 +1,5 @@
 import eventBus from "../../basic/EventBus.js"
-import loopMachine from "../../basic/LoopMachine.js"
+import { LoopMachine } from "../../basic/LoopMachine.js"
 import soundHandler from "../../basic/sound/SoundHandler.js"
 import warrior from "../../character/warrior/Warrior.js"
 import instructionContainer from "../../UI/compoment/InstructionContainer.js"
@@ -10,14 +10,14 @@ class OutOfWater {
     constructor() {
         this.warrior = null
         this.handred = 12
+        this.loop = null
     }
     start() {
-        
         warrior.then(mesh => {
             this.warrior = mesh
             setTimeout(() => {
-                progressBar.querySelector('body')
-                loopMachine.addCallback(this.check)
+                this.loop = LoopMachine.store['TutorialGame']
+                this.loop.addCallback(this.check)
             }, 1000);
         })
 
@@ -31,7 +31,6 @@ class OutOfWater {
             this.stop()
             eventBus.dispatch('outOfWater',true)
             instructionContainer.node.classList.remove('fadeIn1')
-            wellDone.querySelector('body')
             wellDone.setEventName('outOfWater')
             setTimeout(() => {
                 wellDone.node.classList.add('fadeIn1')
@@ -39,7 +38,7 @@ class OutOfWater {
         }
     }
     stop() {
-        loopMachine.removeCallback(this.check)
+        this.loop.removeCallback(this.check)
     }
 }
 

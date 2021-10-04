@@ -3,8 +3,12 @@ import characterControllerZAxes from "../../basic/controllers/CharacterControlle
 import moveController from "../../basic/controllers/MoveController.js";
 import eventBus from "../../basic/EventBus.js";
 import keyListener from "../../basic/KeyListener.js";
+import { LoopMachine } from "../../basic/LoopMachine.js";
+import loopMonitor from "../../basic/LoopMonitor.js";
 import warrior from "../../character/warrior/Warrior.js";
 import instructionContainer from "../../UI/compoment/InstructionContainer.js";
+import { progressBar } from "../../UI/compoment/ProgressBar.js";
+import wellDone from "../../UI/compoment/WellDone.js";
 import outOfWater from "./OutOfWater.js";
 import talkToOldMan from "./TalkToOldMan.js";
 
@@ -28,8 +32,8 @@ class TutorialGame {
         if (bool) {
             moveController.stop()
             characterControllerZAxes.pause()
-            talkToOldMan.stop()
         } else {
+            talkToOldMan.stop()
             moveController.start(this.mesh)
             characterControllerZAxes.resume()
         }
@@ -50,7 +54,14 @@ class TutorialGame {
             eventBus.dispatch('keyListener', data)
         }
         keyListener.setCaster(caster)
-        outOfWater.start()
+        let loop = new LoopMachine()
+        LoopMachine.store['TutorialGame'] = loop
+        loopMonitor.start(loop)
+        loop.debug(loopMonitor)
+        loop.start()
+        progressBar.querySelector('body')
+        wellDone.querySelector('body')
+        talkToOldMan.start()
     }
     stop() {
         eventBus.unSubscribe('outOfWater', this.outOfWater)
