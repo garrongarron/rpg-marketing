@@ -18,7 +18,7 @@ class PlayNow extends Component {
     }
     addEventListener() { return ['click'] }
     clicking(e) {
-        soundHandler.setVolume('fire', .2)
+        soundHandler.setVolume('fire', .4)
         soundHandler.play('epic')
         soundHandler.play('fire')
         e.target.parentNode.classList.add('fadeout')

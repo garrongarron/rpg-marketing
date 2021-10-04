@@ -6,20 +6,34 @@ class WellDone extends Component {
         super()
         this.eventName = null
     }
+    setState(){
+        let state = {}
+        state.title = 'Bien hecho Alva!'
+        state.message = 'Ahora tienes que buscar al anciano para que te encomiende una mision. Ve hacia adelante. Presiona [Shift]+[W] para correr. '
+        state.button = 'Entendido'
+        return state
+    }
     addEventListener() { return ['click'] }
     setEventName(eventName){
         this.eventName = eventName
     }
     doSomething(e) {
+        e.preventDefault()
         e.target.parentNode.classList.remove('fadeIn1')
-        console.log(this.eventName);
         eventBus.dispatch(this.eventName, false)
+    }
+    update(state){
+        this.state = state
+        this.setNewState(this.state)
+    }
+    setNextMessage(message){
+        this.state.message = message
     }
     template({}){
         return `<div class="welldone" >
-            <h1>Bien hecho Alva!</h1>
-            <p>Ahora tienes que buscar al anciano para que te encomiende una mision. Ve hacia adelante. Presiona [Shift]+[W] para correr. </p>
-            <button click="doSomething">Entendido</button>
+            <h1>${this.state.title}</h1>
+            <p>${this.state.message}</p>
+            <button click="doSomething">${this.state.button}</button>
         </div>`
     }
 }

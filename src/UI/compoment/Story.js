@@ -9,8 +9,8 @@ class Story extends Component {
             'listText': [
                 'Hace mucho... mucho tiempo...',
                 'en una tierra lejana',
-                'un valiente gerrero llamado Alva',
-                'lucho una batalla epica'
+                'un valiente gerrero llamado Alva Majo',
+                'libró  una batalla épica'
             ]
         }
     }

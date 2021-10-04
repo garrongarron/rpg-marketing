@@ -14,7 +14,7 @@ let btnTutorial = (story) => {
     tutorial.addEventListener('click', () => {
         fadeInBlack.start(() => {
             landing.sceneHandler.goTo(sceneList.tutorial)
-            localStorage.setItem('n', JSON.stringify(1));
+            // localStorage.setItem('n', JSON.stringify(1));
             let tmp  = document.createElement('div')
             tmp.appendChild(tutorial)
             story.stop()

@@ -18,11 +18,18 @@ body{
     user-select: none;
     opacity: 0;
     transition: .5s all linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 35px;
+    padding-right: 35px;
+    text-align: center;
 }
 
 .basic-container>div {
     position: absolute;
-    width: 100%;
+    /* width: 100%; */
     height: 80px;
 }
 .basic-container>div {
@@ -41,11 +48,13 @@ body{
     font-weight: bolder;
     font-style: italic;
     text-shadow: 1px 1px 2px black;
-    
+    padding-right: 55px;
 }
 
 .basic-container .message {
     text-shadow: 1px 1px 2px black;
+    padding-left: 35px;
+    padding-right: 55px;
 }
 
 .basic-container .ok-btn {

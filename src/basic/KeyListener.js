@@ -1,36 +1,36 @@
-class KeyListener{
-    constructor(caster){
+class KeyListener {
+    constructor(caster) {
         this.keys = {}
         this.caster = caster || console.log;
     }
-    setCaster(caster){
+    setCaster(caster) {
         this.caster = caster
     }
     //eventHandler "callback"
-    down(e){
-        if(this.keys[e.keyCode]) return
+    down = (e) => {
+        if (this.keys[e.keyCode]) return
         this.keys[e.keyCode] = true
         this.caster([e.keyCode, true, this.keys])
-        e.preventDefault()
-        e.stopPropagation()
+        // e.preventDefault()
+        // e.stopPropagation()
     }
     //eventHandler "callback"
-    up(e){
+    up = (e) => {
         this.keys[e.keyCode] = false
         this.caster([e.keyCode, false, this.keys])
-        e.preventDefault()
-        e.stopPropagation()
+        // e.preventDefault()
+        // e.stopPropagation()
     }
-    isPressed(keyCode){
-        return (this.keys[keyCode])?this.keys[keyCode]:false
+    isPressed(keyCode) {
+        return (this.keys[keyCode]) ? this.keys[keyCode] : false
     }
-    start(){
-        window.addEventListener('keydown', this.down.bind(this))
-        window.addEventListener("keyup", this.up.bind(this))
+    start() {
+        window.addEventListener('keydown', this.down)
+        window.addEventListener("keyup", this.up)
     }
-    stop(){
-        window.removeEventListener('keydown', this.down.bind(this))
-        window.removeEventListener("keyup", this.up.bind(this))
+    stop() {
+        window.removeEventListener('keydown', this.down)
+        window.removeEventListener("keyup", this.up)
     }
 }
 

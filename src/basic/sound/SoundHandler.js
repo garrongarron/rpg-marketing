@@ -50,7 +50,6 @@ class SoundHandler {
             this.nodeList[name].currentTime = 0;
         })
     }
-
 }
 
 const soundHandler = new SoundHandler(soundList)

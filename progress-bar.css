@@ -86,7 +86,43 @@
     margin: 0;
     font-size: 1em;
     margin-bottom: 30px;
+    max-height: 120px;
+    overflow-y: scroll;
+    display: block;
 }
+.welldone p >a {
+    color: red;
+    text-decoration: none;
+    transition: .2s all;
+    text-shadow: 0 0 4px yellow ;
+}
+.welldone p >a:hover {
+    color: rgb(253, 229, 192);
+    text-shadow: 0 0 8px red ;
+}
+/*Scroll bar start*/
+/* width */
+.welldone p::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .welldone p::-webkit-scrollbar-track {
+    background: none; 
+  }
+   
+  /* Handle */
+  .welldone p::-webkit-scrollbar-thumb {
+    /* background: #888;  */
+    background: rgb(228, 204, 100);
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .welldone p::-webkit-scrollbar-thumb:hover {
+    background: rgb(230, 164, 89);
+  }
+/*Scroll bar ends*/
 .welldone button{
     font-family: 'gotic';
     display: block;

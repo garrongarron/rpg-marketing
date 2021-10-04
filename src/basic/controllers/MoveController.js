@@ -8,6 +8,7 @@ class MoveController{
         this.target = null
         this.speed = .1
         this.delta = 0
+        this.direction = 0
     }
     start(target){
         this.target = target
@@ -23,13 +24,13 @@ class MoveController{
         this.speed = (bool[2][16])?4:1.5
     }
     run = () => {
-        if(keyListener.isPressed(87)){
+        if(keyListener.isPressed(87) || this.direction == 1){
             let x = Math.sin(this.target.rotation.y) * this.speed * getDelta()
             let z = Math.cos(this.target.rotation.y) * this.speed * getDelta()
             this.target.position.x += x 
             this.target.position.z += z
         }
-        if(keyListener.isPressed(83)){
+        if(keyListener.isPressed(83)|| this.direction == -1){
             let x = Math.sin(this.target.rotation.y) * this.speed * getDelta()
             let z = Math.cos(this.target.rotation.y) * this.speed * getDelta()
             this.target.position.x -= x 

@@ -24,12 +24,14 @@ import characterControllerZAxes from "../basic/controllers/CharacterControllerZA
 import tutorialGame from "./tutorial/TutorialGame.js"
 import peasantController from "../basic/controllers/PeasantController.js"
 import eventBus from "../basic/EventBus.js"
+import soundHandler from "../basic/sound/SoundHandler.js"
 
 
 class Tutorial extends MasterScene {
     constructor(){
         super()
         this.mesh = null
+        this.vol = 1
     }
     open() {
         scene.add(light)
@@ -55,11 +57,12 @@ class Tutorial extends MasterScene {
             scene.add(mesh)
             setTimeout(() => {
                 mesh.position.set(-3, 0, 32)
+                // mesh.position.set(-3, 2, 5)
                 camera.position.set(0, 0, 5)
                 moveController.start(mesh)
                 rayLander.start(mesh, 0)
             }, 1000);
-            cameraController.start(mesh)
+            
             characterControllerZAxes.start(mesh)
             // orbitImplementation.start(mesh)
             // rotationController.start(mesh)           
@@ -71,8 +74,21 @@ class Tutorial extends MasterScene {
         })
         
         tutorialGame.start()
+        loopMachine.addCallback(this.volumen)
+    }
+    volumen = ()=>{
+        this.vol -= 0.01
+        if(this.vol >.4){
+            soundHandler.setVolume('epic', this.vol)
+        }
+        if(this.vol < 0){
+            soundHandler.stop('fire')
+            loopMachine.removeCallback(this.volumen)
+        }
+        soundHandler.setVolume('fire', (this.vol>0)?this.vol:0)
     }
     close() {
+        
         console.log(`the Scene ${this.instanceName} is clossing`);
         loopMachine.clean()
     }

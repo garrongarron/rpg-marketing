@@ -20,7 +20,12 @@ class OutOfWater {
                 this.loop.addCallback(this.check)
             }, 1000);
         })
-
+        setTimeout(() => {
+            instructionContainer.querySelector('body')
+            setTimeout(() => {
+                instructionContainer.node.classList.add('fadeIn1')
+            }, 100);
+        }, 3000);
     }
     check = () => {
         let n = 1 - (this.warrior.position.z - 20) / 12
