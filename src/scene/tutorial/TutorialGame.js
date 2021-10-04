@@ -56,8 +56,6 @@ class TutorialGame {
         keyListener.setCaster(caster)
         let loop = new LoopMachine()
         LoopMachine.store['TutorialGame'] = loop
-        loopMonitor.start(loop)
-        loop.debug(loopMonitor)
         loop.start()
         progressBar.querySelector('body')
         wellDone.querySelector('body')
