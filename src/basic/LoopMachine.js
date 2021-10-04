@@ -2,9 +2,21 @@ class LoopMachine {
     constructor() {
         this.flag = false
         this.callbacks = []
+        this.monitor = document.createElement('div')
+        this.monitor.classList.add('loopMachine')
+        document.body.appendChild(this.monitor)
     }
     addCallback(callback) {
         this.callbacks.push(callback)
+        this.monitor.innerText = this.callbacks.length + '\n'
+        this.monitor.innerText += this.callbacks.map((cb, index)=>{
+            let out = index+' => '+cb.toString().split('\n').join('').split('\r').join('')
+            // out += cb.toString().split('\n')[1]
+            out += `
+            ------------------------------------
+            `
+            return out
+        })
     }
     removeCallback(callback) {
         let index = this.callbacks.indexOf(callback)

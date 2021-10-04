@@ -29,4 +29,5 @@ class InstructionContainer extends Component {
     }
 }
 
-export default InstructionContainer;
+let instructionContainer = new InstructionContainer()
+export default instructionContainer;

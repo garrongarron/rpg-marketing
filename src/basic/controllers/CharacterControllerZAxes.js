@@ -5,18 +5,18 @@ import loopMachine from "../LoopMachine.js"
 class CharacterControllerZAxes {
     constructor() {
         this.animator = null
-        eventBus.subscribe('outOfWater', (bool) => {
-            this.animation = 0
-            if (bool) {
-                this.animator.action(this.animation, 1, false)
-                this.stop()
-            }
-            if (!bool) this.start(this.target)
-        })
+    }
+    pause(){
+        this.animation = 0
+        this.animator.action(this.animation, 1, false)
+        this.stop()
+    }
+    resume(){
+        this.start(this.target)
     }
     start(target) {
         this.target = target
-        this.animator = new Animator(this.target)
+        if(!this.animator) this.animator = new Animator(this.target)
         this.animator.action(0, 1, false)
         this.animator.start()
         this.animations = {
@@ -54,7 +54,7 @@ class CharacterControllerZAxes {
         }
     }
     run = () => {
-        this.animator.action(this.animation, 1, false)
+        this.animator.action(this.animation, 1, false)//run
     }
 }
 

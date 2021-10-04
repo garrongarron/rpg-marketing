@@ -30,10 +30,6 @@ class Tutorial extends MasterScene {
     constructor(){
         super()
         this.mesh = null
-        eventBus.subscribe('outOfWater',(bool)=>{
-            if(bool) moveController.stop()
-            if(!bool) moveController.start(this.mesh)
-        })
     }
     open() {
         scene.add(light)
@@ -47,7 +43,7 @@ class Tutorial extends MasterScene {
         loopMachine.start()
         terrain.start(scene)
         terrainController.start(cube, terrain)
-        keyListener.start()
+        // keyListener.start()
         scene.add(skyFromShader)// scene.add(water);// dinamicWater.start()
         scene.add(transparentWater)
         scene.fog = new THREE.FogExp2(0x868293, 0.002);

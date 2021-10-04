@@ -15,7 +15,7 @@ class PeasantController{
         peasant.then(mesh => {
             this.mesh = mesh
             scene.add(mesh)
-            mesh.position.set(-1, params.customNoiseGenerator(-1, 10)-3.5, 10)
+            mesh.position.set(-1, params.customNoiseGenerator(-1, 5)-3.5, 5)
             
             this.animator = new Animator(mesh)
             this.animator.action(0, 1, false)

@@ -2,10 +2,17 @@ import Component from "../../../js/Component.js";
 import eventBus from "../../basic/EventBus.js";
 
 class WellDone extends Component {
+    constructor(){
+        super()
+        this.eventName = null
+    }
     addEventListener() { return ['click'] }
+    setEventName(eventName){
+        this.eventName = eventName
+    }
     doSomething(e) {
         e.target.parentNode.classList.remove('fadeIn1')
-        eventBus.dispatch('outOfWater', false)
+        eventBus.dispatch(this.eventName, false)
     }
     template({}){
         return `<div class="welldone" >
@@ -16,5 +23,6 @@ class WellDone extends Component {
     }
 }
 
+let wellDone = new WellDone()
 
-export default WellDone;    
+export default wellDone;    

@@ -14,7 +14,7 @@ class ProgressBar extends Component {
         let node = this.node.querySelector('input')
         node.style.background = `linear-gradient(90deg, #fbff00 ${value}%, #ffc0cb00 0%)`
         let label = this.node.querySelector('.slidebar-label')
-        label.innerText = `0/${value}`
+        label.innerText = `${value}%`
     }
     template(){
         
@@ -25,5 +25,7 @@ class ProgressBar extends Component {
         </div>`
     }
 }
-
+let progressBar = new ProgressBar();
 export default ProgressBar;
+
+export { progressBar }

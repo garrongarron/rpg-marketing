@@ -9,3 +9,11 @@ body{
     position: absolute;
     top: 0;
 }
+.loopMachine{
+    position: fixed;
+    /* overflow-x: scroll; */
+    width: 10000px;
+}
+.loopMachine::before{
+    content: 'LoopMachine: ';
+}
