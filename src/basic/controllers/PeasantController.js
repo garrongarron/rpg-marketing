@@ -14,8 +14,12 @@ class PeasantController{
         this.target = target
         peasant.then(mesh => {
             this.mesh = mesh
+            mesh.position.set(-1, -2, 32)
             scene.add(mesh)
-            mesh.position.set(-1, params.customNoiseGenerator(-1, 5)-3.5, 5)
+            setTimeout(() => {
+                mesh.visible = true
+                mesh.position.set(-1, 2.8, 0)
+            }, 2000);
             
             this.animator = new Animator(mesh)
             this.animator.action(0, 1, false)

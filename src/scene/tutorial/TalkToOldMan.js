@@ -26,7 +26,7 @@ class TalkToOldMan {
         this.loop.addCallback(this.check)
     }
     check = () => {
-        if (this.warrior.position.z * 1 < 5) {
+        if (this.warrior.position.z * 1 < 1) {
             soundHandler.play('plim')
             this.stop()
             eventBus.dispatch('talkToOldMan', true)

@@ -61,7 +61,7 @@ class TutorialGame {
         loop.start()
         progressBar.querySelector('body')
         wellDone.querySelector('body')
-        talkToOldMan.start()
+        outOfWater.start()
     }
     stop() {
         eventBus.unSubscribe('outOfWater', this.outOfWater)
