@@ -20,7 +20,7 @@ let dialog =  [
     ['Guerrero', '¡Lo juro! ¡Como que me llamo Alva Majo!'],
     ['Guerrero', 'Desarrollador de Videojuegos indie.'],
     ['Guerrero', 'Dime donde está el castillo. Te lo ordeno.'],
-    ['Anciano', 'El castillo está detrás de las siete colinas.'],
+    ['Anciano', 'El castillo está detrás de las siete colinas en dirección al sur.'],
     ['Anciano', 'Avisaré a los mercaderes del pueblo que tu irás. Tal vez puedan ayudarte a ingresar al castillo.'],
 ]
 

@@ -20,29 +20,25 @@ import characterControllerZAxes from "../basic/controllers/CharacterControllerZA
 import cube from "../shapes/Cube.js"
 import params from "../basic/terrain/Params.js"
 import compass from "./frontcastle/Compass.js"
+import shadowController from "../basic/controllers/ShadowController.js"
+import environementHandler from "./environment/EnvironmentHandler.js"
 
 class FrontCastle extends MasterScene {
     open() {
-        scene.add(light)
-        scene.add(cube)
-        cube.position.set(1, 3, 3)
-        // camera.lookAt(cube.position)
         resize.start(renderer)
         loopMachine.addCallback(() => {
             renderer.render(scene, camera)
         })
         loopMachine.start()
-        terrain.start(scene)
-        
         keyListener.start()
-        
-        // scene.add(skyFromShader)// scene.add(water);// dinamicWater.start()
-        scene.fog = new THREE.FogExp2(0x868293, 0.002);
-        // camera.position.set(0, 10, 20)
+
         warrior.then(mesh => {
             this.mesh = mesh
             scene.add(mesh)
-            // this.mesh.position.set(0, 3, 0)
+            if (this.mesh.position.y == 0) {
+                this.mesh.position.set(0, 3, 0)
+                camera.position.set(0, 10, 20)
+            }
             moveController.start(mesh)
             moveController.mode.walk = 4
             rayLander.start(mesh, 0)
@@ -50,21 +46,15 @@ class FrontCastle extends MasterScene {
             orbitImplementation.start(mesh)
             characterControllerZAxes.justRun = true
             characterControllerZAxes.start(mesh)
-            terrainController.start(mesh, terrain)
             compass.start(mesh)
-            skyFromShader.start(mesh)
-            // orbitImplementation.start(mesh)         
-            // landerController.start(mesh, 0)
-            // let animator = new Animator(mesh)
-            // animator.action(0, 1, false)
-            // animator.start()
-            // peasantController.start(mesh)
+            environementHandler.start(this.mesh)
+            // environementHandler.night()
         })
         let caster = (data) => {
             eventBus.dispatch('keyListener', data)
         }
         keyListener.setCaster(caster)
-        
+
     }
     close() {
         loopMachine.clean()

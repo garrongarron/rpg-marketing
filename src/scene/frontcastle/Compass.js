@@ -12,9 +12,27 @@ class Compass {
         this.node = compass
         this.node.classList.add('compass')
         for (let index = 0; index < 24; index++) {
-            this.node.innerHTML += '<div>'+(index*15-180)+'</div>'
+            let value = index*15-180
+            if(value ==0) value = 'Norte'
+            else if(value ==45) value = 'Nor Este'
+            else if(value ==90) value = 'Este'
+            else if(value ==-180) value = 'Sur'
+            else if(value ==-45) value = 'Nor Oeste'
+            else if(value ==-90) value = 'Oeste'
+            else if(value ==-135) value = 'Sur Oeste'
+            else if(value ==135) value = 'Sur Este'
+            else value = '|'
+            this.node.innerHTML += '<div class="value">'+(value)+'</div>'
             
         }
+        let childRight = this.node.cloneNode(true)
+        childRight.classList.add('rigth')
+        this.node.appendChild(childRight)
+
+        let childLeft = this.node.cloneNode(true)
+        childLeft.classList.add('left')
+        this.node.appendChild(childLeft)
+        
         document.body.appendChild(this.node)
     }
     start(target) {

@@ -228,7 +228,6 @@
 					if(window.params){
 						let min = window.params.customNoiseGenerator(position.x, -position.z)+2
 						position.y = Math.max(min, position.y)
-						console.log(position.y);
 					}
 					scope.object.lookAt( scope.target );
 

@@ -1,11 +1,31 @@
 .compass{
     width: 300vw;
-    height: 50px;
-    background-image: linear-gradient(90deg, red, green, blue);
+    height: 30px;
+    /* background-image: linear-gradient(90deg, red, green, blue); */
     position: fixed;
     top: 0;
     text-align: center;
     display: flex;
     justify-content: space-between;
     /* transform: translateX(20%); */
+    /* transition: .5s all linear; */
+    font-family: 'gotic';
+    color: cadetblue;
+}
+.compass div.value{
+    min-width: 10vw;
+    height: 30px;
+    /* background: white; */
+    line-height: 30px;
+}
+.compass > .compass.left{
+    /* position: absolute; */
+    /* background: red; */
+    transform: translateX(-100%);
+    /* display: none; */
+}
+.compass > .compass.rigth{
+    /* position: absolute; */
+    /* background: blue; */
+    transform: translateX(100%);
 }

@@ -28,7 +28,9 @@ class PeasantController{
         })
     }
     lookAt = ()=>{
-        this.mesh.lookAt(this.target.position)
+        let position = this.target.position.clone()
+        position.y = this.mesh.position.y
+        this.mesh.lookAt(position)
     }
     stop(){
         loopMachine.removeCallback(this.lookAt)
