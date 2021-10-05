@@ -33,5 +33,5 @@ let params = {
     }
 }
 noiseGenerator.params = params.config1
-
+window.params = params
 export default params

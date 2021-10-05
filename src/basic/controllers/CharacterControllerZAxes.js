@@ -6,6 +6,7 @@ class CharacterControllerZAxes {
     constructor() {
         this.animator = null
         this.justRun = false
+        this.animationSpeed = 1
     }
     pause(){
         this.animation = 0
@@ -39,9 +40,12 @@ class CharacterControllerZAxes {
     switcher = (data) => {
         if(this.justRun){
             this.runMode = true
+            // this.animationSpeed = 2
         }else {
+            // this.animationSpeed = 1
             this.runMode = data[2][16]
         }
+        // this.runMode = data[2][16]
         if (this.runMode) {
             if (data[2][87])
                 this.animation = this.animations.runAhead
@@ -59,7 +63,7 @@ class CharacterControllerZAxes {
         }
     }
     run = () => {
-        this.animator.action(this.animation, 1, false)//run
+        this.animator.action(this.animation, this.animationSpeed, false)//run
     }
 }
 

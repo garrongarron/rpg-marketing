@@ -1,0 +1,11 @@
+.compass{
+    width: 300vw;
+    height: 50px;
+    background-image: linear-gradient(90deg, red, green, blue);
+    position: fixed;
+    top: 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    /* transform: translateX(20%); */
+}

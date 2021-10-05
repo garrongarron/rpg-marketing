@@ -1,3 +1,4 @@
+
 ( function () {
 
 	// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
@@ -157,7 +158,7 @@
 				return function update() {
 
 					const position = scope.object.position;
-					position.y = 30
+
 					offset.copy( position ).sub( scope.target ); // rotate offset to "y-axis-is-up" space
 
 					offset.applyQuaternion( quat ); // angle from z-axis around y-axis
@@ -224,6 +225,11 @@
 
 					offset.applyQuaternion( quatInverse );
 					position.copy( scope.target ).add( offset );
+					if(window.params){
+						let min = window.params.customNoiseGenerator(position.x, -position.z)+2
+						position.y = Math.max(min, position.y)
+						console.log(position.y);
+					}
 					scope.object.lookAt( scope.target );
 
 					if ( scope.enableDamping === true ) {

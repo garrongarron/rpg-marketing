@@ -19,6 +19,7 @@ import MasterScene from "../scenesystem/MasterScene.js"
 import characterControllerZAxes from "../basic/controllers/CharacterControllerZAxes.js"
 import cube from "../shapes/Cube.js"
 import params from "../basic/terrain/Params.js"
+import compass from "./frontcastle/Compass.js"
 
 class FrontCastle extends MasterScene {
     open() {
@@ -34,13 +35,14 @@ class FrontCastle extends MasterScene {
         terrain.start(scene)
         
         keyListener.start()
-        scene.add(skyFromShader)// scene.add(water);// dinamicWater.start()
+        
+        // scene.add(skyFromShader)// scene.add(water);// dinamicWater.start()
         scene.fog = new THREE.FogExp2(0x868293, 0.002);
-        camera.position.set(0, 20, 20)
+        // camera.position.set(0, 10, 20)
         warrior.then(mesh => {
             this.mesh = mesh
-            this.mesh.position.set(0, 3, 0)
             scene.add(mesh)
+            // this.mesh.position.set(0, 3, 0)
             moveController.start(mesh)
             moveController.mode.walk = 4
             rayLander.start(mesh, 0)
@@ -49,7 +51,8 @@ class FrontCastle extends MasterScene {
             characterControllerZAxes.justRun = true
             characterControllerZAxes.start(mesh)
             terrainController.start(mesh, terrain)
-            
+            compass.start(mesh)
+            skyFromShader.start(mesh)
             // orbitImplementation.start(mesh)         
             // landerController.start(mesh, 0)
             // let animator = new Animator(mesh)
@@ -61,6 +64,7 @@ class FrontCastle extends MasterScene {
             eventBus.dispatch('keyListener', data)
         }
         keyListener.setCaster(caster)
+        
     }
     close() {
         loopMachine.clean()
