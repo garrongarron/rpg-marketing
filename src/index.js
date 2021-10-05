@@ -11,3 +11,4 @@ if (n == 0) {
 }
 
 
+// sceneHandler.goTo(sceneList.frontCastle)

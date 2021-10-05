@@ -78,7 +78,7 @@ class Tutorial extends MasterScene {
     }
     volumen = ()=>{
         this.vol -= 0.01
-        if(this.vol >.4){
+        if(this.vol >.2){
             soundHandler.setVolume('epic', this.vol)
         }
         if(this.vol < 0){

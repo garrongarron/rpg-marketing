@@ -5,6 +5,7 @@ import loopMachine from "../LoopMachine.js"
 class CharacterControllerZAxes {
     constructor() {
         this.animator = null
+        this.justRun = false
     }
     pause(){
         this.animation = 0
@@ -36,7 +37,11 @@ class CharacterControllerZAxes {
         loopMachine.removeCallback(this.run)
     }
     switcher = (data) => {
-        this.runMode = data[2][16]
+        if(this.justRun){
+            this.runMode = true
+        }else {
+            this.runMode = data[2][16]
+        }
         if (this.runMode) {
             if (data[2][87])
                 this.animation = this.animations.runAhead

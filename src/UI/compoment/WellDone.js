@@ -9,7 +9,7 @@ class WellDone extends Component {
     setState(){
         let state = {}
         state.title = 'Bien hecho Alva!'
-        state.message = 'Ahora tienes que buscar al anciano para que te encomiende una mision. Ve hacia adelante. Presiona [Shift]+[W] para correr. '
+        state.message = 'Ahora tienes que buscar al anciano para que te encomiende una misión. Ve hacia adelante. Presiona [Shift]+[W] para correr. '
         state.button = 'Entendido'
         return state
     }

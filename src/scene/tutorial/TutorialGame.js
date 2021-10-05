@@ -12,9 +12,12 @@ import loopMonitor from "../../basic/LoopMonitor.js";
 import soundHandler from "../../basic/sound/SoundHandler.js";
 import peasant from "../../character/peasant/Peasant.js";
 import warrior from "../../character/warrior/Warrior.js";
+import sceneList from "../../scenesystem/demo/SceneList.js";
 import instructionContainer from "../../UI/compoment/InstructionContainer.js";
 import { progressBar } from "../../UI/compoment/ProgressBar.js";
 import wellDone from "../../UI/compoment/WellDone.js";
+import fadeInBlack from "../../UI/FadeInBlack.js";
+import tutorial from "../Tutorial.js";
 import outOfWater from "./OutOfWater.js";
 import talkToOldMan from "./TalkToOldMan.js";
 
@@ -49,6 +52,18 @@ class TutorialGame {
             cameraController.start(this.mesh)
             keyListener.stop()
             setTimeout(() => {
+                fadeInBlack.start(()=>{
+                    soundHandler.stop('running')
+                    tutorialGame.stop()
+                    tutorial.sceneHandler.goTo(sceneList.frontCastle)
+                    setTimeout(() => {
+                        fadeInBlack.stop()
+                    }, 1000);
+                })
+            }, 10000);
+            setTimeout(() => {
+                soundHandler.setVolume('running', .4)
+                soundHandler.play('running')
                 moveController.speed = 4
                 moveController.direction = 1
                 characterControllerZAxes.animation = characterControllerZAxes.animations.runAhead
@@ -105,6 +120,8 @@ class TutorialGame {
         eventBus.subscribe('dialogSystem', this.dialogSystemCallback)
     }
     stop() {
+        cache.appendChild(progressBar.node)
+        cache.appendChild(wellDone.node)
         eventBus.unSubscribe('outOfWater', this.outOfWater)
         cache.appendChild(instructionContainer.node)
     }

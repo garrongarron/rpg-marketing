@@ -7,11 +7,16 @@ class MoveController{
     constructor(){
         this.target = null
         this.speed = .1
+        this.mode = {
+            'walk':1.5,
+            'run':4,
+        }
         this.delta = 0
         this.direction = 0
     }
     start(target){
         this.target = target
+        this.direction = 0
         loopMachine.addCallback(this.run)
         eventBus.subscribe('keyListener', this.switcher.bind(this))
         
@@ -21,7 +26,7 @@ class MoveController{
         eventBus.unSubscribe('keyListener', this.switcher.bind(this))
     }
     switcher(bool) {
-        this.speed = (bool[2][16])?4:1.5
+        this.speed = (bool[2][16])?this.mode.run:this.mode.walk
     }
     run = () => {
         if(keyListener.isPressed(87) || this.direction == 1){

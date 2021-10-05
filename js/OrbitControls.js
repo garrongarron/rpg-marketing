@@ -157,6 +157,7 @@
 				return function update() {
 
 					const position = scope.object.position;
+					position.y = 30
 					offset.copy( position ).sub( scope.target ); // rotate offset to "y-axis-is-up" space
 
 					offset.applyQuaternion( quat ); // angle from z-axis around y-axis

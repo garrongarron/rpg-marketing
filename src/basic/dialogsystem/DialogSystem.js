@@ -4,9 +4,12 @@ import eventBus from '../EventBus.js'
 
 class DialogSystem {
     constructor() {
-        this.ttsAllowed = confirm("¿Permites que la computadora lea el texto?");
+        this.flag = false
+        this.ttsAllowed = false
         this.content = null
         this.container = document.createElement('div')
+        this.hand = document.createElement('div')
+        this.hand.classList.add('hand')
         this.container.classList.add('dialog-system-container')
         this.speaker = document.createElement('div')
         this.speaker.classList.add('dialog-system-container-speaker')
@@ -22,6 +25,7 @@ class DialogSystem {
         this.text.appendChild(this.invisible)
         this.container.appendChild(this.speaker)
         this.container.appendChild(this.text)
+        this.container.appendChild(this.hand)
         this.t = 0
         this.string = ''
         this.tts = new SpeechSynthesisUtterance();
@@ -41,6 +45,7 @@ class DialogSystem {
     }
 
     open() {
+        if(!this.flag) this.ttsAllowed = confirm("¿Permites que la computadora lea el texto?");
         document.body.appendChild(this.container)
         this.container.classList.add('fadeInDialog')
         this.container.classList.remove('fadeOutDialog')

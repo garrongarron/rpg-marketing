@@ -19,10 +19,12 @@ class PlayNow extends Component {
     addEventListener() { return ['click'] }
     clicking(e) {
         soundHandler.setVolume('fire', .4)
+        soundHandler.setAsLoop('epic')
         soundHandler.play('epic')
         soundHandler.play('fire')
         e.target.parentNode.classList.add('fadeout')
         this.fadeOut()
+        setTimeout(() => {this.drop()},1000)
         setTimeout(() => {
             let s = new Story()
             s.querySelector('body')

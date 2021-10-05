@@ -26,15 +26,33 @@ class OutOfWater {
                 instructionContainer.node.classList.add('fadeIn1')
             }, 100);
         }, 3000);
+        eventBus.subscribe('keyListener', this.waterSound)
+    }
+    waterSound = (data) => {
+        let play = data[2][87] || data[2][83]
+        if(play){
+            soundHandler.setVolume('waterWalk', .15)
+            soundHandler.play('waterWalk')
+            ////////////////
+            soundHandler.setAsLoop('footstep')
+            soundHandler.play('footstep')
+        }
+        let stop = !data[2][87] && !data[2][83]
+        if(stop){
+            soundHandler.stop('waterWalk')
+            ///
+            soundHandler.stop('footstep')
+        }
     }
     check = () => {
-        let n = 1 - (this.warrior.position.z - 20) / 12
+        let z = 22
+        let n = 1 - (this.warrior.position.z - z) / (32 -z)
         let value = Math.round(THREE.MathUtils.clamp(n * 100, 0, 100))
         progressBar.update(value)
         if (value == 100) {
             soundHandler.play('plim')
             this.stop()
-            eventBus.dispatch('outOfWater',true)
+            eventBus.dispatch('outOfWater', true)
             instructionContainer.node.classList.remove('fadeIn1')
             wellDone.setEventName('outOfWater')
             setTimeout(() => {
@@ -42,7 +60,12 @@ class OutOfWater {
             }, 100);
         }
     }
+    
     stop() {
+        soundHandler.stop('waterWalk')
+        ///
+        soundHandler.stop('footstep')
+        eventBus.unSubscribe('keyListener', this.waterSound)
         this.loop.removeCallback(this.check)
     }
 }
