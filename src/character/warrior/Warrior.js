@@ -8,6 +8,9 @@ let fileList = {
     '2':'sword and shield walk (2).fbx',
     '3':'sword and shield run.fbx',
     '4':'sword and shield run (2).fbx',
+    '5':'sword and shield impact (3).fbx',
+    '6':'sword and shield impact (2).fbx',
+    '7':'sword and shield block idle.fbx'
 }
 const list = []
 

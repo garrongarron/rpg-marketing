@@ -8,6 +8,7 @@ body{
 .fire{
     position: absolute;
     top: 0;
+    pointer-events: none;
 }
 .loopMachine{
     position: fixed;

@@ -1,5 +1,6 @@
 import Animator from "../Animator.js"
 import eventBus from "../EventBus.js"
+import keyCode from "../KeyCode.js"
 import loopMachine from "../LoopMachine.js"
 
 class CharacterControllerZAxes {
@@ -8,17 +9,17 @@ class CharacterControllerZAxes {
         this.justRun = false
         this.animationSpeed = 1
     }
-    pause(){
+    pause() {
         this.animation = 0
         this.animator.action(this.animation, 1, false)
         this.stop()
     }
-    resume(){
+    resume() {
         this.start(this.target)
     }
     start(target) {
         this.target = target
-        if(!this.animator) this.animator = new Animator(this.target)
+        if (!this.animator) this.animator = new Animator(this.target)
         this.animator.action(0, 1, false)
         this.animator.start()
         this.animations = {
@@ -27,6 +28,9 @@ class CharacterControllerZAxes {
             'backward': 2,
             'runAhead': 3,
             'runBackward': 4,
+            'impact1': 5,
+            'impact2': 6,
+            'impact3': 7,
         }
         this.animation = 0
         eventBus.subscribe('keyListener', this.switcher)
@@ -38,29 +42,27 @@ class CharacterControllerZAxes {
         loopMachine.removeCallback(this.run)
     }
     switcher = (data) => {
-        if(this.justRun){
+        if (this.justRun) {
             this.runMode = true
             // this.animationSpeed = 2
-        }else {
+        } else {
             // this.animationSpeed = 1
             this.runMode = data[2][16]
         }
         // this.runMode = data[2][16]
         if (this.runMode) {
-            if (data[2][87])
+            if (data[2][keyCode.KEY_W])
                 this.animation = this.animations.runAhead
-            if (data[2][83])
+            if (data[2][keyCode.KEY_S])
                 this.animation = this.animations.runBackward
-            if (!data[2][87] && !data[2][83])
-                this.animation = this.animations.idle
         } else {
-            if (data[2][87])
+            if (data[2][keyCode.KEY_W])
                 this.animation = this.animations.ahead
-            if (data[2][83])
+            if (data[2][keyCode.KEY_S])
                 this.animation = this.animations.backward
-            if (!data[2][87] && !data[2][83])
-                this.animation = this.animations.idle
         }
+        if (!data[2][keyCode.KEY_W] && !data[2][keyCode.KEY_S])
+            this.animation = this.animations.idle
     }
     run = () => {
         this.animator.action(this.animation, this.animationSpeed, false)//run

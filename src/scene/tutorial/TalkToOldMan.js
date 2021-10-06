@@ -13,6 +13,7 @@ class TalkToOldMan {
         this.warrior = null
         this.handred = 12
         this.loop = null
+        this.runMessage = null
     }
     start() {
         this.loop = LoopMachine.store['TutorialGame']
@@ -43,14 +44,18 @@ class TalkToOldMan {
         this.loop.addCallback(this.check)
     }
     check = () => {
-        if (this.warrior.position.z * 1 < 1) {
+        // if(!this.runMessage && this.warrior.position.z * 1 < 5){
+        //     this.runMessage = true
+        //     instructionContainer.node.classList.remove('fadeIn1')
+        // }
+        if (this.warrior.position.z * 1 < -5) {
             soundHandler.play('plim')
             this.stop()
             eventBus.dispatch('talkToOldMan', true)
             // instructionContainer.node.classList.remove('fadeIn1')
             let state = {}
             state.title = 'Anciano'
-            state.message = 'Guerrero! Bienvenido a nuestras tierras.<a href="#">Leer mas</a>'
+            state.message = 'Guerrero! Bienvenido a nuestras tierras. <a href="#">Leer mas</a>'
             state.button = 'Continuar'
             wellDone.update(state)
             this.update(wellDone.node.querySelector('a'))

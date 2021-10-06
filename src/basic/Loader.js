@@ -16,6 +16,13 @@ class Loader {
                     object.castShadow = true;
                     object.receiveShadow = true;
                     res(object)
+                },
+                (loaded)=>{
+                    // console.log(Math.round((loaded.loaded/loaded.total)*100));
+                },
+                ()=>{
+                    alert('Algo salio mal')
+                    location.reload()
                 })
         })
 

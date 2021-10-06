@@ -55,13 +55,14 @@ class Fire {
             mesh.material.transparency = true
             mesh.material.opacity = .5
             camera.position.z = 5;
+            loopMachine.addCallback(() => {
+                uniforms.u_time.value += 0.05 * .25;
+                // console.log(this.uniforms.u_time.value);
+                if(this.renderer) this.renderer.render(scene, camera);
+            })
         })
 
-        loopMachine.addCallback(() => {
-            uniforms.u_time.value += 0.05 * .25;
-            // console.log(this.uniforms.u_time.value);
-            if(this.renderer) this.renderer.render(scene, camera);
-        })
+        
     }
     stop() {
         cache.appendChild(this.canvas)

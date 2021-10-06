@@ -80,7 +80,7 @@
     margin-bottom: 10px;
     font-size: 2.2em;
     color: black;
-    text-shadow: 0 0 4px rgb(129, 89, 37);
+    text-shadow: 0 0 4px rgb(173, 142, 101);
 }
 .welldone p{
     margin: 0;
@@ -89,6 +89,9 @@
     max-height: 120px;
     overflow-y: scroll;
     display: block;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 2px gray;
 }
 .welldone p >a {
     color: red;

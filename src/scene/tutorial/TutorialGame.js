@@ -2,6 +2,7 @@ import cache from "../../basic/Cache.js";
 import camera from "../../basic/Camera.js";
 import cameraController from "../../basic/controllers/CameraController.js";
 import cameraForDialogs from "../../basic/controllers/CameraForDialogs.js";
+import castleguardController from "../../basic/controllers/CastleguardController.js";
 import characterControllerZAxes from "../../basic/controllers/CharacterControllerZAxes.js";
 import moveController from "../../basic/controllers/MoveController.js";
 import dialogSystem from "../../basic/dialogsystem/DialogSystem.js";
@@ -10,6 +11,7 @@ import keyListener from "../../basic/KeyListener.js";
 import { LoopMachine } from "../../basic/LoopMachine.js";
 import loopMonitor from "../../basic/LoopMonitor.js";
 import soundHandler from "../../basic/sound/SoundHandler.js";
+import castleguard from "../../character/castleguard/CastleGuar.js";
 import peasant from "../../character/peasant/Peasant.js";
 import warrior from "../../character/warrior/Warrior.js";
 import sceneList from "../../scenesystem/demo/SceneList.js";
@@ -18,6 +20,7 @@ import { progressBar } from "../../UI/compoment/ProgressBar.js";
 import wellDone from "../../UI/compoment/WellDone.js";
 import fadeInBlack from "../../UI/FadeInBlack.js";
 import tutorial from "../Tutorial.js";
+import firtCombat from "./FirtCombat.js";
 import outOfWater from "./OutOfWater.js";
 import talkToOldMan from "./TalkToOldMan.js";
 
@@ -26,8 +29,37 @@ class TutorialGame {
         this.flag = false
         eventBus.subscribe('outOfWater', this.outOfWater)
         eventBus.subscribe('talkToOldMan', this.talkToOldMan)
+        eventBus.subscribe('firstCombat', this.firstCombat)
+
         this.mesh = null
         this.peasant = null
+        this.guard = null
+    }
+    firstCombat = (bool) => {
+        if (bool) {
+            moveController.stop()
+            characterControllerZAxes.pause()
+        } else {
+            moveController.start(this.mesh)
+            instructionContainer.update({
+                title: 'Tutorial',
+                message: 'Presiona [E] para atacar',
+                btn: 'E'
+            })
+            
+            this.mesh.rotation.y +=  -30*Math.PI/180
+            characterControllerZAxes.resume()
+            characterControllerZAxes.animation = characterControllerZAxes.animations.idle
+            setInterval(() => {
+                castleguardController.kick()
+                // castleguardController.animation = castleguardController.animations.kick
+                setTimeout(() => {
+                    characterControllerZAxes.animator.action(characterControllerZAxes.animations.impact3, 1, true)
+                }, 300);
+            }, 1200);
+            talkToOldMan.start()
+
+        }
     }
     outOfWater = (bool) => {
         if (bool) {
@@ -35,7 +67,14 @@ class TutorialGame {
             characterControllerZAxes.pause()
         } else {
             moveController.start(this.mesh)
-            talkToOldMan.start()
+            instructionContainer.update({
+                title: 'Tutorial',
+                message: '[Shift] + [W] para correr.',
+                btn: 'W'
+            })
+
+            // talkToOldMan.start()
+            firtCombat.start()
             characterControllerZAxes.resume()
         }
     }
@@ -52,7 +91,7 @@ class TutorialGame {
             cameraController.start(this.mesh)
             keyListener.stop()
             setTimeout(() => {
-                fadeInBlack.start(()=>{
+                fadeInBlack.start(() => {
                     soundHandler.stop('running')
                     tutorialGame.stop()
                     tutorial.sceneHandler.goTo(sceneList.frontCastle)
@@ -82,8 +121,9 @@ class TutorialGame {
             cameraController.start(mesh)
         })
         peasant.then(peasant => { this.peasant = peasant })
+        castleguard.then(guard => { this.guard = guard })
         keyListener.start()
-        
+
     }
     dialogSystemCallback = (speaker) => {
         if (!this.flag) {

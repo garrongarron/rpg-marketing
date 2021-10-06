@@ -12,6 +12,7 @@ import tutorialGame from "./tutorial/TutorialGame.js"
 import peasantController from "../basic/controllers/PeasantController.js"
 import soundHandler from "../basic/sound/SoundHandler.js"
 import environementHandler from "./environment/EnvironmentHandler.js"
+import castleguardController from "../basic/controllers/CastleguardController.js"
 
 
 class Tutorial extends MasterScene {
@@ -40,7 +41,8 @@ class Tutorial extends MasterScene {
             }, 1000);
 
             characterControllerZAxes.start(mesh)
-            peasantController.start(mesh)
+            // peasantController.start(mesh)
+            castleguardController.start(mesh)
             environementHandler.start(mesh)
         })
         tutorialGame.start()

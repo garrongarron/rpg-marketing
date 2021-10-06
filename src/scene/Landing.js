@@ -11,6 +11,7 @@ import warrior from "../character/warrior/Warrior.js"
 import Animator from "../basic/Animator.js"
 import eventBus from "../basic/EventBus.js"
 import PlayNow from "../UI/compoment/PlayNow.js"
+import peasant from "../character/peasant/Peasant.js"
 
 class Landing extends MasterScene {
     constructor() {
@@ -50,18 +51,22 @@ class Landing extends MasterScene {
             renderer.render(scene, camera)
             this.delta = clock.getDelta();
         })
-        fire.start()
-
-        setTimeout(() => { this.playNow.querySelector('body') }, 100);
+        renderer.render(scene, camera)
+        
         warrior.then(mesh => {
-            this.mesh = mesh
-            scene.add(mesh)
-            let animator = new Animator(mesh)
-            animator.action(0, 1, false)
-            animator.start()
-            eventBus.dispatch('characterLoaded', this)
+            peasant.then(p=>{
+                this.mesh = mesh
+                scene.add(mesh)
+                let animator = new Animator(mesh)
+                animator.action(0, 1, false)
+                animator.start()
+                eventBus.dispatch('characterLoaded', this)
+                this.playNow.querySelector('body')
+                loopMachine.start()
+                fire.start()
+            })
         })
-        loopMachine.start()
+        
     }
     close() {
         loopMachine.clean()

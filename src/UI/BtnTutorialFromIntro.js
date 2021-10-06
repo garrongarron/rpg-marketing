@@ -1,3 +1,4 @@
+import cache from "../basic/Cache.js"
 import landing from "../scene/Landing.js"
 import sceneList from "../scenesystem/demo/SceneList.js"
 import fadeInBlack from "./FadeInBlack.js"
@@ -10,13 +11,12 @@ let btnTutorial = (story) => {
     document.body.appendChild(tutorial)
     setTimeout(() => {
         tutorial.classList.add('btnTutorialVisible')
-    }, 10);
+    }, 100);
     tutorial.addEventListener('click', () => {
         fadeInBlack.start(() => {
             landing.sceneHandler.goTo(sceneList.tutorial)
             // localStorage.setItem('n', JSON.stringify(1));
-            let tmp  = document.createElement('div')
-            tmp.appendChild(tutorial)
+            cache.appendChild(tutorial)
             story.stop()
             document.body.style.backgroundImage = 'none'
             document.body.style.backgroundColor = 'black'
