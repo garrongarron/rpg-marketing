@@ -40,21 +40,51 @@ class TutorialGame {
             moveController.stop()
             characterControllerZAxes.pause()
         } else {
-            moveController.start(this.mesh)
-            instructionContainer.update({
-                title: 'Tutorial',
-                message: 'Presiona [E] para atacar',
-                btn: 'E'
-            })
-            
-            this.mesh.rotation.y +=  -30*Math.PI/180
+            characterControllerZAxes.keySwitcher = false
+            // instructionContainer.update({
+            //     title: 'Tutorial',
+            //     message: 'Presiona [E] para atacar',
+            //     btn: 'E'
+            // })
+            this.mesh.rotation.y += -50 * Math.PI / 180
             characterControllerZAxes.resume()
             characterControllerZAxes.animation = characterControllerZAxes.animations.idle
-            setInterval(() => {
+            setTimeout(() => {
                 castleguardController.kick()
-                // castleguardController.animation = castleguardController.animations.kick
+                let guardDie = () => {
+                    console.log('guadria muere');
+                    castleguardController.animation = castleguardController.animations.die
+                    castleguardController.lookAtWarrior = false
+                    castleguardController.animator.action(castleguardController.animations.die, 1, true)
+                    castleguardController.animator.whenAnimationEnd(() => {
+                        castleguardController.animator.stop()
+                        castleguardController.stop()
+                        castleguardController.mesh.visible = false
+                    })
+                    moveController.start(this.mesh)
+                    characterControllerZAxes.keySwitcher = true
+                }
+                let move = () =>{
+                    let z = characterControllerZAxes.target.children[4].children[0].position.z / 100
+                    let x = characterControllerZAxes.target.children[4].children[0].position.x / 100
+                    const vec2 = new THREE.Vector2(x, z);
+                    console.log(JSON.stringify(vec2));
+                    vec2.rotateAround(new THREE.Vector2(), -characterControllerZAxes.target.rotation.y)
+                    characterControllerZAxes.target.position.z += vec2.y
+                    characterControllerZAxes.target.position.x += vec2.x
+                    this.mesh.rotation.y += 50 * Math.PI / 180
+                }
+                let startAttack = () => {
+                    setTimeout(() => {
+                        console.log('startAttack');
+                        characterControllerZAxes.animator.action(characterControllerZAxes.animations.attack, 1, true)
+                        characterControllerZAxes.animator.whenAnimationEnd(move)
+                    }, 10);
+                    setTimeout(() => { guardDie() }, 500);
+                }
                 setTimeout(() => {
-                    characterControllerZAxes.animator.action(characterControllerZAxes.animations.impact3, 1, true)
+                    characterControllerZAxes.animator.action(characterControllerZAxes.animations.impact2, 1, true)
+                    characterControllerZAxes.animator.whenAnimationEnd(startAttack)
                 }, 300);
             }, 1200);
             talkToOldMan.start()

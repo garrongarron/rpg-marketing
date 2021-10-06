@@ -9,6 +9,7 @@ class CastleguardController{
     constructor(){
         this.mesh = null
         this.target = null
+        this.lookAtWarrior = true
     }
     start(target){
         this.target = target
@@ -18,29 +19,31 @@ class CastleguardController{
             scene.add(mesh)
             setTimeout(() => {
                 mesh.visible = true
-                mesh.position.set(-1.3, 2.8, 0)
+                mesh.position.set(-1, 2.8, 0)
             }, 2000);
             this.animations = {
                 'asking': 0,
                 'kick': 1,
+                'die': 2,
             }
             this.animation = this.animations.asking
             this.animator = new Animator(mesh)
             this.animator.start()
-            loopMachine.addCallback(this.lookAt)
+            loopMachine.addCallback(this.run)
         })
     }
     kick(){
-        this.animator.action(1, 1, true)
+        this.animator.action(this.animations.kick, 1, true)
     }
-    lookAt = ()=>{
+    run = ()=>{
         let position = this.target.position.clone()
         position.y = this.mesh.position.y
-        this.mesh.lookAt(position)
+         if(this.lookAtWarrior) this.mesh.lookAt(position)
         this.animator.action(this.animation, 1, false)
     }
     stop(){
-        loopMachine.removeCallback(this.lookAt)
+        this.animator.stop()
+        loopMachine.removeCallback(this.run)
     }
 }
 

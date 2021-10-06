@@ -8,6 +8,9 @@ class CharacterControllerZAxes {
         this.animator = null
         this.justRun = false
         this.animationSpeed = 1
+        this.completeAnimation = false
+        this.target = null
+        this.keySwitcher = true
     }
     pause() {
         this.animation = 0
@@ -28,7 +31,7 @@ class CharacterControllerZAxes {
             'backward': 2,
             'runAhead': 3,
             'runBackward': 4,
-            'impact1': 5,
+            'attack': 5,
             'impact2': 6,
             'impact3': 7,
         }
@@ -42,6 +45,7 @@ class CharacterControllerZAxes {
         loopMachine.removeCallback(this.run)
     }
     switcher = (data) => {
+        if(!this.keySwitcher) return
         if (this.justRun) {
             this.runMode = true
             // this.animationSpeed = 2
@@ -65,7 +69,7 @@ class CharacterControllerZAxes {
             this.animation = this.animations.idle
     }
     run = () => {
-        this.animator.action(this.animation, this.animationSpeed, false)//run
+        this.animator.action(this.animation, this.animationSpeed, this.completeAnimation)//run
     }
 }
 

@@ -1,6 +1,7 @@
 import shadowController from "../../basic/controllers/ShadowController.js"
 import terrainController from "../../basic/controllers/TarrainController.js"
 import skyFromShader from "../../basic/environment/skyfromshader/SkyFromShader.js"
+import trees from "../../basic/environment/Trees/Trees.js"
 import transparentWater from "../../basic/environment/watertransparent/WaterTransparent.js"
 import light from "../../basic/Light.js"
 import terrain from "../../basic/terrain/Terrain.js"
@@ -19,6 +20,8 @@ class EnvironmentHandler{
         this.scene.add(light)
         this.scene.add(transparentWater)// scene.add(water);// dinamicWater.start()
         shadowController.start(this.target, light, new THREE.Vector3(0,5,5))
+        let center = new THREE.Vector2()
+        trees.start(center, 10, 4)
     }
     night(){
         this.scene.fog = new THREE.FogExp2(0x333333, 0.002);

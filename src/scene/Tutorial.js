@@ -41,7 +41,7 @@ class Tutorial extends MasterScene {
             }, 1000);
 
             characterControllerZAxes.start(mesh)
-            // peasantController.start(mesh)
+            peasantController.start(mesh)
             castleguardController.start(mesh)
             environementHandler.start(mesh)
         })

@@ -24,7 +24,7 @@ class FirtCombat {
         eventBus.subscribe('keyListener', this.sound)
     }
     sound = (data) => {
-        let walkOrRun = (data[2][16]) ? 'running': 'footstep' 
+        let walkOrRun = (data[2][16]) ? 'running' : 'footstep'
         let play = data[2][87] || data[2][83]
         if (play) {
             soundHandler.setAsLoop(walkOrRun)
@@ -41,7 +41,13 @@ class FirtCombat {
         this.loop.addCallback(this.check)
     }
     check = () => {
-        if(!this.runMessage && this.warrior.position.z * 1 < 5){
+        // this.warrior.children[4].children[0].position.x = 0
+        // this.warrior.children[4].children[0].position.y = 0
+        // this.warrior.children[4].children[0].position.z = 0
+        
+        // console.log(this.warrior);
+        // this.loop.stop()
+        if (!this.runMessage && this.warrior.position.z * 1 < 5) {
             this.runMessage = true
             instructionContainer.node.classList.remove('fadeIn1')
         }
@@ -52,8 +58,8 @@ class FirtCombat {
             // instructionContainer.node.classList.remove('fadeIn1')
             let state = {}
             state.title = 'Guardia del Castillo'
-            state.message = 'Hey Guerrero! ¿Eres tú Alva Majo?'
-            state.button = 'Si soy yo'
+            state.message = 'Hey Guerrero! ¿Que haces vestido asi? ¿Acaso eres tú Alva Majo?'
+            state.button = 'Si soy Alva Majo'
             wellDone.update(state)
             document.querySelector('body').appendChild(wellDone.node)
             wellDone.setEventName('firstCombat')
@@ -62,7 +68,7 @@ class FirtCombat {
             }, 100);
         }
     }
-   
+
     stop() {
         soundHandler.stop('footstep')
         soundHandler.stop('running')

@@ -4,7 +4,8 @@ import Loader from "../../basic/Loader.js"
 const folder = "./src/character/castleguard/"
 let fileList = {
     '0':'Talking.fbx', //sword and shield idle.fbx'
-    '1':'patada.fbx'
+    '1':'patada.fbx',
+    '2':'Falling Back Death.fbx'
 }
 const list = []
 

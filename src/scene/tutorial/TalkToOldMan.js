@@ -55,7 +55,7 @@ class TalkToOldMan {
             // instructionContainer.node.classList.remove('fadeIn1')
             let state = {}
             state.title = 'Anciano'
-            state.message = 'Guerrero! Bienvenido a nuestras tierras. <a href="#">Leer mas</a>'
+            state.message = 'Malditos guardias del castillo! Vaya bienvenida!  Ese guadria  se lo tenia merecido. <a href="#">Leer mas</a>'
             state.button = 'Continuar'
             wellDone.update(state)
             this.update(wellDone.node.querySelector('a'))
