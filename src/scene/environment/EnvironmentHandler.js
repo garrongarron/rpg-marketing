@@ -19,20 +19,22 @@ class EnvironmentHandler{
         this.scene.fog = new THREE.FogExp2(0x868293, 0.002);
         this.scene.add(light)
         this.scene.add(transparentWater)// scene.add(water);// dinamicWater.start()
-        shadowController.start(this.target, light, new THREE.Vector3(0,5,5))
+        shadowController.start(this.target, light, new THREE.Vector3(0,100,0))
         let center = new THREE.Vector2()
         trees.start(center, 10, 4)
     }
     night(){
-        this.scene.fog = new THREE.FogExp2(0x333333, 0.002);
+        this.scene.fog = new THREE.FogExp2(0x000000, 0.002);
         skyFromShader.skyFromShader.material.uniforms.topColor.value = new THREE.Color('black')
         skyFromShader.skyFromShader.material.uniforms.bottomColor.value = new THREE.Color(0x385865)
         transparentWater.material.uniforms.color.value = new THREE.Color(0x385865)
-        light.children[1].intensity = 0.1
-        light.children[0].intensity = 1
-        light.intensity = 0.5
-        console.log(light);
-        shadowController.start(this.target, light, new THREE.Vector3(0,10,-50))
+        light.children[0].intensity = 0.01////directional #1
+        light.children[0].castShadow = false;
+        light.children[1].intensity = 0.01
+        light.children[2].intensity = 0.01////directional #2
+        light.intensity = 0.01 //ambient
+        // console.log(light);
+        shadowController.start(this.target, light, new THREE.Vector3(0,100,-50))
         
     }
     stop(){}

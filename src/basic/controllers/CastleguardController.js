@@ -3,15 +3,16 @@ import Animator from "../Animator.js"
 import loopMachine from "../LoopMachine.js"
 import scene from "../Scene.js"
 import params from "../terrain/Params.js"
+import guiHelper from "./GuiHelper.js"
 
 
-class CastleguardController{
-    constructor(){
+class CastleguardController {
+    constructor() {
         this.mesh = null
         this.target = null
         this.lookAtWarrior = true
     }
-    start(target){
+    start(target) {
         this.target = target
         castleguard.then(mesh => {
             this.mesh = mesh
@@ -32,16 +33,17 @@ class CastleguardController{
             loopMachine.addCallback(this.run)
         })
     }
-    kick(){
+
+    kick() {
         this.animator.action(this.animations.kick, 1, true)
     }
-    run = ()=>{
+    run = () => {
         let position = this.target.position.clone()
         position.y = this.mesh.position.y
-         if(this.lookAtWarrior) this.mesh.lookAt(position)
+        if (this.lookAtWarrior) this.mesh.lookAt(position)
         this.animator.action(this.animation, 1, false)
     }
-    stop(){
+    stop() {
         this.animator.stop()
         loopMachine.removeCallback(this.run)
     }

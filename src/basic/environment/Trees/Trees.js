@@ -39,7 +39,7 @@ class Trees {
             let three = this.trees[Math.floor(Math.random() * this.trees.length)]
             let x = this.center.x += Math.random() * this.radio * 2 - this.radio
             let z = this.center.y += Math.random() * this.radio * 2 - this.radio
-            three.position.set(x, params.customNoiseGenerator(x, z), z)
+            three.position.set(x, params.customNoiseGenerator(x, -z), z)
             let scale = 0.06
             three.scale.set(scale, scale, scale)
             three.traverse(function (child) {
@@ -48,6 +48,8 @@ class Trees {
                     child.receiveShadow = true;
                 }
             });
+            three.castShadow = true; //default is false
+            three.receiveShadow = true; //default
             scene.add(three)
         }
     }

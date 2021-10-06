@@ -2,45 +2,35 @@
 
 import scene from "./Scene.js";
 
-// const light = new THREE.AmbientLight(0x404040);
-let light = new THREE.AmbientLight(0xffffff, 0.6);
+// let directionalLight = new THREE.AmbientLight(0xffffff, 0.125);//0x303030
+let ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.125);
 
-//DIRECTIONAL LIGHT
-// const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-let directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-// directionalLight.position.set(0, 10,50);
-// directionalLight.target.position.set(-30, 0, -30);//see Gravity.js
+//0
+let directionalLight = new THREE.DirectionalLight(0xFFFFFF, .8);
+directionalLight.position.set(-100, 100, 100);
+directionalLight.target.position.set(0, 0, 0);
 directionalLight.castShadow = true;
-// directionalLight.shadow.bias = 0.0001;
-directionalLight.shadow.mapSize.width = 2048 *.5;
-directionalLight.shadow.mapSize.height = 2048*.5;
+directionalLight.shadow.bias = -0.001;
+directionalLight.shadow.mapSize.width = 512;
+directionalLight.shadow.mapSize.height = 512;
+
 directionalLight.shadow.camera.near = 0.5;
-directionalLight.shadow.camera.far = 150.0;
-// let gap = 5
-// directionalLight.shadow.camera.left = gap;
-// directionalLight.shadow.camera.right = -gap;
-// directionalLight.shadow.camera.top = gap;
-// directionalLight.shadow.camera.bottom = -gap;
-// directionalLight.target.updateMatrixWorld();
-// const helper = new THREE.DirectionalLightHelper(directionalLight, 1);
-// scene.add(helper);
-// const helper2 = new THREE.CameraHelper(directionalLight.shadow.camera);
-// scene.add(helper2);
+directionalLight.shadow.camera.far = 500.0;
+let gap = 20
+directionalLight.shadow.camera.left = gap;
+directionalLight.shadow.camera.right = -gap;
+directionalLight.shadow.camera.top = gap;
+directionalLight.shadow.camera.bottom = -gap;
 
-light.add(directionalLight)
-
-// const pointLight = new THREE.SpotLight( 0x333333);
-// pointLight.position.set( 0,5,0);
-// light.add(pointLight)
-// const sphereSize = 1;
-// const pointLightHelper = new THREE.SpotLightHelper( pointLight );
-// scene.add( pointLightHelper );
+ambientLight.add(directionalLight)
 
 
+//1
+let hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0xaaaaaa, .8)
+ambientLight.add(hemisphereLight)
 
-let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffeeb1, .5)
-light.add(hemiLight)
+//2
+let directionalLight2 = new THREE.DirectionalLight(0xdddddd, .2);
+ambientLight.add(directionalLight2)
 
-
-
-export default light
+export default ambientLight

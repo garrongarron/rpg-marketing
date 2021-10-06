@@ -3,8 +3,9 @@ import Animator from "../Animator.js"
 import loopMachine from "../LoopMachine.js"
 import scene from "../Scene.js"
 import params from "../terrain/Params.js"
+import guiHelper from "./GuiHelper.js"
+import pointLightController from "./PointLightController.js"
 // import guiHelper from "./GuiHelper.js"
-
 
 class PeasantController {
     constructor() {
@@ -20,11 +21,11 @@ class PeasantController {
 
             setTimeout(() => {
                 mesh.visible = true
-                mesh.position.set(1.4, 3.7, -6.2)
+                mesh.position.set(0.5, 3.7, -6.2)
                 // guiHelper.start(mesh)
-                const axesHelper = new THREE.AxesHelper(5);
-                scene.add(axesHelper);
-                axesHelper.position.set(8, 3.5, 4)
+                // const axesHelper = new THREE.AxesHelper(5);
+                // scene.add(axesHelper);
+                // axesHelper.position.set(10, 3.5, 6)
             }, 2000);
 
             this.animator = new Animator(mesh)
@@ -33,6 +34,7 @@ class PeasantController {
             loopMachine.addCallback(this.lookAt)
         })
     }
+
     lookAt = () => {
         let position = this.target.position.clone()
         position.y = this.mesh.position.y

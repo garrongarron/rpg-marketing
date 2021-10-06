@@ -44,6 +44,7 @@ class Tutorial extends MasterScene {
             peasantController.start(mesh)
             castleguardController.start(mesh)
             environementHandler.start(mesh)
+            environementHandler.night()
         })
         tutorialGame.start()
         loopMachine.addCallback(this.musicFadeOut)

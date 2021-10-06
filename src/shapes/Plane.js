@@ -2,7 +2,7 @@ const geometry = new THREE.PlaneGeometry(600,600,100,100);
 let colorStr = Math.random().toString().slice(2, 8)
 colorStr = 'ffff00'
 const material = new THREE.MeshStandardMaterial({ 
-    color: '#' + colorStr, side: THREE.FrontSide,
+    color: '#' + colorStr, side: THREE.BackSide,
     wireframe:true
  });
 const plane = new THREE.Mesh(geometry, material);

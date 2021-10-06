@@ -59,7 +59,7 @@ class FirtCombat {
             let state = {}
             state.title = 'Guardia del Castillo'
             state.message = 'Hey Guerrero! ¿Que haces vestido asi? ¿Acaso eres tú Alva Majo?'
-            state.button = 'Si soy Alva Majo'
+            state.button = 'Sí! Soy Alva Majo'
             wellDone.update(state)
             document.querySelector('body').appendChild(wellDone.node)
             wellDone.setEventName('firstCombat')

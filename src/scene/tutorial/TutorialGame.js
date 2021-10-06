@@ -5,6 +5,8 @@ import cameraForDialogs from "../../basic/controllers/CameraForDialogs.js";
 import castleguardController from "../../basic/controllers/CastleguardController.js";
 import characterControllerZAxes from "../../basic/controllers/CharacterControllerZAxes.js";
 import moveController from "../../basic/controllers/MoveController.js";
+import peasantController from "../../basic/controllers/PeasantController.js";
+import pointLightController from "../../basic/controllers/PointLightController.js";
 import dialogSystem from "../../basic/dialogsystem/DialogSystem.js";
 import eventBus from "../../basic/EventBus.js";
 import keyListener from "../../basic/KeyListener.js";
@@ -39,7 +41,9 @@ class TutorialGame {
         if (bool) {
             moveController.stop()
             characterControllerZAxes.pause()
+            pointLightController.start(castleguardController.target)
         } else {
+
             characterControllerZAxes.keySwitcher = false
             // instructionContainer.update({
             //     title: 'Tutorial',
@@ -110,6 +114,7 @@ class TutorialGame {
     }
     talkToOldMan = (bool) => {
         if (bool) {
+            pointLightController.start(peasantController.target)
             moveController.stop()
             characterControllerZAxes.pause()
         } else {
@@ -188,6 +193,7 @@ class TutorialGame {
         outOfWater.start()
         this.flag = false
         eventBus.subscribe('dialogSystem', this.dialogSystemCallback)
+        
     }
     stop() {
         cache.appendChild(progressBar.node)

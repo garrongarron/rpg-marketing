@@ -7,6 +7,7 @@ class CameraController {
         this.target = null
         this.hieght = 0
         this.offset = new THREE.Vector3(-2, 0, -5)
+        this.lookAtVector = new THREE.Vector3()
     }
     start(target) {
         this.target = target
@@ -35,6 +36,7 @@ class CameraController {
         position.y++
         position.x += 1.5
         camera.lookAt(position)
+        this.lookAtVector.copy(position)
     }
 }
 

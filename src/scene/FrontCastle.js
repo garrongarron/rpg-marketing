@@ -39,6 +39,7 @@ class FrontCastle extends MasterScene {
                 this.mesh.position.set(0, 3, 0)
                 camera.position.set(0, 10, 20)
             }
+            // camera.position.set(this.mesh.position.x, this.mesh.position.y +5, this.mesh.position.z-20)
             moveController.start(mesh)
             moveController.mode.walk = 4
             rayLander.start(mesh, 0)
@@ -48,7 +49,7 @@ class FrontCastle extends MasterScene {
             characterControllerZAxes.start(mesh)
             compass.start(mesh)
             environementHandler.start(this.mesh)
-            // environementHandler.night()
+            environementHandler.night()
         })
         let caster = (data) => {
             eventBus.dispatch('keyListener', data)
