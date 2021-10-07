@@ -35,8 +35,8 @@ class Terrain {
             this.modifyVerticalPosition(v)
         })
     }
-    updateTerrain(){
-        this.group.children.forEach(plane=>{
+    updateTerrain() {
+        this.group.children.forEach(plane => {
             this.modifyVerticalPosition(plane)
         })
     }
@@ -107,6 +107,8 @@ class Terrain {
                     let colorStr = Math.random().toString().slice(2, 8)
                     let c = new THREE.Color('#' + colorStr)//RED
                     // otherPlane.material = otherPlane.material.clone()//material
+                    otherPlane.castShadow = true; //default is false
+                    otherPlane.receiveShadow = true; //default
                     otherPlane.material = material
                     otherPlane.geometry = otherPlane.geometry.clone()
                     otherPlane.material.color = c
@@ -123,12 +125,12 @@ class Terrain {
     }
     start() {
         scene.add(this.group)
-        if(this.isBuilt) return
+        if (this.isBuilt) return
         this.isBuilt = true
         plane.rotation.x = -Math.PI * .5
         this.getData(plane)
         this.generateMorePlanes(plane)
-        
+
     }
     stop() {
         scene.remove(this.group)

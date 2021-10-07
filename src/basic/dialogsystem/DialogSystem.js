@@ -29,7 +29,8 @@ class DialogSystem {
         this.t = 0
         this.string = ''
         this.tts = new SpeechSynthesisUtterance();
-        this.tts.lang = 'es-ES'
+        // this.tts.lang = 'es-ES'
+        this.tts.lang = 'es-US'
         this.click = () => {
             if (this.t != 0) {
                 clearInterval(this.t)

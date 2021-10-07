@@ -30,18 +30,24 @@ class FrontCastle extends MasterScene {
     open() {
         resize.start(renderer)
         loopMachine.addCallback(() => {
+            if (this.mesh && this.godot) {
+                let pos = this.mesh.position.clone()
+                pos.y = this.godot.position.y
+                this.godot.lookAt(pos)
+            }
             renderer.render(scene, camera)
         })
         loopMachine.start()
         keyListener.start()
         godot.then(mesh => {
+            this.godot = mesh
             scene.add(mesh)
             let pos = {
-                x: -38.74067637181392,
-                y: 41.18886495883186,
-                z: -61.33970993233344,
+                x: 9.35554280260959,
+                y: 1.1562213741056473,
+                z: -120.90295582921397
             }
-            mesh.rotation.y = Math.PI*.98
+            mesh.rotation.y = Math.PI * .98
             mesh.position.set(pos.x, pos.y, pos.z)
         })
         let pos = {
@@ -87,7 +93,7 @@ class FrontCastle extends MasterScene {
             characterControllerZAxes.start(mesh)
             compass.start(mesh)
             environementHandler.start(this.mesh)
-            // environementHandler.night()
+            environementHandler.night()
         })
         let caster = (data) => {
             eventBus.dispatch('keyListener', data)

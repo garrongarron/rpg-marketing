@@ -17,16 +17,20 @@ class EnvironmentHandler {
             light.children[0].castShadow = this.dayLighting.children[0].castShadow;
             light.children[1].intensity = this.dayLighting.children[1].intensity
             light.children[2].intensity = this.dayLighting.children[2].intensity////directional #2
+            light.children[0].castShadow = true;
             light.intensity = this.dayLighting.intensity //ambient
             skyFromShader.skyFromShader.material.uniforms.topColor.value = this.dayLighting.topColor
             skyFromShader.skyFromShader.material.uniforms.bottomColor.value = this.dayLighting.bottomColor
             terrain.updateTerrain()
         }
+        // light.children[0].castShadow = true;
         this.target = target
         skyFromShader.start(this.target)
         this.dayLighting = light.clone(true)
         this.dayLighting.topColor = skyFromShader.uniforms.topColor.value
-        this.dayLighting.bottomColor = skyFromShader.uniforms.bottomColor.value        
+        this.dayLighting.bottomColor = skyFromShader.uniforms.bottomColor.value  
+        light.children[0].castShadow = true;
+        
         this.scene = this.target.parent
         
         terrain.start(this.scene)
@@ -35,7 +39,7 @@ class EnvironmentHandler {
         this.scene.fog.far = 10000;
         this.scene.add(light)
         this.scene.add(transparentWater)// scene.add(water);// dinamicWater.start()
-        shadowController.start(this.target, light, new THREE.Vector3(0, 100, 0))
+        shadowController.start(this.target, light, new THREE.Vector3(0, 20,15))
         let center = new THREE.Vector2()
         trees.start(center, 10, 4)
     }

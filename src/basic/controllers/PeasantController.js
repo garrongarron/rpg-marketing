@@ -2,9 +2,9 @@ import peasant from "../../character/peasant/Peasant.js"
 import Animator from "../Animator.js"
 import loopMachine from "../LoopMachine.js"
 import scene from "../Scene.js"
-import params from "../terrain/Params.js"
-import guiHelper from "./GuiHelper.js"
-import pointLightController from "./PointLightController.js"
+// import params from "../terrain/Params.js"
+// import guiHelper from "./GuiHelper.js"
+// import pointLightController from "./PointLightController.js"
 // import guiHelper from "./GuiHelper.js"
 
 class PeasantController {
