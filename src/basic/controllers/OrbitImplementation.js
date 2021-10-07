@@ -11,7 +11,7 @@ class OrbitImplementation {
         this.controls.enablePan = false;
         this.controls.enableZoom = true;
         this.controls.minDistance = 1
-        this.controls.maxDistance = 20
+        this.controls.maxDistance = 10
     }
     start(target) {
         if(!this.target) this.init()

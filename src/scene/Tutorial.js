@@ -61,6 +61,7 @@ class Tutorial extends MasterScene {
         soundHandler.setVolume('fire', (this.vol > 0) ? this.vol : 0)
     }
     close() {
+        environementHandler.stop()
         console.log(`the Scene ${this.instanceName} is clossing`);
         loopMachine.clean()
     }

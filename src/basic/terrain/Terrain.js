@@ -17,6 +17,7 @@ class Terrain {
         this.position = new THREE.Vector2()
         this.prevPosition = new THREE.Vector2()
         this.chunksNeeded = []
+        this.isBuilt = false
     }
     getChunksNeeded() {
         this.chunksNeeded = []
@@ -32,6 +33,11 @@ class Terrain {
     updateAgain() {
         this.chunks.forEach((v, k) => {
             this.modifyVerticalPosition(v)
+        })
+    }
+    updateTerrain(){
+        this.group.children.forEach(plane=>{
+            this.modifyVerticalPosition(plane)
         })
     }
     update() {
@@ -116,13 +122,16 @@ class Terrain {
 
     }
     start() {
+        scene.add(this.group)
+        if(this.isBuilt) return
+        this.isBuilt = true
         plane.rotation.x = -Math.PI * .5
         this.getData(plane)
         this.generateMorePlanes(plane)
-        scene.add(this.group)
+        
     }
     stop() {
-
+        scene.remove(this.group)
     }
 }
 

@@ -37,7 +37,7 @@ class SkyFromShader{
 
     }
     stop(){
-        scene.remove(this.this.skyFromShader)
+        scene.remove(this.skyFromShader)
         clearInterval(this.interval)
     }
 }

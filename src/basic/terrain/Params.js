@@ -24,12 +24,17 @@ let params = {
         displacementX: 1,
         displacementZ: 1
     },
+    filters: null,
     'customNoiseGenerator': (x, y) => {
-        return noiseGenerator.perlin2d(x, y) + noiseGenerator.perlin2d(
-            x+ params.config2.displacementX,
+        let out = noiseGenerator.perlin2d(x, y) + noiseGenerator.perlin2d(
+            x + params.config2.displacementX,
             y + params.config2.displacementZ,
             params.config2
-        ) * params.config2.finalHeight *0
+        ) * params.config2.finalHeight * 0
+        if(params.filters){
+            out = params.filters(x, y, out)
+        }
+        return out
     }
 }
 noiseGenerator.params = params.config1

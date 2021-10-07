@@ -4,7 +4,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMappingExplosure = 8.3
-renderer.outputEncoding = 3001; //THREE.sRGBEncoding;
+renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.setClearColor(0xFFFFFF);
 document.body.appendChild(renderer.domElement);
 //shadow

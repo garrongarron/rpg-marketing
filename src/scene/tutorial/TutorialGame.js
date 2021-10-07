@@ -134,7 +134,7 @@ class TutorialGame {
                         fadeInBlack.stop()
                     }, 1000);
                 })
-            }, 10000);
+            }, 7000);
             setTimeout(() => {
                 soundHandler.setVolume('running', .4)
                 soundHandler.play('running')

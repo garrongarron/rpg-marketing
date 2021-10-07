@@ -11,7 +11,7 @@ let dialog =  [
     // ['Anciano', 'Lamentablemente estamos padeciendo tormentos.'],
     ['Anciano', 'La tiranía del Rey Unity y su esposa Unreal han devastado nuestras aldeas.'],
     ['Anciano', 'Ya no permiten realizar VideoJuegos en "Javascript".'],
-    ['Anciano', 'Y todo es por culpa de Alva Majo y su influencia. ¡Maldito Influencer!.'],
+    ['Anciano', 'Y todo es por culpa de la influencia del Juez Alva Majo y su martillo de madera. ¡Maldito Influencer!'],
     ['Guerrero', 'Oh! Lamento mucho oir eso señor.'],
     ['Guerrero', '¿Por qué se les prohibió hacer videojuegos?'],
     ['Anciano', 'Dicen que somos de una raza inferior y que no somos como ellos.'],
