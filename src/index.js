@@ -10,12 +10,12 @@ let sceneHandler = new SceneHandler(sceneList)
 //     sceneHandler.goTo(sceneList.tutorial)
 // }
 
-// if(location.search == "?1"){
-//     sceneHandler.goTo(sceneList.tutorial)
-// } else if(location.search == "?2"){
-//     sceneHandler.goTo(sceneList.frontCastle)
-// } else{
-//     sceneHandler.goTo(sceneList.landing)
-// }
+if(location.search == "?1"){
+    sceneHandler.goTo(sceneList.tutorial)
+} else if(location.search == "?2"){
+    sceneHandler.goTo(sceneList.frontCastle)
+} else{
+    sceneHandler.goTo(sceneList.landing)
+}
 
-sceneHandler.goTo(sceneList.sceneDemoB)
+// sceneHandler.goTo(sceneList.sceneDemoB)

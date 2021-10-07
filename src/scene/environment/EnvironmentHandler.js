@@ -16,7 +16,7 @@ class EnvironmentHandler {
             light.children[0].intensity = this.dayLighting.children[0].intensity////directional #1
             light.children[0].castShadow = this.dayLighting.children[0].castShadow;
             light.children[1].intensity = this.dayLighting.children[1].intensity
-            light.children[2].intensity = this.dayLighting.children[2].intensity////directional #2
+            // light.children[2].intensity = this.dayLighting.children[2].intensity////directional #2
             light.children[0].castShadow = true;
             light.intensity = this.dayLighting.intensity //ambient
             skyFromShader.skyFromShader.material.uniforms.topColor.value = this.dayLighting.topColor
@@ -51,7 +51,7 @@ class EnvironmentHandler {
         light.children[0].intensity = 0.01////directional #1
         light.children[0].castShadow = false;
         light.children[1].intensity = 0.01
-        light.children[2].intensity = 0.01////directional #2
+        // light.children[2].intensity = 0.01////directional #2
         light.intensity = 0.01 //ambient
         // console.log(light);
         shadowController.start(this.target, light, new THREE.Vector3(0, 100, -50))

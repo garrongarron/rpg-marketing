@@ -1,4 +1,4 @@
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const geometry = new THREE.BoxGeometry( .01,0.1,0.1 );
 const material = new THREE.MeshStandardMaterial(
     // {color: 0x00ff00}
  );

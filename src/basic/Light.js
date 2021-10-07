@@ -35,7 +35,7 @@ let hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0xaaaaaa, .8)
 ambientLight.add(hemisphereLight)
 
 //2
-let directionalLight2 = new THREE.DirectionalLight(0xdddddd, .2);
-ambientLight.add(directionalLight2)
+// let directionalLight2 = new THREE.DirectionalLight(0xdddddd, .2);
+// ambientLight.add(directionalLight2)
 
 export default ambientLight

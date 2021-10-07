@@ -27,9 +27,9 @@ let dialog =  [
     ['Guerrero', '¡Lo juro! ¡Como que me llamo Albarracín de Mallorca! Pero me dicen Alva Majo.'],
     // ['Guerrero', 'Desarrollador de Videojuegos indie.'],
     ['Guerrero', 'Dime donde está el castillo. Te lo ordeno.'],
-    ['Anciano', 'Vaya nombre te han dado tus padres Albarracín. El mismo nombre del traidor de estas tierras.'],
+    ['Anciano', 'Vaya nombre te han dado tus padres Albarracín. El mismo nombre del Juez  que puso todos los juegos a juico.'],
     ['Anciano', 'Evita mencionar su nombre, de lo contrario aquí en "Javascript" te aniquilarán.'],
-    ['Anciano', 'El castillo está a un kilómetro en dirección al sur.'],
+    ['Anciano', 'El castillo está a un kilómetro en dirección al sur. Podrás verlo detrás de la colina/.'],
     ['Anciano', 'Avisaré a los mercaderes del pueblo que tu irás. Tal vez puedan ayudarte a ingresar al castillo.'],
 ]
 

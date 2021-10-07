@@ -60,9 +60,10 @@ class ParticleSystem {
         this._sizeSpline = new LinearSpline((t, a, b) => {
             return a + t * (b - a);
         });
-        this._sizeSpline.AddPoint(0.0, 1.0);
-        this._sizeSpline.AddPoint(0.5, 5.0);
-        this._sizeSpline.AddPoint(1.0, 1.0);
+        this._sizeSpline.AddPoint(0.0, 0.1);
+        this._sizeSpline.AddPoint(0.3, 0.5);
+        this._sizeSpline.AddPoint(0.8, 3.0);
+        this._sizeSpline.AddPoint(1.0, 0.5);
 
         // document.addEventListener('keyup', (e) => this._onKeyUp(e), false);
 
@@ -86,6 +87,7 @@ class ParticleSystem {
                 this._points.geometry.dispose();
                 this._points.material.dispose();
                 this._params.parent.remove(this._points);
+                // this._params.parent.parent.remove(this._params.parent);
             }
             return
         }
@@ -101,9 +103,9 @@ class ParticleSystem {
             const life = (Math.random() * 0.75 + 0.25) * this._params.life;
             this._particles.push({
                 position: new THREE.Vector3(
-                    (Math.random() * 2 - 1) * 1.0,
-                    (Math.random() * 2 - 1) * 1.0,
-                    (Math.random() * 2 - 1) * 1.0),
+                    (Math.random() * 2 - 1) * 0.10,
+                    (Math.random() * 2 - 1) * 0.10,
+                    (Math.random() * 2 - 1) * 0.10),
                 size: (Math.random() * 0.5 + 0.5) * 4.0,
                 colour: new THREE.Color(),
                 alpha: 1.0,

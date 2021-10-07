@@ -25,36 +25,17 @@ import environementHandler from "./environment/EnvironmentHandler.js"
 import godot from "../character/dragon/Godot.js"
 import headquarter from "../basic/buildings/Headquarter.js"
 import params from "../basic/terrain/Params.js"
+import godotController from "../basic/controllers/GodotController.js"
 
 class FrontCastle extends MasterScene {
     open() {
         resize.start(renderer)
         loopMachine.addCallback(() => {
-            if (this.mesh && this.godot) {
-                let pos = this.mesh.position.clone()
-                pos.y = this.godot.position.y
-                this.godot.lookAt(pos)
-            }
             renderer.render(scene, camera)
         })
         loopMachine.start()
         keyListener.start()
-        godot.then(mesh => {
-            this.godot = mesh
-            scene.add(mesh)
-            let pos = {
-                x: 9.35554280260959,
-                y: 1.1562213741056473,
-                z: -120.90295582921397
-            }
-            mesh.rotation.y = Math.PI * .98
-            mesh.position.set(pos.x, pos.y, pos.z)
-        })
-        let pos = {
-            x: 0,
-            y: 20,
-            z: -354
-        }
+        let pos = { x: 0, y: 20, z: -354 }
         params.filters = (x, y, out) => {
             let internalRadio = 150
             let externalRadio = 60
@@ -82,6 +63,7 @@ class FrontCastle extends MasterScene {
                 this.mesh.rotation.y = Math.PI
                 camera.position.set(0, 10, 20)
             }
+            godotController.start(mesh)
 
             // camera.position.set(this.mesh.position.x, this.mesh.position.y +5, this.mesh.position.z-20)
             moveController.start(mesh)

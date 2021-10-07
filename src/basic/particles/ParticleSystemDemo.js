@@ -15,6 +15,7 @@ class FireController{
         ]
         this.params = {
             'fire':{
+                name:'fire',
                 parent: scene,
                 life: 1,
                 pointMultiplier: window.innerHeight / (2.0 * Math.tan(0.5 * 60.0 * Math.PI / 180.0))/2,//15,
@@ -25,6 +26,7 @@ class FireController{
                 colors:[ new THREE.Color(0xFFFF80),new THREE.Color(0xFF8080) ]
             },
             'smoke':{
+                name:'smoke',
                 parent: scene,
                 life: 3,
                 pointMultiplier: window.innerHeight / (2.0 * Math.tan(0.5 * 60.0 * Math.PI / 180.0))/3,//280 *15,
@@ -37,8 +39,9 @@ class FireController{
         }
         this.system = null
     }
-    start(params, vector3 = null){
+    start(params, vector3 = null, parent = null){
         if(vector3) params.velocity = vector3
+        if(parent) params.parent = parent
         let system = new ParticleSystem(params);
         let cb = ()=>{
             if(system){
@@ -51,7 +54,7 @@ class FireController{
             setTimeout(() => {
                 // loopMachine.removeCallback(cb)
             }, 1000*3);
-        }, 1000*2);
+        }, (params.name =='fire')?1000*5:1000*3);
     }
     stop(){
 
