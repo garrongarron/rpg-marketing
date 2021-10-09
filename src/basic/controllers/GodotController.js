@@ -1,12 +1,13 @@
 import godot from "../../character/dragon/Godot.js"
 import environementHandler from "../../scene/environment/EnvironmentHandler.js"
+import feedingSystem from "../../scene/FeedingSystem.js"
 import cube from "../../shapes/Cube.js"
 import loopMachine from "../LoopMachine.js"
 import fireController from "../particles/ParticleSystemDemo.js"
 import scene from "../Scene.js"
 
 class GodotController {
-    constructor() { 
+    constructor() {
         this.target = null
         this.day = false
     }
@@ -29,6 +30,7 @@ class GodotController {
             mesh.rotation.y = Math.PI * .98
             mesh.position.set(pos.x, pos.y, pos.z)
             // this.target.position.copy(mesh.position)
+            feedingSystem.start(mesh)
             setInterval(() => {
                 this.fire()
             }, 1000 * 10);
@@ -48,16 +50,14 @@ class GodotController {
     }
     run = () => {
         if (this.target && this.godot) {
-
-            // if(!this.day && this.target.position.distanceTo(this.godot.position)<30){
-            //     environementHandler.stop()
-            //     environementHandler.start(this.target)
-            //     this.day = true
-            // }
-
             let pos = this.target.position.clone()
             pos.y = this.godot.position.y
             this.godot.lookAt(pos)
+            
+            //Aim to the warrior
+            let warriorPos = this.target.position.clone()
+            warriorPos.y += 1
+            cube.lookAt(warriorPos)
         }
     }
 }

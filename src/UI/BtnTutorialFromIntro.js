@@ -22,7 +22,7 @@ let btnTutorial = (story) => {
             document.body.style.backgroundColor = 'black'
             setTimeout(() => {
                 fadeInBlack.stop()
-            }, 1000);
+            }, 2000);
         })
     })
 }

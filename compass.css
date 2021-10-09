@@ -11,6 +11,7 @@
     /* transition: .5s all linear; */
     font-family: 'gotic';
     color: cadetblue;
+    user-select: none;
 }
 .compass div.value{
     min-width: 10vw;

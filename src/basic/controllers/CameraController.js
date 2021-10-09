@@ -7,7 +7,9 @@ class CameraController {
         this.target = null
         this.hieght = 0
         this.offset = new THREE.Vector3(-2, 0, -5)
-        this.lookAtVector = new THREE.Vector3()
+        this.lookingAtTarget = true
+        this.followTheTarget = true
+        // this.lookAtVector = new THREE.Vector3()
     }
     start(target) {
         this.target = target
@@ -28,15 +30,21 @@ class CameraController {
         vec2.rotateAround(new THREE.Vector2(), this.target.rotation.y)
         position.x -= vec2.x
         position.z += vec2.y
+        if(this.followTheTarget) this.cameraMove(position)
+        if(this.lookingAtTarget) this.lookAt(position)
+        // this.lookAtVector.copy(position)
+    }
+    cameraMove(position){
         let newPosition = position.clone()
         newPosition.add(this.offset)
         camera.position.lerp(newPosition, .1)
         let trying = params.customNoiseGenerator(camera.position.x, -camera.position.z) +.5
         camera.position.y = this.hieght= Math.max(camera.position.y, trying)
+    }
+    lookAt(position){
         position.y++
         position.x += 1.5
         camera.lookAt(position)
-        this.lookAtVector.copy(position)
     }
 }
 

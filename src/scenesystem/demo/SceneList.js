@@ -6,8 +6,8 @@ import sceneDemoB from "./SceneDemoB.js"
 
 
 const sceneList = {
-    sceneDemoA,
     sceneDemoB,
+    sceneDemoA,
     landing,
     tutorial,
     frontCastle

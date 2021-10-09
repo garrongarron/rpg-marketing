@@ -26,35 +26,23 @@ import godot from "../character/dragon/Godot.js"
 import headquarter from "../basic/buildings/Headquarter.js"
 import params from "../basic/terrain/Params.js"
 import godotController from "../basic/controllers/GodotController.js"
+import flagContainer from "../basic/environment/cloth/FlagContainer.js"
+import pointLightController from "../basic/controllers/PointLightController.js"
+import sign from "../basic/buildings/Sign.js"
+import headquarterHandler from "./frontcastle/HeadquarterHandler.js"
+import flagHandler from "./frontcastle/FlagHandler.js"
 
 class FrontCastle extends MasterScene {
     open() {
         resize.start(renderer)
         loopMachine.addCallback(() => {
+            // if (this.mesh)
+            //     console.log(this.mesh.position);
             renderer.render(scene, camera)
         })
         loopMachine.start()
         keyListener.start()
-        let pos = { x: 0, y: 20, z: -354 }
-        params.filters = (x, y, out) => {
-            let internalRadio = 150
-            let externalRadio = 60
-            let levelY = pos.y - 3
-            //
-            let a = new THREE.Vector2(x, y)
-            let b = new THREE.Vector2(pos.x, -pos.z)
-            let distance = a.distanceTo(b)
-            if (distance < internalRadio) {
-                let val = (distance - externalRadio) / (internalRadio - externalRadio)
-                let lerp = THREE.MathUtils.clamp(val, 0, 1)
-                return THREE.MathUtils.lerp(levelY, out, lerp)
-            }
-            return out
-        }
-        headquarter.then(mesh => {
-            scene.add(mesh)
-            mesh.position.set(pos.x, pos.y, pos.z)
-        })
+        headquarterHandler.start()
         warrior.then(mesh => {
             this.mesh = mesh
             scene.add(mesh)
@@ -64,8 +52,7 @@ class FrontCastle extends MasterScene {
                 camera.position.set(0, 10, 20)
             }
             godotController.start(mesh)
-
-            // camera.position.set(this.mesh.position.x, this.mesh.position.y +5, this.mesh.position.z-20)
+            flagHandler.start()
             moveController.start(mesh)
             moveController.mode.walk = 4
             rayLander.start(mesh, 0)

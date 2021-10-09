@@ -40,7 +40,7 @@ class PlayNow extends Component {
     template({ }) {
         return `
         <div class="play-now">
-            <h1>Warrior</h1>
+            <h1>The Warrior</h1>
             <div class="beating1" click="clicking">${'Juega ahora'}</div>
         </div>`
     }

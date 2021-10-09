@@ -7,10 +7,11 @@ import loopMachine from "../LoopMachine.js"
 class MoveController {
     constructor() {
         this.target = null
-        this.speed = .1
+        this.speed = 1
+        this.factor = 1
         this.mode = {
-            'walk': 1.5,
-            'run': 4,
+            'walk': 1.5 * this.factor,
+            'run': 4* this.factor,
         }
         this.delta = 0
         this.direction = 0

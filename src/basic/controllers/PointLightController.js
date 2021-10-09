@@ -6,7 +6,7 @@ class PointLightController {
         this.pointLight =null
     }
     init(){
-        this.pointLight = new THREE.PointLight(0xffffff, 8, 4, 4);
+        this.pointLight = new THREE.PointLight(0xffffff, 16, 4, 4);
         this.pointLight.castShadow = true;
         //Set up shadow properties for the light
         this.pointLight.shadow.mapSize.width = 512*4; // default
@@ -34,6 +34,7 @@ class PointLightController {
         this.light.position.copy(pos);
     }
     stop() { 
+        this.pointLight.castShadow = false;
         scene.remove(this.pointLight)
     }
 }

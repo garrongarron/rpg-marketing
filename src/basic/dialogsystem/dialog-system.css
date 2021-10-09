@@ -48,6 +48,7 @@
     padding-left: 35px;
     padding-right: 35px;
     text-align: center;
+    overflow: initial;
 }
 .dialog-system-container-speaker{
     font-weight: bolder;

@@ -126,12 +126,14 @@ class TutorialGame {
             cameraController.start(this.mesh)
             keyListener.stop()
             setTimeout(() => {
+                
                 fadeInBlack.start(() => {
                     soundHandler.stop('running')
                     tutorialGame.stop()
                     tutorial.sceneHandler.goTo(sceneList.frontCastle)
                     setTimeout(() => {
                         fadeInBlack.stop()
+                        pointLightController.stop()
                     }, 1000);
                 })
             }, 7000);
