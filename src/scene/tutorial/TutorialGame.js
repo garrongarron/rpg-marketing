@@ -22,7 +22,7 @@ import { progressBar } from "../../UI/compoment/ProgressBar.js";
 import wellDone from "../../UI/compoment/WellDone.js";
 import fadeInBlack from "../../UI/FadeInBlack.js";
 import tutorial from "../Tutorial.js";
-import firtCombat from "./FirtCombat.js";
+import firstCombat from "./FirstCombat.js";
 import outOfWater from "./OutOfWater.js";
 import talkToOldMan from "./TalkToOldMan.js";
 
@@ -64,8 +64,9 @@ class TutorialGame {
                         castleguardController.animator.stop()
                         castleguardController.stop()
                         castleguardController.mesh.visible = false
+                        moveController.start(this.mesh)
                     })
-                    moveController.start(this.mesh)
+                    
                     characterControllerZAxes.keySwitcher = true
                 }
                 let move = () =>{
@@ -108,7 +109,7 @@ class TutorialGame {
             })
 
             // talkToOldMan.start()
-            firtCombat.start()
+            firstCombat.start()
             characterControllerZAxes.resume()
         }
     }

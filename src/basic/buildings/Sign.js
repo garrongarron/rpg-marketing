@@ -9,7 +9,6 @@ class Sign {
         let leftStick = cube.clone(true)
         leftStick.material = leftStick.material.clone()
         leftStick.material.color = new THREE.Color(0xFFFF00)
-        console.log(leftStick);
         leftStick.scale.set(.1, 2, .1)
         leftStick.position.y = 1
         leftStick.position.x = -1

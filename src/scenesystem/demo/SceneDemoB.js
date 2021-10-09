@@ -14,6 +14,7 @@ import initPhysics from "../../physics/InitPhysics.js"
 import addPhysicBox from "../../physics/PhysicBox.js"
 import rigidBodies from "../../physics/RigidBodies.js"
 import updatePhysics from "../../physics/UpdatePhysics.js"
+import flagHandler from "../../scene/frontcastle/FlagHandler.js"
 import cube from "../../shapes/Cube.js"
 import MasterScene from "../MasterScene.js"
 
@@ -22,7 +23,7 @@ class SceneDemoA extends MasterScene {
         scene.add(light)
         scene.add(cube)
         cube.material.color = new THREE.Color(0x00FF00)
-        camera.position.set(0, 2, 4)
+        camera.position.set(30, 0, 0)
 
         resize.start(renderer)
         loopMachine.addCallback(() => {
@@ -32,7 +33,7 @@ class SceneDemoA extends MasterScene {
             renderer.render(scene, camera)
         })
         loopMachine.start()
-        
+        flagHandler.start()
     }
     close() {
         loopMachine.clean()

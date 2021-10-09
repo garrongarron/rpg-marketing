@@ -27,17 +27,17 @@ class TalkToOldMan {
         eventBus.subscribe('keyListener', this.sound)
     }
     sound = (data) => {
-        let walkOrRun = (data[2][16]) ? 'running': 'footstep' 
+        let current = (data[2][16]) ? 'running' : 'footstep'
+        let oposite = (!data[2][16]) ? 'running' : 'footstep'
         let play = data[2][87] || data[2][83]
         if (play) {
-            soundHandler.setAsLoop(walkOrRun)
-            soundHandler.setVolume(walkOrRun, .4)
-            soundHandler.play(walkOrRun)
+            soundHandler.setAsLoop(current)
+            soundHandler.setVolume(current, .4)
+            soundHandler.play(current)
         }
-        let stop = !data[2][87] && !data[2][83]
-        if (stop) {
-            soundHandler.stop('footstep')
-            soundHandler.stop('running')
+        if (!data[1]) {
+            soundHandler.stop(oposite)
+            soundHandler.stop(current)
         }
     }
     init() {

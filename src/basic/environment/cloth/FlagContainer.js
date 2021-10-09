@@ -1,13 +1,15 @@
 import createParalellepiped from "../../../physics/CreateParalellepiped.js";
 import initPhysics, { physicsWorld, transformAux1 } from "../../../physics/InitPhysics.js";
 import margin from "../../../physics/Margin.js";
-import rigidBodies from "../../../physics/RigidBodies.js";
+import physicsCleaner from "../../../physics/PhysicsCleaner.js";
 import updatePhysics from "../../../physics/UpdatePhysics.js";
+import cube from "../../../shapes/Cube.js";
 import loopMachine from "../../LoopMachine.js";
 import scene from "../../Scene.js";
 
 class FlagContainer {
     constructor() {
+        this.acumm = 0
         this.clock = new THREE.Clock();
         this.clothWidth = 7.55;
         this.clothHeight = 4.22;
@@ -69,91 +71,44 @@ class FlagContainer {
         this.addTexture()
         this.clothPhysics()
         this.builBaseMent()
-        loopMachine.addCallback(this.run)
+        for (let index = 0; index < 60*3; index++) {
+            this.run()
+        }
+        physicsCleaner.start(this.cloth)
+        physicsCleaner.start(this.arm)
     }
     builBaseMent() {
         const pos = new THREE.Vector3();
         const quat = new THREE.Quaternion();
 
         // The base
-        const armMass = 2;
         const armLength = .5 + this.clothWidth;
         const pylonHeight = this.clothPos.y + this.clothHeight;
         const baseMaterial = new THREE.MeshPhongMaterial({ color: 0x606060 });
 
-        //BASE
-        // pos.set(this.clothPos.x, 0.1, this.clothPos.z - armLength);
-        // quat.set(0, 0, 0, 1);
-        // const base = createParalellepiped(1, 0.2, 1, 0, pos, quat, baseMaterial);
-        // base.castShadow = true;
-        // base.receiveShadow = true;
-        // this.base = base
-
         // Pylon
-        pos.set(this.clothPos.x, 0.5 * pylonHeight, this.clothPos.z - armLength);
-        const pylon = createParalellepiped(0.4, pylonHeight, 0.4, 0, pos, quat, baseMaterial);
+        let pylon = cube.clone()
+        pylon.scale.set(0.4, this.clothHeight, 0.4)
+        pylon.position.set(this.clothPos.x, 0.5 * pylon.scale.y+this.clothPos.y, this.clothPos.z - armLength);
+        pylon.geometry = pylon.geometry.clone()
+        pylon.material = baseMaterial
+        scene.add(pylon)
         this.pylon = pylon
-        pylon.castShadow = true;
-        pylon.receiveShadow = true;
+
         pos.set(this.clothPos.x, pylonHeight + 0.2, this.clothPos.z - 0.5 * armLength);
 
         //Arm
-        const arm = createParalellepiped(0.4, 0.4, armLength + 0.4, armMass, pos, quat, baseMaterial);
-        arm.castShadow = true;
-        arm.receiveShadow = true;
+        const arm = createParalellepiped(0.4, 0.4, armLength + 0.4, 0, pos, quat, baseMaterial);
         this.arm = arm
 
         // Glue the cloth to the arm
         const influence = 0.5;
         this.clothSoftBody.appendAnchor(0, arm.userData.physicsBody, false, influence);
         this.clothSoftBody.appendAnchor(this.clothNumSegmentsZ, arm.userData.physicsBody, false, influence);
-
-        // Hinge constraint to move the arm
-        const pivotA = new Ammo.btVector3(0, pylonHeight * 0.5, 0);
-        const pivotB = new Ammo.btVector3(0, - 0.2, - armLength * 0.5);
-        const axis = new Ammo.btVector3(0, 1, 0);
-        let hinge = new Ammo.btHingeConstraint(
-            pylon.userData.physicsBody,
-            arm.userData.physicsBody,
-            pivotA,
-            pivotB,
-            axis,
-            axis, true);
-        this.hinge = hinge
-        physicsWorld.addConstraint(hinge, true);
     }
 
     run = () => {
-        const deltaTime = this.clock.getDelta();
-        updatePhysics(deltaTime)
-
-        //rotate the main stick
-        // this.pylon.userData.physicsBody.setAngularVelocity(new Ammo.btVector3(0, 1, 0))
-
-
-
-        // setMotionState
-        this.pylon.userData.physicsBody.getMotionState().getWorldTransform(transformAux1)
-        transformAux1.setRotation(new Ammo.btQuaternion(0.680, -0.020, -0.695, 0.232));
-        this.pylon.userData.physicsBody.getMotionState().setWorldTransform(transformAux1)
-
-
-
-        // this.pylon.userData.physicsBody.getMotionState().getWorldTransform(transformAux1)
-        // transformAux1.setRotation(new Ammo.btQuaternion( 0.680,-0.020,-0.695,0.232));
-        // this.pylon.userData.physicsBody.getMotionState().setWorldTransform(transformAux1)
-
-        // this.arm.userData.physicsBody.getMotionState().getWorldTransform(transformAux1)
-        // const p = transformAux1.getOrigin();//position
-        // const q = transformAux1.getRotation();
-        // transformAux1.setRotation(new Ammo.btQuaternion(0,0,1,0));
-        // this.arm.userData.physicsBody.getMotionState().setWorldTransform(transformAux1)
-
-
-        // if(this.hinge) 
-        this.n += .01
-        this.hinge.enableAngularMotor(true, 0.1 * Math.sin(this.n * 1), 50);
-
+        updatePhysics(1000/60)
 
         //update cloth 
         let cloth = this.cloth
@@ -164,21 +119,40 @@ class FlagContainer {
         let indexFloat = 0;
 
         for (let i = 0; i < numVerts; i++) {
-
             const node = nodes.at(i);
             const nodePos = node.get_m_x();
             this.clothPositions[indexFloat++] = nodePos.x();
             this.clothPositions[indexFloat++] = nodePos.y();
             this.clothPositions[indexFloat++] = nodePos.z();
-
         }
 
         cloth.geometry.computeVertexNormals();
         cloth.geometry.attributes.position.needsUpdate = true;
         cloth.geometry.attributes.normal.needsUpdate = true;
     }
-    stop() {
-        loopMachine.removeCallback(this.run)
+    cloneFlag(position = new THREE.Vector3(), height =0) {
+        this.pylon.visible = false
+        this.arm.visible = false
+        this.cloth.visible = false
+
+        let pylon = this.pylon.clone()
+        pylon.geometry = pylon.geometry.clone()
+        pylon.position.y = pylon.position.y - height/2
+        pylon.scale.y = pylon.scale.y + height
+        pylon.visible = true
+        
+        let arm = this.arm.clone()
+        arm.geometry = arm.geometry.clone()
+        arm.visible = true
+        
+        let flag = this.cloth.clone()
+        flag.geometry = flag.geometry.clone()
+        flag.visible = true
+        flag.attach(pylon)
+        flag.attach(arm)
+
+        flag.position.copy(position)
+        scene.add(flag)
     }
 }
 

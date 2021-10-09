@@ -8,7 +8,7 @@ import { progressBar } from "../../UI/compoment/ProgressBar.js"
 import wellDone from "../../UI/compoment/WellDone.js"
 import dialog from "./Dialog.js"
 
-class FirtCombat {
+class FirstCombat {
     constructor() {
         this.warrior = null
         this.handred = 12
@@ -24,18 +24,19 @@ class FirtCombat {
         eventBus.subscribe('keyListener', this.sound)
     }
     sound = (data) => {
-        let walkOrRun = (data[2][16]) ? 'running' : 'footstep'
+        let current = (data[2][16]) ? 'running' : 'footstep'
+        let oposite = (!data[2][16]) ? 'running' : 'footstep'
         let play = data[2][87] || data[2][83]
         if (play) {
-            soundHandler.setAsLoop(walkOrRun)
-            soundHandler.setVolume(walkOrRun, .4)
-            soundHandler.play(walkOrRun)
+            soundHandler.setAsLoop(current)
+            soundHandler.setVolume(current, .4)
+            soundHandler.play(current)
         }
-        let stop = !data[2][87] && !data[2][83]
-        if (stop) {
-            soundHandler.stop('footstep')
-            soundHandler.stop('running')
+        if (!data[1]) {
+            soundHandler.stop(oposite)
+            soundHandler.stop(current)
         }
+
     }
     init() {
         this.loop.addCallback(this.check)
@@ -77,6 +78,6 @@ class FirtCombat {
     }
 }
 
-const firtCombat = new FirtCombat()
+const firstCombat = new FirstCombat()
 
-export default firtCombat
+export default firstCombat
