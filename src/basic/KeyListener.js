@@ -25,6 +25,7 @@ class KeyListener {
         return (this.keys[keyCode]) ? this.keys[keyCode] : false
     }
     start() {
+        this.stop()
         window.addEventListener('keydown', this.down)
         window.addEventListener("keyup", this.up)
     }
@@ -37,3 +38,4 @@ class KeyListener {
 const keyListener = new KeyListener()
 
 export default keyListener
+export { KeyListener }

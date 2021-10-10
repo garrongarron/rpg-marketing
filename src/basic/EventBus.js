@@ -6,6 +6,8 @@ class EventBus{
         if(!this.event[eventName]) {
             this.event[eventName] = []
         }
+        let index = this.event[eventName].indexOf(callback)
+        if (index > -1) return
         this.event[eventName].push(callback)
     }
     unSubscribe(eventName, callback){

@@ -30,14 +30,16 @@ class CastleguardController {
             this.animation = this.animations.asking
             this.animator = new Animator(mesh)
             this.animator.start()
-            loopMachine.addCallback(this.run)
+            loopMachine.addCallback(this.tick)
         })
     }
-
+    die() {
+        this.animator.action(this.animations.die, 1, true)
+    }
     kick() {
         this.animator.action(this.animations.kick, 1, true)
     }
-    run = () => {
+    tick = () => {
         let position = this.target.position.clone()
         position.y = this.mesh.position.y
         if (this.lookAtWarrior) this.mesh.lookAt(position)
@@ -45,7 +47,7 @@ class CastleguardController {
     }
     stop() {
         this.animator.stop()
-        loopMachine.removeCallback(this.run)
+        loopMachine.removeCallback(this.tick)
     }
 }
 

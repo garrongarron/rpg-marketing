@@ -1,6 +1,9 @@
 import sign from "../../basic/buildings/Sign.js"
 import camera from "../../basic/Camera.js"
+import { AnimationComponent } from "../../basic/controllers/CharacterController/components/AnimationComponent.js"
+import tutorialCharacterController from "../../basic/controllers/CharacterController/TutorialCharacterController.js"
 import flagContainer from "../../basic/environment/cloth/FlagContainer.js"
+import eventBus from "../../basic/EventBus.js"
 import keyCode from "../../basic/KeyCode.js"
 import keyListener from "../../basic/KeyListener.js"
 import light from "../../basic/Light.js"
@@ -23,7 +26,7 @@ class SceneDemoA extends MasterScene {
         scene.add(light)
         scene.add(cube)
         cube.material.color = new THREE.Color(0x00FF00)
-        camera.position.set(30, 0, 0)
+        camera.position.set(10, 0, 0)
 
         resize.start(renderer)
         loopMachine.addCallback(() => {
@@ -33,7 +36,29 @@ class SceneDemoA extends MasterScene {
             renderer.render(scene, camera)
         })
         loopMachine.start()
-        flagHandler.start()
+        tutorialCharacterController.start()
+        keyListener.start()
+        let caster = (data) => {
+            eventBus.dispatch('keyListener', data)
+        }
+        keyListener.setCaster(caster)
+        let anim = tutorialCharacterController.getComponentByClass(AnimationComponent)
+        
+        window.addEventListener('click', () => {
+            anim.animator.action(anim.animations.attack, 1, true)
+            anim.animator.whenAnimationEnd(this.move)
+        })
+        // flagHandler.start()
+    }
+    move = () => {
+        this.warrior = tutorialCharacterController.state.mesh
+        let z = this.warrior.children[4].children[0].position.z / 100
+        let x = this.warrior.children[4].children[0].position.x / 100
+        const vec2 = new THREE.Vector2(x, z);
+        vec2.rotateAround(new THREE.Vector2(), -this.warrior.rotation.y)
+        this.warrior.position.z += vec2.y
+        this.warrior.position.x += vec2.x
+        // this.warrior.rotation.y += 50 * Math.PI / 180
     }
     close() {
         loopMachine.clean()

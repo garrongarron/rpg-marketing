@@ -31,17 +31,11 @@ class OutOfWater {
     waterSound = (data) => {
         let play = data[2][87] || data[2][83]
         if(play){
-            soundHandler.setVolume('waterWalk', .15)
             soundHandler.play('waterWalk')
-            ////////////////
-            soundHandler.setAsLoop('footstep')
-            soundHandler.play('footstep')
         }
         let stop = !data[2][87] && !data[2][83]
         if(stop){
             soundHandler.stop('waterWalk')
-            ///
-            soundHandler.stop('footstep')
         }
     }
     check = () => {

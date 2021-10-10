@@ -10,7 +10,7 @@ import warrior from "../character/warrior/Warrior.js"
 // import soundHandler from "../basic/sound/SoundHandler.js"
 import Animator from "../basic/Animator.js"
 import eventBus from "../basic/EventBus.js"
-import PlayNow from "../UI/compoment/PlayNow.js"
+// import PlayNow from "../UI/compoment/PlayNow.js"
 import peasant from "../character/peasant/Peasant.js"
 
 class Landing extends MasterScene {
@@ -19,7 +19,7 @@ class Landing extends MasterScene {
         this.cameraTarget = new THREE.Object3D()
         this.mesh = null
         this.delta = 0
-        this.playNow = new PlayNow()
+        // this.playNow = new PlayNow()
     }
     down() {
         let callback = () => {

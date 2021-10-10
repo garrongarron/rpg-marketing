@@ -12,9 +12,12 @@ class Animator {
         this.interpolationTime = 0.2
         this.inProgress = false
         this.callback = null
+        window.delta = 1
     }
     run = () => {
-        this.mixer.update(this.clock.getDelta())
+
+        let n = this.clock.getDelta() * window.delta
+        this.mixer.update(n)
     }
     start() {
         machine.addCallback(this.run)

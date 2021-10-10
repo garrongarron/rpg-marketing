@@ -21,33 +21,11 @@ class FirstCombat {
             this.warrior = mesh
             this.init()
         })
-        eventBus.subscribe('keyListener', this.sound)
-    }
-    sound = (data) => {
-        let current = (data[2][16]) ? 'running' : 'footstep'
-        let oposite = (!data[2][16]) ? 'running' : 'footstep'
-        let play = data[2][87] || data[2][83]
-        if (play) {
-            soundHandler.setAsLoop(current)
-            soundHandler.setVolume(current, .4)
-            soundHandler.play(current)
-        }
-        if (!data[1]) {
-            soundHandler.stop(oposite)
-            soundHandler.stop(current)
-        }
-
     }
     init() {
         this.loop.addCallback(this.check)
     }
     check = () => {
-        // this.warrior.children[4].children[0].position.x = 0
-        // this.warrior.children[4].children[0].position.y = 0
-        // this.warrior.children[4].children[0].position.z = 0
-        
-        // console.log(this.warrior);
-        // this.loop.stop()
         if (!this.runMessage && this.warrior.position.z * 1 < 5) {
             this.runMessage = true
             instructionContainer.node.classList.remove('fadeIn1')
@@ -73,7 +51,6 @@ class FirstCombat {
     stop() {
         soundHandler.stop('footstep')
         soundHandler.stop('running')
-        eventBus.unSubscribe('keyListener', this.sound)
         this.loop.removeCallback(this.check)
     }
 }

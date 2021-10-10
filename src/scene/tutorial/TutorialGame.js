@@ -9,6 +9,7 @@ import peasantController from "../../basic/controllers/PeasantController.js";
 import pointLightController from "../../basic/controllers/PointLightController.js";
 import dialogSystem from "../../basic/dialogsystem/DialogSystem.js";
 import eventBus from "../../basic/EventBus.js";
+import keyCode from "../../basic/KeyCode.js";
 import keyListener from "../../basic/KeyListener.js";
 import { LoopMachine } from "../../basic/LoopMachine.js";
 import loopMonitor from "../../basic/LoopMonitor.js";
@@ -29,10 +30,9 @@ import talkToOldMan from "./TalkToOldMan.js";
 class TutorialGame {
     constructor() {
         this.flag = false
-        eventBus.subscribe('outOfWater', this.outOfWater)
-        eventBus.subscribe('talkToOldMan', this.talkToOldMan)
-        eventBus.subscribe('firstCombat', this.firstCombat)
-
+        // eventBus.subscribe('outOfWater', this.outOfWater)
+        // eventBus.subscribe('talkToOldMan', this.talkToOldMan)
+        // eventBus.subscribe('firstCombat', this.firstCombat)
         this.mesh = null
         this.peasant = null
         this.guard = null
@@ -41,9 +41,10 @@ class TutorialGame {
         if (bool) {
             moveController.stop()
             characterControllerZAxes.pause()
+            keyListener.stop()
             pointLightController.start(castleguardController.target)
         } else {
-
+            keyListener.start()
             characterControllerZAxes.keySwitcher = false
             // instructionContainer.update({
             //     title: 'Tutorial',
@@ -66,10 +67,10 @@ class TutorialGame {
                         castleguardController.mesh.visible = false
                         moveController.start(this.mesh)
                     })
-                    
+
                     characterControllerZAxes.keySwitcher = true
                 }
-                let move = () =>{
+                let move = () => {
                     let z = characterControllerZAxes.target.children[4].children[0].position.z / 100
                     let x = characterControllerZAxes.target.children[4].children[0].position.x / 100
                     const vec2 = new THREE.Vector2(x, z);
@@ -127,7 +128,7 @@ class TutorialGame {
             cameraController.start(this.mesh)
             keyListener.stop()
             setTimeout(() => {
-                
+
                 fadeInBlack.start(() => {
                     soundHandler.stop('running')
                     tutorialGame.stop()
@@ -196,7 +197,26 @@ class TutorialGame {
         outOfWater.start()
         this.flag = false
         eventBus.subscribe('dialogSystem', this.dialogSystemCallback)
-        
+        eventBus.subscribe('keyListener', this.sound)
+
+    }
+    sound = (data) => {
+        let current = (data[2][16]) ? 'running' : 'footstep'
+        let oposite = (!data[2][16]) ? 'running' : 'footstep'
+        let play = data[2][keyCode.KEY_W] || data[2][keyCode.KEY_S]
+        if (play) {
+            if(!soundHandler.isPlaying(current)){
+                soundHandler.setAsLoop(current)
+                soundHandler.setVolume(current, .4)
+                soundHandler.play(current)
+                soundHandler.stop(oposite)
+            }
+        }
+        let stop = !data[2][keyCode.KEY_W] && !data[2][keyCode.KEY_S]
+        if (stop) {
+            soundHandler.stop(oposite)
+            soundHandler.stop(current)
+        }
     }
     stop() {
         cache.appendChild(progressBar.node)
@@ -207,5 +227,5 @@ class TutorialGame {
 }
 
 const tutorialGame = new TutorialGame()
-
+console.log('a');
 export default tutorialGame

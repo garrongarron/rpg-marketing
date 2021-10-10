@@ -23,6 +23,10 @@ class SoundHandler {
         this.nodeList[name].currentTime = 0;
         this.nodeList[name].play()
     }
+    
+    isPlaying(name){
+        return !this.nodeList[name].paused;
+    }
 
     setVolume(sound, value) {
         this.nodeList[sound].volume = value;

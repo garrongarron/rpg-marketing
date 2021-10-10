@@ -14,6 +14,7 @@ class Terrain {
         }
         this.chunks = new Map()
         this.group = new THREE.Group();
+        this.group.name = "Terrain"
         this.position = new THREE.Vector2()
         this.prevPosition = new THREE.Vector2()
         this.chunksNeeded = []

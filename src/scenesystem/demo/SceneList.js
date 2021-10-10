@@ -1,16 +1,23 @@
-import landing from "../../scene/Landing.js"
-import tutorial from "../../scene/Tutorial.js"
-import frontCastle from "../../scene/FrontCastle.js"
-import sceneDemoA from "./SceneDemoA.js"
+import landingScene from "../../scene/LandingScene.js"
+// import landing from "../../scene/Landing.js"
+// import tutorial from "../../scene/Tutorial.js"
+import tutorialScene from "../../scene/TutorialScene.js"
+import frontCastleScene from "../../scene/FrontCastleScene.js"
+// import frontCastle from "../../scene/FrontCastle.js"
+// import sceneDemoA from "./SceneDemoA.js"
 import sceneDemoB from "./SceneDemoB.js"
 
+// 
 
 const sceneList = {
     sceneDemoB,
-    sceneDemoA,
-    landing,
-    tutorial,
-    frontCastle
+    // sceneDemoA,
+    // landing,
+    // tutorial,
+    tutorialScene,
+    // frontCastle,
+    landingScene,
+    frontCastleScene
 }
 
 

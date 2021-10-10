@@ -1,18 +1,20 @@
 import sceneList from './scenesystem/demo/SceneList.js'
 import SceneHandler from './scenesystem/SceneHandler.js'
 // import './basic/terrain/GuiTerrain.js'
+import './UI/StatsImplementation.js'
 
 Ammo().then(function (AmmoLib) {
     Ammo = AmmoLib;
+    // console.log('a');
     let sceneHandler = new SceneHandler(sceneList)
     if (location.search == "?1") {
-        sceneHandler.goTo(sceneList.tutorial)
+        sceneHandler.goTo(sceneList.tutorialScene)
     } else if (location.search == "?2") {
-        sceneHandler.goTo(sceneList.frontCastle)
+        sceneHandler.goTo(sceneList.frontCastleScene)
     } else {
-        sceneHandler.goTo(sceneList.landing)
+        sceneHandler.goTo(sceneList.landingScene)
     }
-    // sceneHandler.goTo(sceneList.sceneDemoB)
+    // sceneHandler.goTo(sceneList.landingScene)
 });
 
 

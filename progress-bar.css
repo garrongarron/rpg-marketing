@@ -14,7 +14,8 @@
     font-size  : 1em;
     text-shadow: 2px 2px 2px black;
     line-height: 30px;
-    user-select: none
+    user-select: none;
+    text-align: center;
 }
 
 .slidebar-container input[type=range] {
@@ -31,7 +32,8 @@
 }
 
 .slidebar-container input[type=range] {
-    position: absolute
+    position: absolute;
+    width: 90%;
 }
 
 .slidebar-container input[type=range]::-moz-range-thumb {

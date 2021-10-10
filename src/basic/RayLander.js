@@ -1,10 +1,10 @@
 import loopMachine from "./LoopMachine.js";
 import scene from "./Scene.js";
-
+alert('no')
 class RayLander {
     constructor() {
         this.raycaster = new THREE.Raycaster();
-        this.raycaster.layers.set(1);
+        // this.raycaster.layers.set(1);
         this.mesh = null
         this.distanceToGround = null
     }

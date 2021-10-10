@@ -23,6 +23,10 @@ class HeadquarterHandler{
         }
         headquarter.then(mesh => {
             scene.add(mesh)
+            this.mesh = mesh
+            mesh.name = "castle"
+            window.scene = scene
+            mesh.layers.enable( 1 );
             mesh.position.set(pos.x, pos.y, pos.z)
         })
     }

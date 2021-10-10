@@ -6,24 +6,14 @@ import btnTutorial from "../BtnTutorialFromIntro.js";
 import Story from "../compoment/Story.js"
 
 class PlayNow extends Component {
-    constructor() {
-        super()
-        this.fadeOut = () => console.error('character no loaded');
-        eventBus.subscribe('characterLoaded', (landing) => {
-            this.fadeOut = () => {
-                landing.down()
-                landing.rotation()
-            }
-        })
-    }
     addEventListener() { return ['click'] }
     clicking(e) {
         soundHandler.setVolume('fire', .4)
         soundHandler.setAsLoop('epic')
         soundHandler.play('epic')
         soundHandler.play('fire')
+        eventBus.dispatch('playNow', true)
         e.target.parentNode.classList.add('fadeout')
-        this.fadeOut()
         setTimeout(() => {this.drop()},1000)
         setTimeout(() => {
             let s = new Story()

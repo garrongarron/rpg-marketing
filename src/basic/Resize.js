@@ -1,20 +1,21 @@
 import camera from "./Camera.js"
 
-class Resize{
-    constructor(){
+class Resize {
+    constructor() {
         this.renderer = null
     }
-    start(renderer){
+    start(renderer) {
         this.renderer = renderer
-        window.addEventListener('resize', this.resize.bind(this))
+        window.removeEventListener('resize', this.resize)
+        window.addEventListener('resize', this.resize)
     }
-    stop(){
-        window.removeEventListener('resize', this.resize.bind(this))
+    stop() {
+        window.removeEventListener('resize', this.resize)
     }
-    resize(){
+    resize = () => {
         camera.aspect = window.innerWidth / window.innerHeight
         camera.updateProjectionMatrix()
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 }
 

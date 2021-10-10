@@ -1,5 +1,7 @@
 import cache from "../basic/Cache.js"
+import eventBus from "../basic/EventBus.js"
 import landing from "../scene/Landing.js"
+import landingScene from "../scene/LandingScene.js"
 import sceneList from "../scenesystem/demo/SceneList.js"
 import fadeInBlack from "./FadeInBlack.js"
 
@@ -14,7 +16,7 @@ let btnTutorial = (story) => {
     }, 100);
     tutorial.addEventListener('click', () => {
         fadeInBlack.start(() => {
-            landing.sceneHandler.goTo(sceneList.tutorial)
+            eventBus.dispatch('gotoTutorial', true)
             // localStorage.setItem('n', JSON.stringify(1));
             cache.appendChild(tutorial)
             story.stop()

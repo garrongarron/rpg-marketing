@@ -24,21 +24,6 @@ class TalkToOldMan {
                 this.init()
             }, 1000);
         })
-        eventBus.subscribe('keyListener', this.sound)
-    }
-    sound = (data) => {
-        let current = (data[2][16]) ? 'running' : 'footstep'
-        let oposite = (!data[2][16]) ? 'running' : 'footstep'
-        let play = data[2][87] || data[2][83]
-        if (play) {
-            soundHandler.setAsLoop(current)
-            soundHandler.setVolume(current, .4)
-            soundHandler.play(current)
-        }
-        if (!data[1]) {
-            soundHandler.stop(oposite)
-            soundHandler.stop(current)
-        }
     }
     init() {
         this.loop.addCallback(this.check)
@@ -75,7 +60,6 @@ class TalkToOldMan {
     stop() {
         soundHandler.stop('footstep')
         soundHandler.stop('running')
-        eventBus.unSubscribe('keyListener', this.sound)
         dialogSystem.close()
         this.loop.removeCallback(this.check)
     }
