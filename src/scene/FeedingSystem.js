@@ -10,7 +10,7 @@ import warrior from "../character/warrior/Warrior.js"
 class FeedingSystem {
     constructor() {
         this.radio = 15
-        this.quantity = 4
+        this.quantity = 5
         this.target = null
     }
     start(target) {
@@ -21,19 +21,10 @@ class FeedingSystem {
         const cube = new THREE.Mesh(geometry, material);
         cube.rotation.x = Math.PI * .5
         for (let index = 0; index < this.quantity; index++) {
-            // const geometry = new THREE.BoxGeometry(.5,.5,.5);
-
-
-
-            // const geometry = new THREE.SphereGeometry( .1, 16, 8 );
-            // const material = new THREE.MeshBasicMaterial({ color: 0xcccc00 });
-            // const cube = new THREE.Mesh(geometry, material);
             let apple = cube.clone()
             apple.rotation.z = Math.PI * Math.random()
             apple.userData.rotateCallback = () => {
-                // console.log('sss');
                 apple.rotation.z += .1 
-                // apple.rotation.x +w= .1
             }
             loopMachine.addCallback(apple.userData.rotateCallback)
             let x = Math.random() * this.radio * 2 - this.radio + this.target.position.x

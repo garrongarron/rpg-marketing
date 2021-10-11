@@ -33,9 +33,6 @@ class FrontCastleScene extends MasterScene {
         tutorialCharacterController.start()
 
         inventory.start()
-        setTimeout(() => {
-            inventory.addItem(1, inventory.types.gold)
-        }, 5000);
         // let cameraComp = tutorialCharacterController.getComponentByClass(GravityComponent)
         // godotController.range.distance = 30
         // godotController.range.frecuency = 1
