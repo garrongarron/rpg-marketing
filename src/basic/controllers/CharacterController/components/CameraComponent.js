@@ -45,20 +45,21 @@ class CameraComponent extends AbstractComponent {
         vec2.rotateAround(new THREE.Vector2(), this.target.rotation.y)
         position.x -= vec2.x
         position.z += vec2.y
-        //
-        this.max.x = Math.max(this.max.x, tmp.x)
-        this.max.y = Math.max(this.max.y, tmp.z)
-        let bonesPosition = new THREE.Vector2(tmp.x, tmp.z)
-        if (this.max.distanceTo(bonesPosition) > .5 && bonesPosition.length() < .5) {
-            const fix = new THREE.Vector2(this.max.x, this.max.y);
-            fix.rotateAround(new THREE.Vector2(), this.target.rotation.y)
-            this.target.position.z += fix.y
-            this.target.position.x -= fix.x
-            this.max.set(0, 0)
-            position.x = this.target.position.x
-            position.z = this.target.position.z
-            eventBus.dispatch('animation-translated', true)
-        }
+        // //
+        // this.max.x = Math.max(this.max.x, tmp.x)
+        // this.max.y = Math.max(this.max.y, tmp.z)
+        // let bonesPosition = new THREE.Vector2(tmp.x, tmp.z)
+        // if (this.max.distanceTo(bonesPosition) > .5 && bonesPosition.length() < .5) {
+        //     // const fix = new THREE.Vector2(this.max.x, this.max.y);
+        //     // fix.rotateAround(new THREE.Vector2(), this.target.rotation.y)
+        //     // this.target.position.z += fix.y
+        //     // this.target.position.x -= fix.x
+        //     // this.max.set(0, 0)
+        //     // position.x = this.target.position.x
+        //     // position.z = this.target.position.z
+        //     // window.delta = .1
+        //     // eventBus.dispatch('animation-translated', true)
+        // }
         if (this.followTheTarget) this.cameraMove(position)
         if (this.lookingAtTarget) this.lookAt(position)        
     }

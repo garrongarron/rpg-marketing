@@ -21,3 +21,18 @@ body{
 .loopMachine::before{
     content: 'LoopMachine: ';
 }
+.sponsor{
+    position: fixed;
+    z-index: 1;
+    bottom: 10px;
+    left: 10px;
+    transition: .1s all linear;
+    opacity: .5;
+    user-select: none;
+    cursor: pointer;
+    box-shadow: 0 0 2px gray;
+}
+.sponsor:hover{
+    opacity: 1;
+    box-shadow: 0 0 10px yellow;
+}

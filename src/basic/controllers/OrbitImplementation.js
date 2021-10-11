@@ -5,8 +5,13 @@ import renderer from "../Renderer.js";
 class OrbitImplementation {
     constructor() {
         this.target = null
+        this.following = { value: true }
+        window.orbitImplementation = { 
+            following: this.following 
+        }
+
     }
-    init(){
+    init() {
         this.controls = new THREE.OrbitControls(camera, renderer.domElement);
         this.controls.enablePan = false;
         this.controls.enableZoom = true;
@@ -14,18 +19,23 @@ class OrbitImplementation {
         this.controls.maxDistance = 10
     }
     start(target) {
-        if(!this.target) this.init()
+        if (!this.target) this.init()
         this.target = target
-        loopMachine.addCallback(this.run.bind(this))
+        loopMachine.addCallback(this.run)
     }
     stop() {
-        loopMachine.removeCallback(this.run.bind(this))
+        loopMachine.removeCallback(this.run)
     }
-    run() {
-        let target = this.target.position.clone()
-        target.y++
-        this.controls.target.lerp(target, 0.1);
-        this.controls.update();
+    run = () => {
+        if(this.following.value){
+            let target = this.target.position.clone()
+            target.y++
+            this.controls.target.lerp(target, 0.1);
+            this.controls.update();
+        }
+    }
+    follow(val){
+        this.following.value = val
     }
 }
 

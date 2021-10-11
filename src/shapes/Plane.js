@@ -1,4 +1,4 @@
-const geometry = new THREE.PlaneGeometry(600,600,100,100);
+const geometry = new THREE.PlaneGeometry(1000,1000,100,100);
 let colorStr = Math.random().toString().slice(2, 8)
 colorStr = 'ffff00'
 const material = new THREE.MeshStandardMaterial({ 

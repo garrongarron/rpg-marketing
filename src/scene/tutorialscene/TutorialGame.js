@@ -1,3 +1,4 @@
+import pointLightController from "../../basic/controllers/PointLightController.js"
 import eventBus from "../../basic/EventBus.js"
 import castleguard from "../../character/castleguard/CastleGuar.js"
 import peasant from "../../character/peasant/Peasant.js"
@@ -8,7 +9,11 @@ import talkToOldMan from "./TalkToOldMan.js"
 class TutorialGame {
     constructor() { }
     start() {
-        peasant.then(peasant => { this.peasant = peasant })
+        peasant.then(peasant => { 
+            this.peasant = peasant 
+            //preload light
+            pointLightController.start(peasant)
+        })
         castleguard.then(guard => { this.guard = guard })
         eventBus.subscribe('outOfWater', this.outOfWaterEnds)
         eventBus.subscribe('firstCombat', this.firstCombatEnds)

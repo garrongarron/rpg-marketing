@@ -224,10 +224,12 @@
 					offset.setFromSpherical( spherical ); // rotate offset back to "camera-up-vector-is-up" space
 
 					offset.applyQuaternion( quatInverse );
-					position.copy( scope.target ).add( offset );
-					if(window.params){
-						let min = window.params.customNoiseGenerator(position.x, -position.z)+2
-						position.y = Math.max(min, position.y)
+					if(window.orbitImplementation.following.value){
+						position.copy( scope.target ).add( offset );
+						if(window.params){
+							let min = window.params.customNoiseGenerator(position.x, -position.z)+2
+							position.y = Math.max(min, position.y)
+						}
 					}
 					scope.object.lookAt( scope.target );
 
