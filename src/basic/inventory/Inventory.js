@@ -51,7 +51,6 @@ class Inventory {
             this.db[this.inverTypes[type]] = 0
         }
         this.db[this.inverTypes[type]] += quantity
-        console.log(this.db);
 
         //add element on UI
         let img = imageFactory.getOneImage(imageFactory.list().gold)

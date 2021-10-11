@@ -1,8 +1,8 @@
 import cache from "../basic/Cache.js"
 import eventBus from "../basic/EventBus.js"
-import landing from "../scene/Landing.js"
-import landingScene from "../scene/LandingScene.js"
-import sceneList from "../scenesystem/demo/SceneList.js"
+// import landing from "../scene/Landing.js"
+// import landingScene from "../scene/LandingScene.js"
+// import sceneList from "../scenesystem/demo/SceneList.js"
 import fadeInBlack from "./FadeInBlack.js"
 
 let tutorial = document.createElement('div')
