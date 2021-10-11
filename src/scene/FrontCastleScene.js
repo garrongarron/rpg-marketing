@@ -43,7 +43,7 @@ class FrontCastleScene extends MasterScene {
         // // godotController.range.callback = (onRange) => {
         // //     // console.log(onRange);
         // //     (onRange)?orbitImplementation.start(this.obj):orbitImplementation.start(this.warrior)
-            
+
         // //     this.onRange = onRange
         // // }
         headquarterHandler.start()
@@ -55,16 +55,17 @@ class FrontCastleScene extends MasterScene {
                 mesh.rotation.y = Math.PI
                 camera.position.set(0, 10, 20)
             }
+            camera.position.set(0, 10, 20)
             environementHandler.start(mesh)
             environementHandler.night()
             orbitImplementation.start(mesh)
             compass.start(mesh)
             rayLander.start(mesh, 0)
             godotController.start(mesh)
-            godot.then(mesh=>{
+            godot.then(mesh => {
                 feedingSystem.start(mesh)
             })
-            
+
         })
         if (!soundHandler.isPlaying('epic')) {
             soundHandler.setVolume('epic', .2)
