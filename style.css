@@ -31,6 +31,7 @@ body{
     user-select: none;
     cursor: pointer;
     box-shadow: 0 0 2px gray;
+    border-radius: 5px;
 }
 .sponsor:hover{
     opacity: 1;

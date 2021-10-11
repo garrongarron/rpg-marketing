@@ -22,6 +22,7 @@
     padding-left: 35px;
     padding-right: 35px;
     text-align: center;
+    pointer-events: none;
 }
 
 .basic-container>div {
