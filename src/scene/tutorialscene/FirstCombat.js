@@ -81,8 +81,8 @@ class FirstCombat {
             warrior.position.z += vec2.y
             warrior.position.x += vec2.x
             warrior.rotation.y += 50 * Math.PI / 180
-            // this.animComponent.animator.action(this.animComponent.animations.idle, 1, false)
-            // this.animComponent.animtion = this.animComponent.animations.idle
+            this.animComponent.animator.action(this.animComponent.animations.idle, 1, false)
+            this.animComponent.animtion = this.animComponent.animations.idle
             this.animComponent.start()
             this.animComponent.animator.interpolationTime = 0.2
             tutorialCharacterController.startComponent(MovementComponent)
