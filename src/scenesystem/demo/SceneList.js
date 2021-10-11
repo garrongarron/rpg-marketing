@@ -11,11 +11,11 @@ import sceneDemoB from "./SceneDemoB.js"
 
 const sceneList = {
     sceneDemoB,
-    // sceneDemoA,
-    // landing,
-    // tutorial,
-    tutorialScene,
+    // //sceneDemoA,
+    // //landing,
+    // //tutorial,
     // frontCastle,
+    tutorialScene,
     landingScene,
     frontCastleScene
 }

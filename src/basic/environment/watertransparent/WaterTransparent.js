@@ -1,4 +1,4 @@
-const waterGeometry = new THREE.PlaneGeometry(1000, 200);
+const waterGeometry = new THREE.PlaneGeometry(100, 100);
 const params = {
     color: '#66ddff',
     scale: 4,
@@ -18,7 +18,8 @@ let transparentWater = new THREE.Water(waterGeometry, {
 
 transparentWater.rotation.x = Math.PI * - 0.5;
 
-transparentWater.position.set(-3, 0, 32)
+transparentWater.position.set(20, 0, 50)
+transparentWater.position.y = .5;
 transparentWater.position.y = .5;
 
 export default transparentWater

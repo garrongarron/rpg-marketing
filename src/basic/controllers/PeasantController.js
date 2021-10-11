@@ -21,7 +21,7 @@ class PeasantController {
 
             setTimeout(() => {
                 mesh.visible = true
-                mesh.position.set(0.5, 3.7, -6.2)
+                mesh.position.set(0.5, 3.9, -6.2)
                 // guiHelper.start(mesh)
                 // const axesHelper = new THREE.AxesHelper(5);
                 // scene.add(axesHelper);
