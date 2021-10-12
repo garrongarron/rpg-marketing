@@ -1,6 +1,5 @@
-import headquarterHandler from "../../scene/frontcastle/HeadquarterHandler.js";
+import headquarter from "../buildings/Headquarter.js";
 import loopMachine from "../LoopMachine.js";
-import scene from "../Scene.js";
 import terrain from "../terrain/Terrain.js";
 
 class RayLander {
@@ -10,18 +9,22 @@ class RayLander {
         this.mesh = null
         this.distanceToGround = null
         this.prev = []
+        let array = [terrain.group]
+        this.objectsToIntersect = array
+        headquarter.then(mesh=>{
+            array.push(mesh)
+        })
     }
     start(mesh, distanceToGround = .5) {
         this.mesh = mesh
         this.distanceToGround = distanceToGround
-        loopMachine.addCallback(this.tick.bind(this))
+        loopMachine.addCallback(this.tick)
     }
-    tick() {
+    tick = () =>{
         let vec3 = this.mesh.position.clone()
         vec3.y++
         this.raycaster.set(vec3, this.mesh.up.negate().normalize(), 0, 2)
-        // const intersected = this.raycaster.intersectObjects(scene.children, true)[0];
-        const intersected = this.raycaster.intersectObjects([headquarterHandler.mesh, terrain.group], true)[0];
+        const intersected = this.raycaster.intersectObjects(this.objectsToIntersect, true)[0];
         if (intersected) {
             if (Math.abs(intersected.distance - this.distanceToGround - 1) < .5) {
                 this.prev.push(intersected.distance - this.distanceToGround - 1)
@@ -42,7 +45,7 @@ class RayLander {
 
     }
     stop() {
-        loopMachine.removeCallback(this.tick.bind(this))
+        loopMachine.removeCallback(this.tick)
     }
 }
 

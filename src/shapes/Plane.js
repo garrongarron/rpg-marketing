@@ -9,7 +9,7 @@ const plane = new THREE.Mesh(geometry, material);
 plane.castShadow = true; //default is false
 plane.receiveShadow = true; //default
 plane.position.set(0,0,0)
-plane.layers.enable( 1 );
+// plane.layers.enable( 1 );
 plane.name = 'plane'
 
 export default plane

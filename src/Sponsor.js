@@ -11,5 +11,4 @@ htmlImageElement.addEventListener('click', () => {
     let url = 'https://www.udemy.com/course/threejs-basico-en-espanol/?referralCode=3985668E0F426CD1BA37'
     window.open(url, '_blank');
 })
-
 document.body.appendChild(htmlImageElement);

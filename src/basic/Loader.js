@@ -21,8 +21,8 @@ class Loader {
                     // console.log(Math.round((loaded.loaded/loaded.total)*100));
                 },
                 ()=>{
-                    alert('Algo salio mal')
-                    location.reload()
+                    // alert('Algo salio mal')
+                    // location.reload()
                 })
         })
 

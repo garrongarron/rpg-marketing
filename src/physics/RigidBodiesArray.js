@@ -1,3 +1,3 @@
-const rigidBodies = [];
+let  rigidBodies = [];
 
 export default rigidBodies

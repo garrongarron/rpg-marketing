@@ -10,7 +10,7 @@ let fileList = {
     '4':'sword and shield run (2).fbx',
     '5':'sword and shield attack (3).fbx', //sword and shield idle.fbx'
     '6':'sword and shield impact (3).fbx',
-    '7':'sword and shield block idle.fbx'
+    // '7':'sword and shield block idle.fbx'
 }
 const list = []
 

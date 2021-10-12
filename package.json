@@ -1,0 +1,34 @@
+{
+  "name": "RPG5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=development --config webpack.config.js",
+    "prod": "webpack --mode=production --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garrongarron/rpg-marketing.git"
+  },
+  "keywords": [],
+  "author": "Samu Garron <samugarrondev@gmail.com> (https://www.youtube.com/channel/UCvZ-Ssn7OLkSCbfc1xRAnTw)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/garrongarron/rpg-marketing/issues"
+  },
+  "homepage": "https://github.com/garrongarron/rpg-marketing#readme",
+  "devDependencies": {
+    "css-loader": "^6.4.0",
+    "html-webpack-plugin": "^5.3.2",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
+  }
+}

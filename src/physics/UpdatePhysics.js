@@ -1,5 +1,5 @@
 import { physicsWorld, transformAux1 } from "./InitPhysics.js";
-import rigidBodies from "./RigidBodies.js ";
+import rigidBodies from "./RigidBodiesArray.js";
 
 function updatePhysics( deltaTime ) {
     // Step world

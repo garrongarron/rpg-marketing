@@ -1,24 +1,16 @@
-import landingScene from "../../scene/LandingScene.js"
-import tutorialScene from "../../scene/TutorialScene.js"
-import frontCastleScene from "../../scene/FrontCastleScene.js"
-// import landing from "../../scene/Landing.js"
-// import tutorial from "../../scene/Tutorial.js"
-// import frontCastle from "../../scene/FrontCastle.js"
-// import sceneDemoA from "./SceneDemoA.js"
-import sceneDemoB from "./SceneDemoB.js"
-
-// 
-
-const sceneList = {
-    sceneDemoB,
-    // //sceneDemoA,
-    // //landing,
-    // //tutorial,
-    // frontCastle,
-    tutorialScene,
-    landingScene,
-    frontCastleScene
+let sceneList =  {
+    get landingScene() { return lazy('landingScene') },
+    get tutorialScene() { return lazy('tutorialScene') },
+    get frontCastleScene() { return lazy('frontCastleScene') }
 }
-
+const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+let lazy = async (filename) => {
+    let module = await import(`../../scene/${capitalize(filename)}.js`)
+    return module.default
+}
+// let sceneList = new SceneGetList()
 
 export default sceneList

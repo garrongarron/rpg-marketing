@@ -79,9 +79,11 @@
     user-select: none;
 }
 .welldone h1{
+    width: 100%;
+    text-align: center;
     margin: 0;
     margin-bottom: 10px;
-    font-size: 2.2em;
+    font-size: 1.8em;
     color: black;
     text-shadow: 0 0 4px rgb(173, 142, 101);
 }

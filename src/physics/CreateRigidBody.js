@@ -1,6 +1,6 @@
 import scene from "../basic/Scene.js";
 import { physicsWorld } from "./InitPhysics.js";
-import rigidBodies from "./RigidBodies.js";
+import rigidBodies from "./RigidBodiesArray.js";
 
 
 function createRigidBody(threeObject, physicsShape, mass, pos, quat) {
