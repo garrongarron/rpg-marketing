@@ -2,7 +2,7 @@ import sceneList from './scenesystem/demo/SceneList.js'
 import SceneHandler from './scenesystem/SceneHandler.js'
 // import './basic/terrain/GuiTerrain.js'
 import './UI/StatsImplementation.js'
-import './Sponsor.js'
+// import sponsor from './Sponsor.js'
 // import './styles/style.scss'
 
 Ammo().then(function (AmmoLib) {

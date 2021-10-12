@@ -41,9 +41,15 @@ class FrontCastleScene extends MasterScene {
                 mesh.rotation.y = Math.PI
                 camera.position.set(0, 10, 20)
                 // let pos = { x: 0, y: 17, z: -310.10 + 2 }
-                // mesh.position.copy(pos)
+                let pos = {
+                    x: 0,
+                    y: 7.593922879090872 ,
+                    z: -163,
+                }
+                mesh.position.copy(pos)
+                camera.position.copy(pos)
             }
-            camera.position.set(0, 10, 20)
+            // camera.position.set(0, 10, 20)
             environementHandler.start(mesh)
             environementHandler.night()
             orbitImplementation.start(mesh)

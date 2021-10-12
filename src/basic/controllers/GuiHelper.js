@@ -12,9 +12,10 @@ class GuiHelper {
             let x = target.position.x*1
             let y = target.position.y*1
             let z = target.position.z*1
-            folder1.add(target.position, 'x', x - 1.5, x + 1.5, .1)
-            folder1.add(target.position, 'y', y - 1.5, y + 1.5, .1)
-            folder1.add(target.position, 'z', z - 1.5, z + 1.5, .1)
+            let gap= 4
+            folder1.add(target.position, 'x', x - gap, x + gap, .1)
+            folder1.add(target.position, 'y', y - gap, y + gap, .1)
+            folder1.add(target.position, 'z', z - gap, z + gap, .1)
             folder1.open()
         }, 4000);
     }

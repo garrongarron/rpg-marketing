@@ -26,7 +26,7 @@ import tutorial from "../Tutorial.js";
 import firstCombat from "./FirstCombat.js";
 import outOfWater from "./OutOfWater.js";
 import talkToOldMan from "./TalkToOldMan.js";
-
+alert('as')
 class TutorialGame {
     constructor() {
         this.flag = false

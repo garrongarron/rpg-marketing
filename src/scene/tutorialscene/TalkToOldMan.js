@@ -34,7 +34,7 @@ class TalkToOldMan{
             soundHandler.play('plim')
             this.stop()
             tutorialCharacterController.stopComponent(MovementComponent)
-            pointLightController.start(peasantController.target)
+            pointLightController.start(peasantController.target, {x:0, y:3, z:-1.5})
             let state = {}
             state.title = 'Anciano'
             state.message = 'Malditos guardias del castillo! Vaya bienvenida!  Ese guadria  se lo tenia merecido. <a href="#">Leer mas</a>'
@@ -67,7 +67,6 @@ class TalkToOldMan{
                 tutorialScene.sceneHandler.goTo(sceneList.frontCastleScene)
                 setTimeout(() => {
                     fadeInBlack.stop()
-                    pointLightController.stop()
                     tutorialCharacterController.state.direction.z = 0
                     tutorialCharacterController.start(MovementComponent)
                 }, 1000);

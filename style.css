@@ -1,10 +1,10 @@
 *{
     box-sizing: border-box;
-    overflow: hidden;
 }
 body{
     margin: 0;
     background-color: black;
+    overflow: hidden;
 }
 .fire{
     position: absolute;
@@ -36,4 +36,7 @@ body{
 .sponsor:hover{
     opacity: 1;
     box-shadow: 0 0 10px yellow;
+}
+.dg.ac{
+    /* overflow:unset; */
 }

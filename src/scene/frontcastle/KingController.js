@@ -95,7 +95,10 @@ class KingController {
         tutorialCharacterController.state.mesh.rotation.y += Math.PI
         tutorialCharacterController.getComponentByClass(MovementComponent).stop()
         pointLightController.start(this.mesh)
-        pointLightController.light.position.copy(this.pos)
+        pointLightController.pointLight.position.copy(this.pos)
+        pointLightController.pointLight.intensity = 2
+        pointLightController.pointLight.distance = 10
+        pointLightController.pointLight.decay = 1
         wellDone.querySelector('body')//
         let state = {}
         state.title = 'El rey Unity'

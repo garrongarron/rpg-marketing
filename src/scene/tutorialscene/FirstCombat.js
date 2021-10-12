@@ -34,7 +34,7 @@ class FirstCombat {
             soundHandler.play('plim')
             this.stop()
             tutorialCharacterController.stopComponent(MovementComponent)
-            pointLightController.start(castleguardController.target)
+            pointLightController.start(castleguardController.target ,{x:0, y:3, z:-1.5})
             let state = {}
             state.title = 'Guardia del Castillo'
             state.message = 'Hey Guerrero! ¿Que haces vestido asi? ¿Acaso eres tú Alva Majo?'

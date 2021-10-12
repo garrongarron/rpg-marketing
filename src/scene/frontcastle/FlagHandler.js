@@ -1,4 +1,5 @@
 import sign from "../../basic/buildings/Sign.js";
+import pointLightController from "../../basic/controllers/PointLightController.js";
 import flagContainer from "../../basic/environment/cloth/FlagContainer.js";
 import scene from "../../basic/Scene.js";
 import warrior from "../../character/warrior/Warrior.js";
@@ -15,16 +16,17 @@ class FlagHandler {
         flagContainer.cloneFlag({
             x: 1,
             y: 7.593922879090872 + 2,
-            z: -165+ .5,
+            z: -165 + .5,
         }, 3)
 
-        const spotLight = new THREE.PointLight(0xffffaa, 1, 10);
-        spotLight.position.set(pos.x - 2, pos.y + 3, pos.z - 3);
-        scene.add(spotLight);
         let obj = new THREE.Object3D()
-        obj.position.set(pos.x, pos.y, pos.z)
-        spotLight.target = obj
-        scene.add(spotLight.target)
+        obj.position.set(-1.1, 12.6, -167.7)
+        pointLightController.start(obj)
+        pointLightController.pointLight.intensity = 4
+        pointLightController.pointLight.distance = 10
+        pointLightController.pointLight.decay = 2
+
+        // pointLightController.pointLight.castShadow = false
 
         // warrior.then(mesh => {
         //     mesh.position.copy(pos)

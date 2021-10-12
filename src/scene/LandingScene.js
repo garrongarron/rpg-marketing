@@ -12,6 +12,7 @@ import eventBus from "../basic/EventBus.js"
 import sceneList from "../scenesystem/demo/SceneList.js"
 import warrior from "../character/warrior/Warrior.js"
 import Animator from "../basic/Animator.js"
+import sponsor from "../Sponsor.js"
 
 class LandingScene extends MasterScene {
     open() {
@@ -32,6 +33,7 @@ class LandingScene extends MasterScene {
                 this.playNow.querySelector('body')
                 loopMachine.start()
                 fire.start()
+                sponsor()
             }, 1000);
         })
     }
