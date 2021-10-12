@@ -14,8 +14,8 @@ import sceneList from "../../scenesystem/demo/SceneList.js"
 import instructionContainer from "../../UI/compoment/InstructionContainer.js"
 import wellDone from "../../UI/compoment/WellDone.js"
 import fadeInBlack from "../../UI/FadeInBlack.js"
-import dialog from "../tutorial/Dialog.js"
 import tutorialScene from "../TutorialScene.js"
+import dialog from "./Dialog.js"
 
 class TalkToOldMan{
     constructor(){}

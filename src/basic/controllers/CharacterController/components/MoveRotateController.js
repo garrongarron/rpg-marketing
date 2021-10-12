@@ -38,7 +38,7 @@ class MoveRotateController extends AbstractComponent {
         if (this.controller.state.direction.z == 0 && this.controller.state.direction.x == 0) {
             this.controller.state.moved = false
         }
-
+        // console.log(this.target.position);
     }
     tick = () => { }
 }

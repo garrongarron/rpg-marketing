@@ -20,6 +20,7 @@ import { GravityComponent } from "../basic/controllers/CharacterController/compo
 import inventory from "../basic/inventory/Inventory.js"
 import feedingSystem from "./FeedingSystem.js"
 import godot from "../character/dragon/Godot.js"
+import kingController from "./frontcastle/KingController.js"
 
 class FrontCastleScene extends MasterScene {
     open() {
@@ -39,6 +40,8 @@ class FrontCastleScene extends MasterScene {
                 mesh.position.set(0, 3, 0)
                 mesh.rotation.y = Math.PI
                 camera.position.set(0, 10, 20)
+                // let pos = { x: 0, y: 17, z: -310.10 + 2 }
+                // mesh.position.copy(pos)
             }
             camera.position.set(0, 10, 20)
             environementHandler.start(mesh)
@@ -51,6 +54,7 @@ class FrontCastleScene extends MasterScene {
                 feedingSystem.start(mesh)
             })
         })
+        kingController.start()
         if (!soundHandler.isPlaying('epic')) {
             soundHandler.setVolume('epic', .2)
             soundHandler.setAsLoop('epic')

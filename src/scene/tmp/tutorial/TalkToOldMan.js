@@ -1,12 +1,12 @@
-import dialogSystem from "../../basic/dialogsystem/DialogSystem.js"
-import eventBus from "../../basic/EventBus.js"
-import loopMachine, { LoopMachine } from "../../basic/LoopMachine.js"
-import soundHandler from "../../basic/sound/SoundHandler.js"
-import warrior from "../../character/warrior/Warrior.js"
-import instructionContainer from "../../UI/compoment/InstructionContainer.js"
-import { progressBar } from "../../UI/compoment/ProgressBar.js"
-import wellDone from "../../UI/compoment/WellDone.js"
-import dialog from "./Dialog.js"
+import dialogSystem from "../../../basic/dialogsystem/DialogSystem.js"
+import eventBus from "../../../basic/EventBus.js"
+import loopMachine, { LoopMachine } from "../../../basic/LoopMachine.js"
+import soundHandler from "../../../basic/sound/SoundHandler.js"
+import warrior from "../../../character/warrior/Warrior.js"
+import instructionContainer from "../../../UI/compoment/InstructionContainer.js"
+import { progressBar } from "../../../UI/compoment/ProgressBar.js"
+import wellDone from "../../../UI/compoment/WellDone.js"
+import dialog from "../../tutorialscene/Dialog.js"
 
 class TalkToOldMan {
     constructor() {

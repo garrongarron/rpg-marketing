@@ -5,12 +5,13 @@ import scene from "../basic/Scene.js"
 import soundHandler from "../basic/sound/SoundHandler.js"
 import params from "../basic/terrain/Params.js"
 import warrior from "../character/warrior/Warrior.js"
+import kingController from "./frontcastle/KingController.js"
 // import cube from "../shapes/Cube.js"
 
 class FeedingSystem {
     constructor() {
         this.radio = 15
-        this.quantity = 5
+        this.quantity = 4
         this.target = null
     }
     start(target) {
@@ -24,7 +25,7 @@ class FeedingSystem {
             let apple = cube.clone()
             apple.rotation.z = Math.PI * Math.random()
             apple.userData.rotateCallback = () => {
-                apple.rotation.z += .1 
+                apple.rotation.z += .1
             }
             loopMachine.addCallback(apple.userData.rotateCallback)
             let x = Math.random() * this.radio * 2 - this.radio + this.target.position.x
@@ -34,12 +35,29 @@ class FeedingSystem {
             scene.add(apple)
             collisionSistem.addElement(apple)
         }
-        
-        
+        for (let index = 0; index < 1; index++) {
+            let apple = cube.clone()
+            apple.rotation.z = Math.PI * Math.random()
+            apple.userData.rotateCallback = () => {
+                apple.rotation.z += .1
+            }
+            loopMachine.addCallback(apple.userData.rotateCallback)
+            let pos = { x: 0, y: 17+1, z: -310 }
+            apple.position.copy(pos)
+            apple.name = 'last-coint'
+            scene.add(apple)
+            collisionSistem.addElement(apple)
+        }
+
+
+
         collisionSistem.addCallback((mesh) => {
             soundHandler.play('plim')
             collisionSistem.removeElement(mesh)
             loopMachine.removeCallback(mesh.userData.rotateCallback)
+            if(mesh.name == 'last-coint'){
+                kingController.fightWithTheKing()
+            }
             scene.remove(mesh)
             inventory.addItem(1, inventory.types.gold)
         })

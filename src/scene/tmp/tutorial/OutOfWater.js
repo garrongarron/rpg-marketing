@@ -1,10 +1,10 @@
-import eventBus from "../../basic/EventBus.js"
-import { LoopMachine } from "../../basic/LoopMachine.js"
-import soundHandler from "../../basic/sound/SoundHandler.js"
-import warrior from "../../character/warrior/Warrior.js"
-import instructionContainer from "../../UI/compoment/InstructionContainer.js"
-import { progressBar } from "../../UI/compoment/ProgressBar.js"
-import wellDone from "../../UI/compoment/WellDone.js"
+import eventBus from "../../../basic/EventBus.js"
+import { LoopMachine } from "../../../basic/LoopMachine.js"
+import soundHandler from "../../../basic/sound/SoundHandler.js"
+import warrior from "../../../character/warrior/Warrior.js"
+import instructionContainer from "../../../UI/compoment/InstructionContainer.js"
+import { progressBar } from "../../../UI/compoment/ProgressBar.js"
+import wellDone from "../../../UI/compoment/WellDone.js"
 
 class OutOfWater {
     constructor() {

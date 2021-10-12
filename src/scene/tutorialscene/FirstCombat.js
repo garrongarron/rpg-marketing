@@ -55,18 +55,6 @@ class FirstCombat {
             castleguardController.stop()
             castleguardController.mesh.visible = false
         }
-        // let lookAtSouth = () => {
-        //     eventBus.unSubscribe('animation-translated', lookAtSouth)
-        //     this.animComponent.animator.inProgress = false
-        //     this.animComponent.animator.action(this.animComponent.animations.idle, 1, true)
-        //     this.animComponent.start()
-        //     //
-        //     this.animComponent.animator.inProgress = false
-        //     tutorialCharacterController.startComponent(MovementComponent)
-        //     this.animComponent.animator.interpolationTime = 0.2
-        //     this.warrior.rotation.y += 50 * Math.PI / 180
-        // }
-
         let move = () => {
             let warrior = tutorialCharacterController.state.mesh
             let tmp = warrior.position.clone()
@@ -76,7 +64,6 @@ class FirstCombat {
             let z = warrior.children[4].children[0].position.z / 100
             let x = warrior.children[4].children[0].position.x / 100
             const vec2 = new THREE.Vector2(x, z);
-            console.log(JSON.stringify(vec2));
             vec2.rotateAround(new THREE.Vector2(), -warrior.rotation.y)
             warrior.position.z += vec2.y
             warrior.position.x += vec2.x

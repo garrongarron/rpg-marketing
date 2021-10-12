@@ -18,18 +18,14 @@ class FlagHandler {
             z: -165+ .5,
         }, 3)
 
-
-
-
         const spotLight = new THREE.PointLight(0xffffaa, 1, 10);
         spotLight.position.set(pos.x - 2, pos.y + 3, pos.z - 3);
         scene.add(spotLight);
-
-
         let obj = new THREE.Object3D()
         obj.position.set(pos.x, pos.y, pos.z)
         spotLight.target = obj
         scene.add(spotLight.target)
+
         // warrior.then(mesh => {
         //     mesh.position.copy(pos)
         // })
