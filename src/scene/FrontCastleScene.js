@@ -24,6 +24,8 @@ import kingController from "./frontcastle/KingController.js"
 import ending from "./frontcastle/Ending.js"
 import { MovementComponent } from "../basic/controllers/CharacterController/components/MovementComponent.js"
 import fadeInBlack from "../UI/FadeInBlack.js"
+import king from "../character/king/King.js"
+import headquarter from "../basic/buildings/Headquarter.js"
 
 class FrontCastleScene extends MasterScene {
     open() {
@@ -65,12 +67,14 @@ class FrontCastleScene extends MasterScene {
             orbitImplementation.start(this.warrior)
             godot.then(mesh => {
                 feedingSystem.start(mesh)
-                // setTimeout(() => {
-                    fadeInBlack.stop()
-                    tutorialCharacterController.start()
-                    tutorialCharacterController.loop.start()
-                // }, 3000);
             })
+        })
+        Promise.all([king, godot, warrior, headquarter]).then(() => {
+            setTimeout(() => {
+                fadeInBlack.stop()
+                tutorialCharacterController.start()
+                tutorialCharacterController.loop.start()
+            }, 1000);
         })
         kingController.start()
         if (!soundHandler.isPlaying('epic')) {
