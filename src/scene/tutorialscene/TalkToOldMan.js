@@ -37,7 +37,7 @@ class TalkToOldMan{
             pointLightController.start(peasantController.target, {x:0, y:3, z:-1.5})
             let state = {}
             state.title = 'Anciano'
-            state.message = 'Malditos guardias del castillo! Vaya bienvenida!  Ese guadria  se lo tenia merecido. <a href="#">Leer mas</a>'
+            state.message = 'Malditos guardias del castillo! Vaya bienvenida!  Ese guadria  se lo tenia merecido. <a>Leer más</a>'
             state.button = 'Continuar'
             wellDone.update(state)
             eventBus.dispatch('talkToOldMan', true)
@@ -51,7 +51,9 @@ class TalkToOldMan{
     }
     update(node) {
         dialogSystem.loadContent(dialog)
-        node.addEventListener('click', () => {
+        node.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             dialogSystem.open()
         })
     }
