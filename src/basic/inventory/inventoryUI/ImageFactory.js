@@ -18,6 +18,7 @@ class ImageFactory{
         let img = document.createElement('img')
         img.classList.add('inventory-img')
         img.setAttribute('src', data.url)
+        return img
         img.setAttribute('draggable',true)
         img.setAttribute('data-stackable',true)
         img.setAttribute('name', data.name)

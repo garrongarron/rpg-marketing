@@ -64,13 +64,10 @@ class TalkToOldMan{
         setTimeout(() => {
             fadeInBlack.start(() => {
                 // soundHandler.stop('running')
-                tutorialScene.sceneHandler.goTo(sceneList.frontCastleScene)
-                setTimeout(() => {
-                    fadeInBlack.stop()
-                    tutorialCharacterController.state.direction.z = 0
-                    tutorialCharacterController.start(MovementComponent)
-                }, 1000);
+                tutorialCharacterController.state.direction.z = 0
+                tutorialCharacterController.loop.stop()
                 instructionContainer.node.classList.remove('fadeIn1')
+                tutorialScene.sceneHandler.goTo(sceneList.frontCastleScene)
             })
         }, 7000);
         dialogSystem.close()

@@ -21,43 +21,55 @@ import inventory from "../basic/inventory/Inventory.js"
 import feedingSystem from "./FeedingSystem.js"
 import godot from "../character/dragon/Godot.js"
 import kingController from "./frontcastle/KingController.js"
+import ending from "./frontcastle/Ending.js"
+import { MovementComponent } from "../basic/controllers/CharacterController/components/MovementComponent.js"
+import fadeInBlack from "../UI/FadeInBlack.js"
 
 class FrontCastleScene extends MasterScene {
     open() {
         resize.start(renderer)
         loopMachine.addCallback(this.tick)
         loopMachine.start()
-        tutorialCharacterController.removeComponentByClass(CameraComponent)
-        tutorialCharacterController.removeComponentByClass(GravityComponent)
-        tutorialCharacterController.addComponents(rotationComponent)
-        tutorialCharacterController.start()
         inventory.start()
         headquarterHandler.start()
+
         flagHandler.start()
+        tutorialCharacterController.removeComponentByClass(CameraComponent)
+        tutorialCharacterController.addComponents(rotationComponent)
+        rotationComponent.start()
+        tutorialCharacterController.removeComponentByClass(GravityComponent)
+        tutorialCharacterController.startComponent(MovementComponent)
         warrior.then(mesh => {
             this.warrior = mesh
+            ending.start(this.warrior)//listener
             if (mesh.position.y == 0) {
                 mesh.position.set(0, 3, 0)
                 mesh.rotation.y = Math.PI
                 camera.position.set(0, 10, 20)
-                // let pos = { x: 0, y: 17, z: -310.10 + 2 }
-                let pos = {
-                    x: 0,
-                    y: 7.593922879090872 ,
-                    z: -163,
-                }
-                mesh.position.copy(pos)
-                camera.position.copy(pos)
+
+                // let pos = { x: 0, y: 17, z: -354 + 40 }
+                // let pos = {
+                //     x: 0,
+                //     y: 7.593922879090872 ,
+                //     z: -163,
+                // }
+                // mesh.position.copy(pos)
+                // camera.position.copy(pos)
             }
-            // camera.position.set(0, 10, 20)
+            camera.position.set(0, 10, 20)
             environementHandler.start(mesh)
             environementHandler.night()
-            orbitImplementation.start(mesh)
             compass.start(mesh)
             rayLander.start(mesh, 0)
             godotController.start(mesh)
+            orbitImplementation.start(this.warrior)
             godot.then(mesh => {
                 feedingSystem.start(mesh)
+                // setTimeout(() => {
+                    fadeInBlack.stop()
+                    tutorialCharacterController.start()
+                    tutorialCharacterController.loop.start()
+                // }, 3000);
             })
         })
         kingController.start()

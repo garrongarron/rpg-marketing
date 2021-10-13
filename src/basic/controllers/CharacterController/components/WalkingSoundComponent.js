@@ -28,6 +28,10 @@ class WalkingSoundComponent extends AbstractComponent {
         }
     }
     tick = () => { }
+    stop = () =>{
+        soundHandler.setVolume('running',0)
+        soundHandler.setVolume('footstep',0)
+    }
 }
 let walkingSoundComponent = new WalkingSoundComponent
 export default walkingSoundComponent

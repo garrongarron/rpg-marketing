@@ -76,11 +76,14 @@ class KingController {
                 btn: 'F'
             })
             setTimeout(() => {
-                instructionContainer.update({
-                    title: 'Tutorial',
-                    message: 'No entres al castillo!',
-                    btn: 'F'
-                })
+                instructionContainer.node.classList.remove('fadeIn1')
+                setTimeout(() => {
+                    instructionContainer.update({
+                        title: 'Tutorial',
+                        message: 'No entres al castillo!',
+                        btn: 'F'
+                    })
+                }, 3000);
                 tutorialCharacterController.getComponentByClass(MovementComponent).start()
                 this.animComponent.start()
             }, 10000);

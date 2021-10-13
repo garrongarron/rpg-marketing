@@ -57,6 +57,8 @@ class Inventory {
         tooltip.setDescription(img, imageFactory.list().gold.description)
         if (this.grid.get(this.n)){
             this.grid.get(this.n).appendChild(img);
+            console.log(this.grid.get(this.n));
+            this.grid.get(this.n).querySelector('.inventory-slot-number').innerText = this.db[this.inverTypes[type]]
             this.n++
         } 
         

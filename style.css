@@ -10,6 +10,7 @@ body{
     position: absolute;
     top: 0;
     pointer-events: none;
+    z-index: 1;
 }
 .loopMachine{
     position: fixed;
@@ -37,6 +38,48 @@ body{
     opacity: 1;
     box-shadow: 0 0 10px yellow;
 }
-.dg.ac{
-    /* overflow:unset; */
+
+.advertisement{
+    background-color: white;
+    color: black;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    width: 400px;
+    z-index: 2;
+    height: 300px;
+    text-align: center;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0 0 20px grey;
+    background-image: url(src/basic/environment/cloth/Three-Basico.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-flow: column;
+    justify-content: end;
+    align-items: end;
+    font-family: sans-serif;
+    opacity: 0;
+    transition: 1s all;
+    border: 2px solid black;
+    cursor: pointer;
+}
+.advertisement:hover{
+    box-shadow: 0 0 40px yellow;
+}
+.advertisement div{
+    color: black;
+    width: 100%;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.threejs{
+    color: white !important;
+    text-shadow: 0 0 8px skyblue;
+    position: fixed;
+    top: -40%;
+    font-size:2.8em !important;
+    width: 200%;
 }

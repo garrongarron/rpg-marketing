@@ -23,7 +23,7 @@ class RayLander {
     tick = () =>{
         let vec3 = this.mesh.position.clone()
         vec3.y++
-        this.raycaster.set(vec3, this.mesh.up.negate().normalize(), 0, 2)
+        this.raycaster.set(vec3, this.mesh.up.negate().normalize(), 0, 10)
         const intersected = this.raycaster.intersectObjects(this.objectsToIntersect, true)[0];
         if (intersected) {
             if (Math.abs(intersected.distance - this.distanceToGround - 1) < .5) {

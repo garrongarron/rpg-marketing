@@ -13,10 +13,11 @@ class FadeInBlack {
             this.bg.classList.add('fadeout-1')
         }, 10);
         setTimeout(() => {
-            if(callback) callback()
+            if (callback) callback()
         }, 2010);
     }
-    stop() { 
+    stop() {
+        if (!this.bg) return 
         this.bg.classList.remove('fadeout-1')
         setTimeout(() => {
             cache.appendChild(this.bg)
