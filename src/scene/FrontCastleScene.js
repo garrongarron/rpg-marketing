@@ -64,13 +64,13 @@ class FrontCastleScene extends MasterScene {
             compass.start(mesh)
             rayLander.start(mesh, 0)
             godotController.start(mesh)
-            orbitImplementation.start(this.warrior)
             godot.then(mesh => {
                 feedingSystem.start(mesh)
             })
         })
         Promise.all([king, godot, warrior, headquarter]).then(() => {
             setTimeout(() => {
+                orbitImplementation.start(this.warrior)
                 fadeInBlack.stop()
                 tutorialCharacterController.start()
                 tutorialCharacterController.loop.start()
